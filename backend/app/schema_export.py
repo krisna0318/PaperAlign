@@ -12,6 +12,7 @@ from app.domain.blocks import DocumentBlock
 from app.domain.issues import DiagnosisIssue
 from app.domain.jobs import AnalysisJob
 from app.domain.rules import FormatRule
+from app.domain.template_evidence import TemplateEvidenceReport
 
 SCHEMAS: dict[str, type[BaseModel]] = {
     "document_block.schema.json": DocumentBlock,
@@ -21,6 +22,7 @@ SCHEMAS: dict[str, type[BaseModel]] = {
     "document_profile.schema.json": DocumentProfile,
     "content_fingerprint.schema.json": ContentFingerprintReport,
     "unsupported_objects.schema.json": UnsupportedObjectsReport,
+    "template_evidence.schema.json": TemplateEvidenceReport,
 }
 
 

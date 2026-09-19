@@ -72,6 +72,7 @@ def create_synthetic_docx(
     body_text: str = "这是用于测试的论文正文。",
     font_name: str = "宋体",
     include_unsupported: bool = False,
+    include_three_line_table: bool = False,
 ) -> Path:
     extra_body = ""
     extra_relationships = ""
@@ -99,6 +100,34 @@ def create_synthetic_docx(
             "word/vbaProject.bin": b"synthetic macro bytes",
         }
 
+    table_properties = ""
+    first_row_cell_properties = ""
+    second_row = ""
+    if include_three_line_table:
+        table_properties = """
+      <w:tblPr>
+        <w:tblStyle w:val="NormalTable"/>
+        <w:jc w:val="center"/>
+        <w:tblBorders>
+          <w:top w:val="single" w:sz="12" w:color="auto"/>
+          <w:left w:val="none" w:sz="0" w:color="auto"/>
+          <w:bottom w:val="single" w:sz="12" w:color="auto"/>
+          <w:right w:val="none" w:sz="0" w:color="auto"/>
+          <w:insideH w:val="none" w:sz="0" w:color="auto"/>
+          <w:insideV w:val="none" w:sz="0" w:color="auto"/>
+        </w:tblBorders>
+      </w:tblPr>
+"""
+        first_row_cell_properties = """
+          <w:tcPr><w:tcBorders><w:top w:val="single" w:sz="12"/><w:bottom w:val="single" w:sz="8"/></w:tcBorders></w:tcPr>
+"""
+        second_row = """
+      <w:tr>
+        <w:tc><w:tcPr><w:tcBorders><w:top w:val="single" w:sz="8"/><w:bottom w:val="single" w:sz="12"/></w:tcBorders></w:tcPr><w:p><w:r><w:t>样本</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcBorders><w:top w:val="single" w:sz="8"/><w:bottom w:val="single" w:sz="12"/></w:tcBorders></w:tcPr><w:p><w:r><w:t>1</w:t></w:r></w:p></w:tc>
+      </w:tr>
+"""
+
     document = f"""<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
  xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
@@ -116,10 +145,12 @@ def create_synthetic_docx(
       <w:r><w:drawing><wp:inline><a:graphic><a:graphicData><pic:pic><pic:blipFill><a:blip r:embed="rIdImage"/></pic:blipFill></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>
     </w:p>
     <w:tbl>
+      {table_properties}
       <w:tr>
-        <w:tc><w:p><w:r><w:t>指标</w:t></w:r></w:p></w:tc>
-        <w:tc><w:p><w:r><w:t>结果</w:t></w:r></w:p></w:tc>
+        <w:tc>{first_row_cell_properties}<w:p><w:r><w:t>指标</w:t></w:r></w:p></w:tc>
+        <w:tc>{first_row_cell_properties}<w:p><w:r><w:t>结果</w:t></w:r></w:p></w:tc>
       </w:tr>
+      {second_row}
     </w:tbl>
     {extra_body}
     <w:sectPr>

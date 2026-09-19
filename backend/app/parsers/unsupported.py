@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Literal
 
 from app.domain.analysis import UnsupportedObject, UnsupportedObjectsReport
 from app.parsers.content_types import ContentTypeMap
@@ -10,12 +11,15 @@ from app.parsers.namespaces import OFFICE, M, V, W, qn
 from app.parsers.relationships import Relationship
 from app.parsers.xml_utils import parse_xml
 
+FindingSeverity = Literal["error", "warning", "info"]
+FindingPolicy = Literal["block_formatting", "manual_review", "report_only"]
+
 
 @dataclass(frozen=True)
 class Finding:
     category: str
-    severity: str
-    policy: str
+    severity: FindingSeverity
+    policy: FindingPolicy
     part_name: str
     message: str
     relationship_type: str | None = None
@@ -24,7 +28,7 @@ class Finding:
     details: dict[str, object] = field(default_factory=dict)
 
 
-RELATIONSHIP_CATEGORIES = (
+RELATIONSHIP_CATEGORIES: tuple[tuple[str, str, FindingSeverity, FindingPolicy], ...] = (
     ("/oleObject", "ole_object", "error", "block_formatting"),
     ("/package", "embedded_package", "error", "block_formatting"),
     ("/aFChunk", "alt_chunk", "error", "block_formatting"),
@@ -34,7 +38,9 @@ RELATIONSHIP_CATEGORIES = (
 )
 
 
-ELEMENT_CATEGORIES = (
+ELEMENT_CATEGORIES: tuple[
+    tuple[str, str, FindingSeverity, FindingPolicy, str], ...
+] = (
     (qn(W, "altChunk"), "alt_chunk", "error", "block_formatting", "altChunk content"),
     (qn(OFFICE, "OLEObject"), "ole_object", "error", "block_formatting", "OLE object"),
     (qn(W, "object"), "embedded_object", "error", "block_formatting", "embedded object"),

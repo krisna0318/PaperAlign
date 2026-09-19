@@ -2,7 +2,7 @@
 
 PaperAlign 是一个面向学术论文的可解释格式诊断与安全排版工具。
 
-当前阶段是 **M1：DOCX 只读分析**。项目可以生成文档画像、内容指纹、不支持对象报告和分析摘要，**尚不能判断论文格式是否合规，也不会修改或排版 DOCX**。
+当前阶段是 **M2：格式模板证据与规则 Profile**。M1 的 DOCX 只读分析已经完成；项目现在可以在不依赖批注的情况下提取模板页面、样式和表格边框证据。当前仍不会修改或排版 DOCX。
 
 ## MVP 边界
 
@@ -45,7 +45,7 @@ py -3.13 -m venv .venv
 打开 `http://127.0.0.1:8000/health`，应返回：
 
 ```json
-{"status":"ok","service":"paperalign-api","version":"0.2.0","stage":"M1"}
+{"status":"ok","service":"paperalign-api","version":"0.3.0","stage":"M2"}
 ```
 
 ## DOCX 只读分析
@@ -67,6 +67,16 @@ py -3.13 -m venv .venv
 ```
 
 分析器会验证 DOCX 包完整性和安全上限，读取段落、表格、样式、图片、字段、分节、页眉页脚及脚注等结构，并在分析前后比对输入文件 SHA-256。宏、ActiveX、OLE、嵌入包、altChunk、外部关系、文本框、公式、修订等对象会被显式报告。
+
+## 格式模板证据提取
+
+```powershell
+.\.venv\Scripts\python.exe -m paperalign inspect-template `
+  .\path\to\official-template.docx `
+  --out .\.artifacts\template-evidence
+```
+
+输出 `template_evidence.json` 和 `template_evidence_summary.md`。命令不要求模板含有批注，会从 DOCX 的分节、样式使用、直接格式和表格边框中提取观察值；观察值不会自动升级为学校规则，也不会复制模板正文。表格边框同时保留 OOXML 原始值，并将 `w:sz` 按 1/8 pt 换算为磅。
 
 ## 前端启动
 

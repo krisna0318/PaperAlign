@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 from collections.abc import Iterable
+from typing import Literal
 
 from lxml import etree
 
@@ -21,7 +22,9 @@ from app.parsers.namespaces import NS, M, R, W, qn
 from app.parsers.relationships import Relationship
 from app.parsers.xml_utils import parse_xml
 
-STORY_PARTS: tuple[tuple[str, str], ...] = (
+StoryKind = Literal["header", "footer", "footnotes", "endnotes", "comments"]
+
+STORY_PARTS: tuple[tuple[str, StoryKind], ...] = (
     ("word/header", "header"),
     ("word/footer", "footer"),
     ("word/footnotes.xml", "footnotes"),
@@ -324,7 +327,7 @@ class DocumentParser:
         return sorted(stories, key=lambda story: story.part_name), fields
 
     @staticmethod
-    def _story_kind(part_name: str) -> str | None:
+    def _story_kind(part_name: str) -> StoryKind | None:
         for prefix, kind in STORY_PARTS:
             if part_name == prefix or (
                 prefix in {"word/header", "word/footer"}

@@ -1,0 +1,678 @@
+{
+  "$defs": {
+    "BorderObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "edge": {
+          "title": "Edge",
+          "type": "string"
+        },
+        "line_style": {
+          "title": "Line Style",
+          "type": "string"
+        },
+        "size_eighth_points": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size Eighth Points"
+        },
+        "size_pt": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size Pt"
+        },
+        "color": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Color"
+        },
+        "count": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Count",
+          "type": "integer"
+        },
+        "source_scope": {
+          "enum": [
+            "table",
+            "table_style",
+            "cell"
+          ],
+          "title": "Source Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "edge",
+        "line_style",
+        "source_scope"
+      ],
+      "title": "BorderObservation",
+      "type": "object"
+    },
+    "DirectFormatCluster": {
+      "additionalProperties": false,
+      "properties": {
+        "style_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Style Id"
+        },
+        "style_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Style Name"
+        },
+        "font_east_asia": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Font East Asia"
+        },
+        "font_latin": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Font Latin"
+        },
+        "size_pt": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size Pt"
+        },
+        "bold": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bold"
+        },
+        "italic": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Italic"
+        },
+        "alignment": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Alignment"
+        },
+        "line_rule": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Rule"
+        },
+        "line_value": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Value"
+        },
+        "first_line_indent_twips": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First Line Indent Twips"
+        },
+        "first_line_indent_chars": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First Line Indent Chars"
+        },
+        "paragraph_count": {
+          "minimum": 1,
+          "title": "Paragraph Count",
+          "type": "integer"
+        },
+        "sample_paragraph_indexes": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 5,
+          "title": "Sample Paragraph Indexes",
+          "type": "array"
+        },
+        "source_method": {
+          "const": "direct_first_text_run",
+          "default": "direct_first_text_run",
+          "title": "Source Method",
+          "type": "string"
+        }
+      },
+      "required": [
+        "paragraph_count"
+      ],
+      "title": "DirectFormatCluster",
+      "type": "object"
+    },
+    "ParagraphStyleUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "style_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Style Id"
+        },
+        "style_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Style Name"
+        },
+        "paragraph_count": {
+          "minimum": 1,
+          "title": "Paragraph Count",
+          "type": "integer"
+        },
+        "sample_paragraph_indexes": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 5,
+          "title": "Sample Paragraph Indexes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "paragraph_count"
+      ],
+      "title": "ParagraphStyleUsage",
+      "type": "object"
+    },
+    "SectionSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "index": {
+          "minimum": 0,
+          "title": "Index",
+          "type": "integer"
+        },
+        "start_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Type"
+        },
+        "page_width_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Width Twips"
+        },
+        "page_height_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Height Twips"
+        },
+        "margin_top_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Margin Top Twips"
+        },
+        "margin_right_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Margin Right Twips"
+        },
+        "margin_bottom_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Margin Bottom Twips"
+        },
+        "margin_left_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Margin Left Twips"
+        },
+        "header_relationship_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Header Relationship Ids",
+          "type": "array"
+        },
+        "footer_relationship_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Footer Relationship Ids",
+          "type": "array"
+        },
+        "page_number_format": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Number Format"
+        },
+        "page_number_start": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Number Start"
+        }
+      },
+      "required": [
+        "index"
+      ],
+      "title": "SectionSnapshot",
+      "type": "object"
+    },
+    "TableFormatObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "table_index": {
+          "minimum": 0,
+          "title": "Table Index",
+          "type": "integer"
+        },
+        "style_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Style Id"
+        },
+        "style_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Style Name"
+        },
+        "row_count": {
+          "minimum": 0,
+          "title": "Row Count",
+          "type": "integer"
+        },
+        "column_count": {
+          "minimum": 0,
+          "title": "Column Count",
+          "type": "integer"
+        },
+        "alignment": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Alignment"
+        },
+        "layout": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Layout"
+        },
+        "grid_widths_twips": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Grid Widths Twips",
+          "type": "array"
+        },
+        "repeating_header_rows": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Repeating Header Rows",
+          "type": "array"
+        },
+        "border_declarations": {
+          "items": {
+            "$ref": "#/$defs/BorderObservation"
+          },
+          "title": "Border Declarations",
+          "type": "array"
+        },
+        "outer_top_widths_pt": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Outer Top Widths Pt",
+          "type": "array"
+        },
+        "header_separator_widths_pt": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Header Separator Widths Pt",
+          "type": "array"
+        },
+        "outer_bottom_widths_pt": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Outer Bottom Widths Pt",
+          "type": "array"
+        },
+        "vertical_borders_present": {
+          "default": false,
+          "title": "Vertical Borders Present",
+          "type": "boolean"
+        },
+        "inferred_pattern": {
+          "enum": [
+            "three_line",
+            "grid",
+            "borderless",
+            "mixed",
+            "unknown"
+          ],
+          "title": "Inferred Pattern",
+          "type": "string"
+        },
+        "confidence": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "requires_confirmation": {
+          "default": true,
+          "title": "Requires Confirmation",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "table_index",
+        "row_count",
+        "column_count",
+        "inferred_pattern",
+        "confidence"
+      ],
+      "title": "TableFormatObservation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Formatting observations extracted from a DOCX without treating them as rules.",
+  "properties": {
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "extractor_version": {
+      "title": "Extractor Version",
+      "type": "string"
+    },
+    "file_name": {
+      "title": "File Name",
+      "type": "string"
+    },
+    "input_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Input Sha256",
+      "type": "string"
+    },
+    "comments_present": {
+      "title": "Comments Present",
+      "type": "boolean"
+    },
+    "comment_count": {
+      "minimum": 0,
+      "title": "Comment Count",
+      "type": "integer"
+    },
+    "observations_are_rules": {
+      "const": false,
+      "default": false,
+      "title": "Observations Are Rules",
+      "type": "boolean"
+    },
+    "evidence_sources": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Sources",
+      "type": "array"
+    },
+    "sections": {
+      "items": {
+        "$ref": "#/$defs/SectionSnapshot"
+      },
+      "title": "Sections",
+      "type": "array"
+    },
+    "paragraph_style_usage": {
+      "items": {
+        "$ref": "#/$defs/ParagraphStyleUsage"
+      },
+      "title": "Paragraph Style Usage",
+      "type": "array"
+    },
+    "direct_format_clusters": {
+      "items": {
+        "$ref": "#/$defs/DirectFormatCluster"
+      },
+      "title": "Direct Format Clusters",
+      "type": "array"
+    },
+    "tables": {
+      "items": {
+        "$ref": "#/$defs/TableFormatObservation"
+      },
+      "title": "Tables",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "extractor_version",
+    "file_name",
+    "input_sha256",
+    "comments_present",
+    "comment_count"
+  ],
+  "title": "TemplateEvidenceReport",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/template_evidence.schema.json"
+}
