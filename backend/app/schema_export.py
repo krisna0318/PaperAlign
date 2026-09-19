@@ -32,6 +32,7 @@ def export_schemas(output_dir: Path) -> None:
         (output_dir / filename).write_text(
             json.dumps(schema, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
+            newline="\n",
         )
 
 
