@@ -1,0 +1,139 @@
+{
+  "$defs": {
+    "RulePriority": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2"
+      ],
+      "title": "RulePriority",
+      "type": "string"
+    },
+    "RuleSource": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "minLength": 1,
+          "title": "Type",
+          "type": "string"
+        },
+        "document": {
+          "minLength": 1,
+          "title": "Document",
+          "type": "string"
+        },
+        "evidence": {
+          "minLength": 1,
+          "title": "Evidence",
+          "type": "string"
+        },
+        "locator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Locator"
+        }
+      },
+      "required": [
+        "type",
+        "document",
+        "evidence"
+      ],
+      "title": "RuleSource",
+      "type": "object"
+    },
+    "RuleStatus": {
+      "enum": [
+        "confirmed",
+        "provisional",
+        "needs_review"
+      ],
+      "title": "RuleStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A versioned formatting requirement with evidence and a validator.",
+  "properties": {
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "profile_id": {
+      "minLength": 1,
+      "title": "Profile Id",
+      "type": "string"
+    },
+    "scope": {
+      "minLength": 1,
+      "title": "Scope",
+      "type": "string"
+    },
+    "property_path": {
+      "minLength": 1,
+      "title": "Property Path",
+      "type": "string"
+    },
+    "expected_value": {
+      "title": "Expected Value"
+    },
+    "status": {
+      "$ref": "#/$defs/RuleStatus"
+    },
+    "confidence": {
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "source": {
+      "$ref": "#/$defs/RuleSource"
+    },
+    "implementation": {
+      "minLength": 1,
+      "title": "Implementation",
+      "type": "string"
+    },
+    "validator": {
+      "minLength": 1,
+      "title": "Validator",
+      "type": "string"
+    },
+    "priority": {
+      "$ref": "#/$defs/RulePriority",
+      "default": "P1"
+    },
+    "auto_fixable": {
+      "default": false,
+      "title": "Auto Fixable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "profile_id",
+    "scope",
+    "property_path",
+    "expected_value",
+    "status",
+    "confidence",
+    "source",
+    "implementation",
+    "validator"
+  ],
+  "title": "FormatRule",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/format_rule.schema.json"
+}
