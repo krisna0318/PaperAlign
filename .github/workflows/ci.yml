@@ -19,9 +19,11 @@ jobs:
           cache: pip
       - run: python -m pip install -e ".[dev]"
       - run: python -m ruff check .
-      - run: python -m mypy app
+      - run: python -m mypy app paperalign
       - run: python -m pytest
       - run: python -m pip check
+      - run: python -m app.schema_export
+      - run: git -C .. diff --exit-code -- schemas
 
   frontend:
     runs-on: ubuntu-latest

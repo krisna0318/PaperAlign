@@ -1,0 +1,85 @@
+{
+  "$defs": {
+    "FingerprintUnit": {
+      "additionalProperties": false,
+      "properties": {
+        "anchor": {
+          "title": "Anchor",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "text_length": {
+          "minimum": 0,
+          "title": "Text Length",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "anchor",
+        "kind",
+        "text_length",
+        "sha256"
+      ],
+      "title": "FingerprintUnit",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "algorithm": {
+      "const": "sha256",
+      "default": "sha256",
+      "title": "Algorithm",
+      "type": "string"
+    },
+    "normalization": {
+      "title": "Normalization",
+      "type": "string"
+    },
+    "aggregate_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Aggregate Sha256",
+      "type": "string"
+    },
+    "unit_count": {
+      "minimum": 0,
+      "title": "Unit Count",
+      "type": "integer"
+    },
+    "total_characters": {
+      "minimum": 0,
+      "title": "Total Characters",
+      "type": "integer"
+    },
+    "units": {
+      "items": {
+        "$ref": "#/$defs/FingerprintUnit"
+      },
+      "title": "Units",
+      "type": "array"
+    }
+  },
+  "required": [
+    "normalization",
+    "aggregate_sha256",
+    "unit_count",
+    "total_characters",
+    "units"
+  ],
+  "title": "ContentFingerprintReport",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/content_fingerprint.schema.json"
+}

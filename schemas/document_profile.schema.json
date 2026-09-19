@@ -1,0 +1,862 @@
+{
+  "$defs": {
+    "BlockKind": {
+      "enum": [
+        "paragraph",
+        "table",
+        "table_cell",
+        "image",
+        "section_break",
+        "page_break",
+        "field",
+        "unknown"
+      ],
+      "title": "BlockKind",
+      "type": "string"
+    },
+    "DecisionSource": {
+      "enum": [
+        "word_style",
+        "rule",
+        "model",
+        "hybrid",
+        "user",
+        "unknown"
+      ],
+      "title": "DecisionSource",
+      "type": "string"
+    },
+    "DocumentBlock": {
+      "additionalProperties": false,
+      "description": "A locatable and classifiable unit extracted from a DOCX package.",
+      "properties": {
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "order": {
+          "minimum": 0,
+          "title": "Order",
+          "type": "integer"
+        },
+        "kind": {
+          "$ref": "#/$defs/BlockKind"
+        },
+        "text": {
+          "default": "",
+          "title": "Text",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/SemanticRole",
+          "default": "unknown"
+        },
+        "parent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Id"
+        },
+        "confidence": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "decision_source": {
+          "$ref": "#/$defs/DecisionSource",
+          "default": "unknown"
+        },
+        "requires_confirmation": {
+          "default": false,
+          "title": "Requires Confirmation",
+          "type": "boolean"
+        },
+        "style": {
+          "$ref": "#/$defs/StyleSnapshot"
+        },
+        "source_anchor": {
+          "$ref": "#/$defs/SourceAnchor"
+        },
+        "protected": {
+          "default": true,
+          "title": "Protected",
+          "type": "boolean"
+        },
+        "metadata": {
+          "additionalProperties": true,
+          "title": "Metadata",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "order",
+        "kind",
+        "source_anchor"
+      ],
+      "title": "DocumentBlock",
+      "type": "object"
+    },
+    "DocumentStatistics": {
+      "additionalProperties": false,
+      "properties": {
+        "block_count": {
+          "minimum": 0,
+          "title": "Block Count",
+          "type": "integer"
+        },
+        "paragraph_count": {
+          "minimum": 0,
+          "title": "Paragraph Count",
+          "type": "integer"
+        },
+        "table_count": {
+          "minimum": 0,
+          "title": "Table Count",
+          "type": "integer"
+        },
+        "table_cell_count": {
+          "minimum": 0,
+          "title": "Table Cell Count",
+          "type": "integer"
+        },
+        "image_count": {
+          "minimum": 0,
+          "title": "Image Count",
+          "type": "integer"
+        },
+        "section_count": {
+          "minimum": 0,
+          "title": "Section Count",
+          "type": "integer"
+        },
+        "field_count": {
+          "minimum": 0,
+          "title": "Field Count",
+          "type": "integer"
+        },
+        "story_part_count": {
+          "minimum": 0,
+          "title": "Story Part Count",
+          "type": "integer"
+        },
+        "character_count": {
+          "minimum": 0,
+          "title": "Character Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "block_count",
+        "paragraph_count",
+        "table_count",
+        "table_cell_count",
+        "image_count",
+        "section_count",
+        "field_count",
+        "story_part_count",
+        "character_count"
+      ],
+      "title": "DocumentStatistics",
+      "type": "object"
+    },
+    "FieldSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "part_name": {
+          "title": "Part Name",
+          "type": "string"
+        },
+        "instruction": {
+          "title": "Instruction",
+          "type": "string"
+        },
+        "result_text": {
+          "default": "",
+          "title": "Result Text",
+          "type": "string"
+        },
+        "simple": {
+          "default": false,
+          "title": "Simple",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "part_name",
+        "instruction"
+      ],
+      "title": "FieldSnapshot",
+      "type": "object"
+    },
+    "MediaAsset": {
+      "additionalProperties": false,
+      "properties": {
+        "part_name": {
+          "title": "Part Name",
+          "type": "string"
+        },
+        "content_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Type"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "part_name",
+        "size_bytes",
+        "sha256"
+      ],
+      "title": "MediaAsset",
+      "type": "object"
+    },
+    "PackageSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "file_name": {
+          "title": "File Name",
+          "type": "string"
+        },
+        "file_size_bytes": {
+          "minimum": 0,
+          "title": "File Size Bytes",
+          "type": "integer"
+        },
+        "input_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Input Sha256",
+          "type": "string"
+        },
+        "part_count": {
+          "minimum": 0,
+          "title": "Part Count",
+          "type": "integer"
+        },
+        "compressed_size_bytes": {
+          "minimum": 0,
+          "title": "Compressed Size Bytes",
+          "type": "integer"
+        },
+        "uncompressed_size_bytes": {
+          "minimum": 0,
+          "title": "Uncompressed Size Bytes",
+          "type": "integer"
+        },
+        "main_document_part": {
+          "title": "Main Document Part",
+          "type": "string"
+        },
+        "macro_enabled": {
+          "default": false,
+          "title": "Macro Enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "file_name",
+        "file_size_bytes",
+        "input_sha256",
+        "part_count",
+        "compressed_size_bytes",
+        "uncompressed_size_bytes",
+        "main_document_part"
+      ],
+      "title": "PackageSummary",
+      "type": "object"
+    },
+    "SectionSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "index": {
+          "minimum": 0,
+          "title": "Index",
+          "type": "integer"
+        },
+        "start_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Type"
+        },
+        "page_width_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Width Twips"
+        },
+        "page_height_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Height Twips"
+        },
+        "margin_top_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Margin Top Twips"
+        },
+        "margin_right_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Margin Right Twips"
+        },
+        "margin_bottom_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Margin Bottom Twips"
+        },
+        "margin_left_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Margin Left Twips"
+        },
+        "header_relationship_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Header Relationship Ids",
+          "type": "array"
+        },
+        "footer_relationship_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Footer Relationship Ids",
+          "type": "array"
+        },
+        "page_number_format": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Number Format"
+        },
+        "page_number_start": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Number Start"
+        }
+      },
+      "required": [
+        "index"
+      ],
+      "title": "SectionSnapshot",
+      "type": "object"
+    },
+    "SemanticRole": {
+      "enum": [
+        "cover",
+        "declaration",
+        "abstract_zh",
+        "abstract_en",
+        "keywords_zh",
+        "keywords_en",
+        "table_of_contents",
+        "heading_1",
+        "heading_2",
+        "heading_3",
+        "body",
+        "figure_caption",
+        "table_caption",
+        "reference_heading",
+        "reference_entry",
+        "appendix_heading",
+        "appendix_body",
+        "acknowledgement_heading",
+        "acknowledgement_body",
+        "unknown"
+      ],
+      "title": "SemanticRole",
+      "type": "string"
+    },
+    "SourceAnchor": {
+      "additionalProperties": false,
+      "properties": {
+        "part_name": {
+          "default": "word/document.xml",
+          "title": "Part Name",
+          "type": "string"
+        },
+        "paragraph_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Paragraph Index"
+        },
+        "table_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Table Index"
+        },
+        "row_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Row Index"
+        },
+        "cell_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cell Index"
+        },
+        "xml_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Xml Path"
+        }
+      },
+      "title": "SourceAnchor",
+      "type": "object"
+    },
+    "StoryPartSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "part_name": {
+          "title": "Part Name",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "header",
+            "footer",
+            "footnotes",
+            "endnotes",
+            "comments"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "paragraph_count": {
+          "minimum": 0,
+          "title": "Paragraph Count",
+          "type": "integer"
+        },
+        "text_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "part_name",
+        "kind",
+        "text",
+        "paragraph_count",
+        "text_sha256"
+      ],
+      "title": "StoryPartSnapshot",
+      "type": "object"
+    },
+    "StyleDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "style_id": {
+          "title": "Style Id",
+          "type": "string"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "style_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Style Type"
+        },
+        "based_on": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Based On"
+        }
+      },
+      "required": [
+        "style_id"
+      ],
+      "title": "StyleDefinition",
+      "type": "object"
+    },
+    "StyleSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "style_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Style Id"
+        },
+        "style_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Style Name"
+        },
+        "font_east_asia": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Font East Asia"
+        },
+        "font_latin": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Font Latin"
+        },
+        "size_pt": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size Pt"
+        },
+        "bold": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bold"
+        },
+        "italic": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Italic"
+        },
+        "alignment": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Alignment"
+        },
+        "line_spacing": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Spacing"
+        },
+        "space_before_pt": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Space Before Pt"
+        },
+        "space_after_pt": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Space After Pt"
+        },
+        "first_line_indent_pt": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First Line Indent Pt"
+        }
+      },
+      "title": "StyleSnapshot",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "analyzer_version": {
+      "title": "Analyzer Version",
+      "type": "string"
+    },
+    "package": {
+      "$ref": "#/$defs/PackageSummary"
+    },
+    "statistics": {
+      "$ref": "#/$defs/DocumentStatistics"
+    },
+    "blocks": {
+      "items": {
+        "$ref": "#/$defs/DocumentBlock"
+      },
+      "title": "Blocks",
+      "type": "array"
+    },
+    "styles": {
+      "items": {
+        "$ref": "#/$defs/StyleDefinition"
+      },
+      "title": "Styles",
+      "type": "array"
+    },
+    "sections": {
+      "items": {
+        "$ref": "#/$defs/SectionSnapshot"
+      },
+      "title": "Sections",
+      "type": "array"
+    },
+    "story_parts": {
+      "items": {
+        "$ref": "#/$defs/StoryPartSnapshot"
+      },
+      "title": "Story Parts",
+      "type": "array"
+    },
+    "fields": {
+      "items": {
+        "$ref": "#/$defs/FieldSnapshot"
+      },
+      "title": "Fields",
+      "type": "array"
+    },
+    "media": {
+      "items": {
+        "$ref": "#/$defs/MediaAsset"
+      },
+      "title": "Media",
+      "type": "array"
+    }
+  },
+  "required": [
+    "analyzer_version",
+    "package",
+    "statistics",
+    "blocks"
+  ],
+  "title": "DocumentProfile",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/document_profile.schema.json"
+}

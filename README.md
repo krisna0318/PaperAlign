@@ -2,7 +2,7 @@
 
 PaperAlign 是一个面向学术论文的可解释格式诊断与安全排版工具。
 
-当前阶段是 **M0：仓库、开发环境与核心数据模型**。此时项目只提供开发骨架、健康检查和数据契约，**尚不能解析或排版 DOCX**。
+当前阶段是 **M1：DOCX 只读分析**。项目可以生成文档画像、内容指纹、不支持对象报告和分析摘要，**尚不能判断论文格式是否合规，也不会修改或排版 DOCX**。
 
 ## MVP 边界
 
@@ -45,8 +45,28 @@ py -3.13 -m venv .venv
 打开 `http://127.0.0.1:8000/health`，应返回：
 
 ```json
-{"status":"ok","service":"paperalign-api","version":"0.1.0","stage":"M0"}
+{"status":"ok","service":"paperalign-api","version":"0.2.0","stage":"M1"}
 ```
+
+## DOCX 只读分析
+
+```powershell
+.\.venv\Scripts\python.exe -m paperalign analyze `
+  .\path\to\anonymized-thesis.docx `
+  --out .\.artifacts\sample
+```
+
+输出：
+
+```text
+.artifacts/sample/
+├─ document_profile.json
+├─ content_fingerprint.json
+├─ unsupported_objects.json
+└─ analysis_summary.md
+```
+
+分析器会验证 DOCX 包完整性和安全上限，读取段落、表格、样式、图片、字段、分节、页眉页脚及脚注等结构，并在分析前后比对输入文件 SHA-256。宏、ActiveX、OLE、嵌入包、altChunk、外部关系、文本框、公式、修订等对象会被显式报告。
 
 ## 前端启动
 
@@ -87,8 +107,8 @@ npm run build
 
 ## 近期路线
 
-1. M0：仓库、环境、健康检查、数据模型；
-2. M1：DOCX 只读画像、内容指纹、不支持对象报告；
+1. M0：仓库、环境、健康检查、数据模型（已完成）；
+2. M1：DOCX 只读画像、内容指纹、不支持对象报告（已完成）；
 3. M2：华农规则 Profile；
 4. M3：Rules-only 结构识别；
 5. M4：Prompt-only 与 Hybrid 对照；

@@ -11,9 +11,11 @@ if (-not (Test-Path -LiteralPath $Python)) {
 Push-Location (Join-Path $RepoRoot "backend")
 try {
     & $Python -m ruff check .
-    & $Python -m mypy app
+    & $Python -m mypy app paperalign
     & $Python -m pytest
     & $Python -m pip check
+    & $Python -m app.schema_export
+    git -C $RepoRoot diff --exit-code -- schemas
 }
 finally {
     Pop-Location

@@ -2,9 +2,9 @@
 
 ## Current state
 
-- Current milestone: M0 complete; M1 is next.
-- Implemented: repository scaffold, local environments, health endpoint, core domain contracts, schema export, tests, CI.
-- Not implemented: DOCX parsing, semantic classification, diagnosis, formatting, AI calls, Word automation.
+- Current milestone: M1 implementation complete; M2 is next after real-document validation.
+- Implemented: repository scaffold, safe DOCX package inspection, OOXML document profile, protected-content fingerprint, unsupported-object report, deterministic CLI artifacts, tests, and CI.
+- Not implemented: SCAU format rules, semantic classification, compliance diagnosis, formatting, AI calls, Word automation.
 
 ## Product decisions that must survive context changes
 
@@ -19,14 +19,13 @@
 
 ## Next implementation target
 
-Build the M1 read-only analyzer before business UI or model integration:
+Validate M1 with the user's anonymized real DOCX, then build the M2 SCAU rule profile:
 
 ```text
-DOCX package inspection
-  → document_profile.json
-  → content_fingerprint.json
-  → unsupported_objects.json
-  → analysis_summary.md
+official template evidence
+  → manually confirmed P0 rules
+  → versioned manifest.json
+  → validators and evidence locators
 ```
 
-The first public interface should be a CLI with deterministic output. Add API and UI only after the parser contract and golden fixtures are stable.
+Do not infer rules from visual appearance alone. Every rule needs source evidence, status, implementation strategy, and validator. Keep M1 CLI artifacts stable while M2 evolves.

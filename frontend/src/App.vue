@@ -18,11 +18,11 @@ onMounted(async () => {
 <template>
   <main class="shell">
     <section class="hero">
-      <p class="eyebrow">PaperAlign · M0</p>
+      <p class="eyebrow">PaperAlign · M1</p>
       <h1>可解释的论文格式诊断与安全排版</h1>
       <p class="summary">
-        当前版本正在搭建工程地基：仓库、开发环境、健康检查和核心数据契约。
-        DOCX 分析将在 M1 开始。
+        当前版本已完成 DOCX 只读分析：文档画像、内容指纹和不支持对象检测。
+        格式规则与合规诊断将在后续阶段实现。
       </p>
       <div class="status" :class="{ online: health }" role="status">
         <span class="dot" aria-hidden="true" />
