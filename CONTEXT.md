@@ -2,9 +2,9 @@
 
 ## Current state
 
-- Current milestone: M3 Rules-only structure classification implemented (application 0.7.0). Full M2 normative confirmation and M3 human review of real ambiguity remain ongoing acceptance work.
+- Current milestone: M4.2 human Gold Set and evaluation runner implemented (application 0.10.0). Full M2 normative confirmation and M3/M4 human review of real ambiguity remain ongoing acceptance work.
 - Implemented: repository scaffold, safe DOCX package inspection, OOXML document profile, protected-content fingerprint, unsupported-object report, deterministic CLI artifacts, tests, and CI.
-- Not implemented: AI ambiguity resolution, diagnostic upload UI, deterministic formatting, and final Word validation. Full school compliance is not available while 244 rules remain provisional.
+- Live DeepSeek proposals are verified; automatic Hybrid adjudication, diagnostic upload UI, deterministic formatting, and final Word validation are not implemented. Full school compliance is not available while 244 rules remain provisional.
 - M2.0 implemented: comment-optional template evidence extraction, paragraph style usage, direct-format clusters, and table border widths with OOXML-to-point conversion.
 - M2.1 implemented: document defaults, base/derived paragraph styles, character styles and direct formatting are merged into property-level effective values with provenance.
 - M2.1 audit: `audit-template --include-preview` writes HTML and short previews only under ignored `.paperalign`. Real Word 16.0 check: 13 paragraphs, 92 matching properties; source SHA unchanged. This is not human visual sign-off. Browser tool denied file:// page inspection; do not claim UI visual verification.
@@ -12,8 +12,15 @@
 - M2.3: Profile 1.0.0 has 248 atomic rules (4 confirmed, 244 provisional), 36 evidence records, 46 inventory entries (14 encoded, 23 partial, 9 deferred). Loader validates references, evidence hash, duplicate definitions and coverage. Every rule is read-only.
 - CLI: inspect-profile exports profile.json/profile_summary.md/applicability.json. verify-template checks hash-bound sample indexes only; rejects other documents. Real sample: 3 pass, 1 fail (abbreviation table separator 0.5 pt vs 1 pt), 108 evidence_insufficient. Never label these counts whole-document compliance.
 - M3: classify produces a hash-bound StructureReport for every represented M1 block, identifies four heading levels and document regions, preserves TOC fields, detects formulas/drawings, builds parentage, allows reviewed role/scope corrections, and runs located M2 rules. Local HTML/JSON/Markdown stay under .paperalign; no-key and no-write.
+- Final-page fallback: classify also writes a customer-readable manual review guide. It states which layout results cannot be guaranteed statically and gives applicable Word steps plus acceptance checks for final layout, fields/TOC, figures, tables, sections/page numbering and unsupported objects.
+- M4.0: prepare-ai-review creates local-only, bounded Prompt-only or Hybrid packets and a strict hash-bound response contract. Hybrid targets review roots; Prompt-only hides rules answers. No provider is called, no API key is read, and formatting remains disabled.
+- M4.1: DeepSeek and OpenAI Responses adapters use JSON Schema output contracts. DeepSeek uses its native stateless Responses endpoint; OpenAI sets store=false. Context is adaptive but hard-capped at 3 blocks and 240 characters each. Cloud execution requires both AI_MODE and --confirm-send-cloud; records validated proposals, failures, usage/time and optional user-configured cost, never raw responses. This does not imply account-level zero data retention.
+- Current real M4.1 preparation: 28 M3 review roots became 11 cloud-eligible packets and 17 manual-only no-text targets; 756 total context characters, at most 3 blocks per packet, actual longest excerpt 68 characters. A prior current-model qualitative review grouped the 11 packets into 6 list items and 5 table captions; it is not a Gold Set.
+- Live test on 2026-09-21: deepseek-flash, reasoning=none, 11/11 valid responses, 0 failures/abstentions, 15,262 input + 1,165 output = 16,427 tokens, 41,019 ms. Roles: 5 list_item, 1 heading_4, 5 table_caption. p-0123 (0.57) disagrees with prior qualitative review; 3 null scopes and 4 confidence scores below 0.70 need review. No model output was applied to the DOCX. Original source hash unchanged. Local result: .paperalign/m4-review/runs/2026-09-21-deepseek-live/ai_review_run.json. Earlier one-packet connectivity probe used 1,507 tokens (17,934 known successful tokens for the session).
+- Local .env stays AI_MODE=off; this authorized test temporarily set ambiguous_only in the process environment. Optional blank configuration values now fall back to defaults. Never print .env or secret values.
+- M4.2: prepare-gold-set creates a no-manuscript-text template for every plan target, including manual-only items; evaluate-ai-review validates plan/run/Gold Set identity and reports Rules-only versus model proposal coverage, role and scope metrics, disagreements, Token and latency. Only confirmed human labels count. Real no-label smoke result is 0/28 evaluated and all accuracy fields remain unassessed. Local template: .paperalign/m4-review/gold-set-v1; baseline: .paperalign/m4-review/evaluations/2026-09-21-no-label-baseline.
 - Real runs before final full regression: thesis 785 blocks, 28 priority review roots / 179 including inherited table-cell review; template 392 blocks, 9 review roots. Thesis located checks: 2 pass, 2 fail, 4379 evidence_insufficient. These are check occurrences, not unique-rule coverage or accuracy.
-- Latest full verification: scripts/test.ps1 passed, 113 backend tests, strict mypy (52 source files), Ruff, schema check, dependency checks, 1 frontend test and build; npm audit 0 vulnerabilities. Two third-party deprecation warnings remain nonblocking.
+- Latest verification (2026-09-21): 132 backend tests, strict mypy (61 source files), Ruff, schema check, Python dependency check, frontend typecheck, 1 frontend test, production build and npm audit passed; audit found 0 vulnerabilities. Documentation diff and secret scan passed. Two third-party deprecation warnings remain nonblocking.
 - M3 implementation follows pushed M2 commit 7406931; use `git log -1 --oneline` for the current delivery commit.
 
 ## Product decisions that must survive context changes
@@ -32,7 +39,7 @@
 
 ## Next implementation target
 
-Complete M3 real-document human review, then implement M4 AI ambiguity comparison. Keep M2 rule confirmation as a separate gate before any consequential formatting:
+Complete the real 28-target Gold Set with independent human review, then add M4.3 Hybrid adjudication. DeepSeek connectivity is already verified; do not repeat paid calls just to rediscover this. Prioritize list-versus-heading disagreements and missing scopes. Keep M2 rule confirmation as a separate gate before any consequential formatting:
 
 ```text
 official template evidence
@@ -42,7 +49,10 @@ official template evidence
   → versioned manifest.json
   → validators and evidence locators (fixed template samples working)
   → M3 role recognition and hash-bound human corrections (implemented)
-  → M4 model proposals for ambiguous items only, with schema validation and rules-only fallback
+  → M4.0 bounded local model packets and response validation (implemented)
+  → M4.1 provider calls, metrics and rules-only fallback (implemented; DeepSeek live test complete)
+  → M4.2 Gold Set template and evaluation runner (implemented; human labels pending)
+  → M4.3 Hybrid adjudication and three-mode evaluation
 ```
 
 Planning references:
@@ -55,6 +65,12 @@ Planning references:
 - `docs/reports/m23-profile-report.md`
 - `docs/implementation/m3-execution-plan.md`
 - `docs/reports/m3-structure-report.md`
+- `docs/implementation/m4-execution-plan.md`
+- `docs/reports/m40-review-safety-report.md`
+- `docs/reports/m41-cloud-provider-report.md`
+- `docs/reports/m41-deepseek-live-test.md`
+- `docs/reports/m42-gold-set-report.md`
+- `docs/README.md`
 
 Do not re-ask the template scope or expand college-specific templates. Remaining atomic confirmation and page-layout ambiguities can be requested when needed for consequential validation or formatting, not as a blanket blocker on read-only development.
 

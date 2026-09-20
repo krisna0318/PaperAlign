@@ -1,0 +1,266 @@
+{
+  "$defs": {
+    "SystemEvaluation": {
+      "additionalProperties": false,
+      "properties": {
+        "system": {
+          "enum": [
+            "rules_only",
+            "model_proposal"
+          ],
+          "title": "System",
+          "type": "string"
+        },
+        "evaluated_count": {
+          "minimum": 0,
+          "title": "Evaluated Count",
+          "type": "integer"
+        },
+        "prediction_count": {
+          "minimum": 0,
+          "title": "Prediction Count",
+          "type": "integer"
+        },
+        "correct_role_count": {
+          "minimum": 0,
+          "title": "Correct Role Count",
+          "type": "integer"
+        },
+        "scope_evaluated_count": {
+          "minimum": 0,
+          "title": "Scope Evaluated Count",
+          "type": "integer"
+        },
+        "correct_scope_count": {
+          "minimum": 0,
+          "title": "Correct Scope Count",
+          "type": "integer"
+        },
+        "abstained_count": {
+          "minimum": 0,
+          "title": "Abstained Count",
+          "type": "integer"
+        },
+        "unknown_count": {
+          "minimum": 0,
+          "title": "Unknown Count",
+          "type": "integer"
+        },
+        "disagreement_count": {
+          "minimum": 0,
+          "title": "Disagreement Count",
+          "type": "integer"
+        },
+        "coverage": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Coverage"
+        },
+        "role_accuracy": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Accuracy"
+        },
+        "role_precision": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Precision"
+        },
+        "role_recall": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Recall"
+        },
+        "role_f1": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role F1"
+        },
+        "scope_accuracy": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scope Accuracy"
+        },
+        "total_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Total Tokens",
+          "type": "integer"
+        },
+        "elapsed_ms": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Elapsed Ms",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "system",
+        "evaluated_count",
+        "prediction_count",
+        "correct_role_count",
+        "scope_evaluated_count",
+        "correct_scope_count",
+        "abstained_count",
+        "unknown_count",
+        "disagreement_count"
+      ],
+      "title": "SystemEvaluation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "input_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Input Sha256",
+      "type": "string"
+    },
+    "content_fingerprint": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Fingerprint",
+      "type": "string"
+    },
+    "gold_set_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Gold Set Sha256",
+      "type": "string"
+    },
+    "plan_mode": {
+      "enum": [
+        "prompt_only",
+        "hybrid"
+      ],
+      "title": "Plan Mode",
+      "type": "string"
+    },
+    "model_provider": {
+      "enum": [
+        "openai_responses",
+        "deepseek_responses"
+      ],
+      "title": "Model Provider",
+      "type": "string"
+    },
+    "model": {
+      "minLength": 1,
+      "title": "Model",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "no_confirmed_labels",
+        "partial_gold_set",
+        "complete_gold_set"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "target_count": {
+      "minimum": 0,
+      "title": "Target Count",
+      "type": "integer"
+    },
+    "evaluated_count": {
+      "minimum": 0,
+      "title": "Evaluated Count",
+      "type": "integer"
+    },
+    "unassessed_count": {
+      "minimum": 0,
+      "title": "Unassessed Count",
+      "type": "integer"
+    },
+    "formatting_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Formatting Allowed",
+      "type": "boolean"
+    },
+    "systems": {
+      "items": {
+        "$ref": "#/$defs/SystemEvaluation"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Systems",
+      "type": "array"
+    }
+  },
+  "required": [
+    "input_sha256",
+    "content_fingerprint",
+    "gold_set_sha256",
+    "plan_mode",
+    "model_provider",
+    "model",
+    "status",
+    "target_count",
+    "evaluated_count",
+    "unassessed_count",
+    "systems"
+  ],
+  "title": "EvaluationReport",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/evaluation_report.schema.json"
+}

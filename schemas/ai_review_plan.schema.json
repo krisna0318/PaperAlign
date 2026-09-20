@@ -1,0 +1,594 @@
+{
+  "$defs": {
+    "AiContextExcerpt": {
+      "additionalProperties": false,
+      "properties": {
+        "block_id": {
+          "minLength": 1,
+          "title": "Block Id",
+          "type": "string"
+        },
+        "relative_position": {
+          "title": "Relative Position",
+          "type": "integer"
+        },
+        "kind": {
+          "$ref": "#/$defs/BlockKind"
+        },
+        "current_role": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SemanticRole"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "style": {
+          "$ref": "#/$defs/StyleSnapshot"
+        },
+        "has_numbering": {
+          "title": "Has Numbering",
+          "type": "boolean"
+        },
+        "numbering_level": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Numbering Level"
+        },
+        "has_drawing": {
+          "title": "Has Drawing",
+          "type": "boolean"
+        },
+        "text": {
+          "maxLength": 240,
+          "title": "Text",
+          "type": "string"
+        },
+        "text_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "truncated": {
+          "title": "Truncated",
+          "type": "boolean"
+        },
+        "selection_reason": {
+          "enum": [
+            "target",
+            "parent_heading",
+            "previous",
+            "next"
+          ],
+          "title": "Selection Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "block_id",
+        "relative_position",
+        "kind",
+        "style",
+        "has_numbering",
+        "has_drawing",
+        "text",
+        "text_sha256",
+        "truncated",
+        "selection_reason"
+      ],
+      "title": "AiContextExcerpt",
+      "type": "object"
+    },
+    "AiReviewPacket": {
+      "additionalProperties": false,
+      "properties": {
+        "packet_id": {
+          "minLength": 1,
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "target_block_id": {
+          "minLength": 1,
+          "title": "Target Block Id",
+          "type": "string"
+        },
+        "target_text_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Target Text Sha256",
+          "type": "string"
+        },
+        "allowed_roles": {
+          "items": {
+            "$ref": "#/$defs/SemanticRole"
+          },
+          "minItems": 1,
+          "title": "Allowed Roles",
+          "type": "array"
+        },
+        "allowed_scopes": {
+          "items": {
+            "$ref": "#/$defs/RuleScope"
+          },
+          "title": "Allowed Scopes",
+          "type": "array"
+        },
+        "rules_only_role": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SemanticRole"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "rules_only_scope": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RuleScope"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "rules_only_reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rules Only Reasons",
+          "type": "array"
+        },
+        "system_instruction": {
+          "minLength": 1,
+          "title": "System Instruction",
+          "type": "string"
+        },
+        "task_instruction": {
+          "minLength": 1,
+          "title": "Task Instruction",
+          "type": "string"
+        },
+        "context": {
+          "items": {
+            "$ref": "#/$defs/AiContextExcerpt"
+          },
+          "minItems": 1,
+          "title": "Context",
+          "type": "array"
+        }
+      },
+      "required": [
+        "packet_id",
+        "target_block_id",
+        "target_text_sha256",
+        "allowed_roles",
+        "system_instruction",
+        "task_instruction",
+        "context"
+      ],
+      "title": "AiReviewPacket",
+      "type": "object"
+    },
+    "AiSkippedTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "target_block_id": {
+          "minLength": 1,
+          "title": "Target Block Id",
+          "type": "string"
+        },
+        "target_text_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Target Text Sha256",
+          "type": "string"
+        },
+        "reason": {
+          "enum": [
+            "no_text_evidence",
+            "unsupported_object",
+            "unsupported_kind"
+          ],
+          "title": "Reason",
+          "type": "string"
+        },
+        "action": {
+          "const": "manual_review",
+          "default": "manual_review",
+          "title": "Action",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target_block_id",
+        "target_text_sha256",
+        "reason"
+      ],
+      "title": "AiSkippedTarget",
+      "type": "object"
+    },
+    "BlockKind": {
+      "enum": [
+        "paragraph",
+        "table",
+        "table_cell",
+        "image",
+        "section_break",
+        "page_break",
+        "field",
+        "unknown"
+      ],
+      "title": "BlockKind",
+      "type": "string"
+    },
+    "RuleScope": {
+      "enum": [
+        "document",
+        "section",
+        "cover_title",
+        "cover_document_type",
+        "cover_metadata",
+        "declaration",
+        "abstract_zh_heading",
+        "abstract_zh_body",
+        "abstract_en_title",
+        "abstract_en_author",
+        "abstract_en_affiliation",
+        "abstract_en_body",
+        "keywords_zh",
+        "keywords_en",
+        "toc_heading",
+        "toc_entry",
+        "heading_1",
+        "heading_2",
+        "heading_3",
+        "heading_4",
+        "body",
+        "abbreviation_table",
+        "table",
+        "table_text",
+        "table_caption",
+        "table_note",
+        "figure",
+        "figure_caption",
+        "figure_note",
+        "equation",
+        "footnote",
+        "reference_heading",
+        "reference_entry",
+        "appendix_heading",
+        "appendix_body",
+        "acknowledgement_heading",
+        "acknowledgement_body"
+      ],
+      "title": "RuleScope",
+      "type": "string"
+    },
+    "SemanticRole": {
+      "enum": [
+        "cover",
+        "declaration",
+        "abstract_zh",
+        "abstract_en",
+        "keywords_zh",
+        "keywords_en",
+        "table_of_contents",
+        "heading_1",
+        "heading_2",
+        "heading_3",
+        "heading_4",
+        "body",
+        "list_item",
+        "table",
+        "table_text",
+        "abbreviation_table",
+        "abbreviation_heading",
+        "figure",
+        "equation",
+        "figure_caption",
+        "table_caption",
+        "reference_heading",
+        "reference_entry",
+        "appendix_heading",
+        "appendix_body",
+        "acknowledgement_heading",
+        "acknowledgement_body",
+        "unknown"
+      ],
+      "title": "SemanticRole",
+      "type": "string"
+    },
+    "StyleSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "style_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Style Id"
+        },
+        "style_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Style Name"
+        },
+        "font_east_asia": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Font East Asia"
+        },
+        "font_latin": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Font Latin"
+        },
+        "size_pt": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size Pt"
+        },
+        "bold": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bold"
+        },
+        "italic": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Italic"
+        },
+        "alignment": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Alignment"
+        },
+        "line_spacing": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Spacing"
+        },
+        "space_before_pt": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Space Before Pt"
+        },
+        "space_after_pt": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Space After Pt"
+        },
+        "first_line_indent_pt": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First Line Indent Pt"
+        }
+      },
+      "title": "StyleSnapshot",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "input_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Input Sha256",
+      "type": "string"
+    },
+    "content_fingerprint": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Fingerprint",
+      "type": "string"
+    },
+    "mode": {
+      "enum": [
+        "prompt_only",
+        "hybrid"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "status": {
+      "const": "prepared_not_sent",
+      "default": "prepared_not_sent",
+      "title": "Status",
+      "type": "string"
+    },
+    "ai_used": {
+      "const": false,
+      "default": false,
+      "title": "Ai Used",
+      "type": "boolean"
+    },
+    "formatting_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Formatting Allowed",
+      "type": "boolean"
+    },
+    "contains_private_text": {
+      "const": true,
+      "default": true,
+      "title": "Contains Private Text",
+      "type": "boolean"
+    },
+    "context_radius": {
+      "maximum": 2,
+      "minimum": 0,
+      "title": "Context Radius",
+      "type": "integer"
+    },
+    "max_context_blocks": {
+      "const": 3,
+      "default": 3,
+      "title": "Max Context Blocks",
+      "type": "integer"
+    },
+    "max_characters_per_block": {
+      "maximum": 240,
+      "minimum": 1,
+      "title": "Max Characters Per Block",
+      "type": "integer"
+    },
+    "candidate_count": {
+      "minimum": 0,
+      "title": "Candidate Count",
+      "type": "integer"
+    },
+    "packet_count": {
+      "minimum": 0,
+      "title": "Packet Count",
+      "type": "integer"
+    },
+    "skipped_count": {
+      "minimum": 0,
+      "title": "Skipped Count",
+      "type": "integer"
+    },
+    "total_context_characters": {
+      "minimum": 0,
+      "title": "Total Context Characters",
+      "type": "integer"
+    },
+    "privacy_notice": {
+      "minLength": 1,
+      "title": "Privacy Notice",
+      "type": "string"
+    },
+    "packets": {
+      "items": {
+        "$ref": "#/$defs/AiReviewPacket"
+      },
+      "title": "Packets",
+      "type": "array"
+    },
+    "skipped_targets": {
+      "items": {
+        "$ref": "#/$defs/AiSkippedTarget"
+      },
+      "title": "Skipped Targets",
+      "type": "array"
+    }
+  },
+  "required": [
+    "input_sha256",
+    "content_fingerprint",
+    "mode",
+    "context_radius",
+    "max_characters_per_block",
+    "candidate_count",
+    "packet_count",
+    "skipped_count",
+    "total_context_characters",
+    "privacy_notice",
+    "packets",
+    "skipped_targets"
+  ],
+  "title": "AiReviewPlan",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/ai_review_plan.schema.json"
+}

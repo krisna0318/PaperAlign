@@ -1,0 +1,159 @@
+{
+  "$defs": {
+    "ManualReviewItem": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "final_layout",
+            "toc_and_fields",
+            "figure_pagination",
+            "table_pagination",
+            "section_page_numbering",
+            "unsupported_objects"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "customer_notice": {
+          "minLength": 1,
+          "title": "Customer Notice",
+          "type": "string"
+        },
+        "reason": {
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "related_block_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Block Ids",
+          "type": "array"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/$defs/ManualReviewStep"
+          },
+          "minItems": 1,
+          "title": "Steps",
+          "type": "array"
+        },
+        "acceptance_checks": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Acceptance Checks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "category",
+        "title",
+        "customer_notice",
+        "reason",
+        "steps",
+        "acceptance_checks"
+      ],
+      "title": "ManualReviewItem",
+      "type": "object"
+    },
+    "ManualReviewStep": {
+      "additionalProperties": false,
+      "properties": {
+        "order": {
+          "minimum": 1,
+          "title": "Order",
+          "type": "integer"
+        },
+        "instruction": {
+          "minLength": 1,
+          "title": "Instruction",
+          "type": "string"
+        },
+        "expected_result": {
+          "minLength": 1,
+          "title": "Expected Result",
+          "type": "string"
+        }
+      },
+      "required": [
+        "order",
+        "instruction",
+        "expected_result"
+      ],
+      "title": "ManualReviewStep",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "input_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Input Sha256",
+      "type": "string"
+    },
+    "content_fingerprint": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Fingerprint",
+      "type": "string"
+    },
+    "scope_statement": {
+      "minLength": 1,
+      "title": "Scope Statement",
+      "type": "string"
+    },
+    "generated_automatically": {
+      "const": true,
+      "default": true,
+      "title": "Generated Automatically",
+      "type": "boolean"
+    },
+    "word_desktop_required": {
+      "title": "Word Desktop Required",
+      "type": "boolean"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/ManualReviewItem"
+      },
+      "minItems": 1,
+      "title": "Items",
+      "type": "array"
+    }
+  },
+  "required": [
+    "input_sha256",
+    "content_fingerprint",
+    "scope_statement",
+    "word_desktop_required",
+    "items"
+  ],
+  "title": "ManualReviewGuide",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/manual_review_guide.schema.json"
+}

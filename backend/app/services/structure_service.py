@@ -24,6 +24,7 @@ from app.parsers.errors import DocxAnalysisError
 from app.parsers.structure_signals import StructuralSignals, read_structure_signals
 from app.profiles.loader import load_profile
 from app.services.analyzer import analyze_docx
+from app.services.manual_review import build_manual_review_guide, render_manual_review_markdown
 from app.services.structure_classifier import classify_structure
 from app.services.template_inspector import _write_text, inspect_template
 from app.validation.comparator import validate_rule
@@ -173,6 +174,7 @@ def inspect_structure(
 
 
 def _render_html(report: StructureReport) -> str:
+    manual_guide = build_manual_review_guide(report)
     cards = []
     for item in report.decisions:
         status = "待确认" if item.requires_confirmation else "已识别"
@@ -201,6 +203,20 @@ def _render_html(report: StructureReport) -> str:
     warning_list = "".join(
         f"<li>{escape(w.code)}：{escape(w.message)}</li>" for w in report.warnings
     )
+    manual_items = "".join(
+        '<details class="manual"><summary>'
+        + escape(item.title)
+        + "</summary><p><strong>注意事项：</strong>"
+        + escape(item.customer_notice)
+        + "</p><ol>"
+        + "".join(
+            f"<li>{escape(step.instruction)}<br><small>预期结果："
+            f"{escape(step.expected_result)}</small></li>"
+            for step in item.steps
+        )
+        + "</ol></details>"
+        for item in manual_guide.items
+    )
     return (
         '<!doctype html><html lang="zh-CN"><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
@@ -209,7 +225,7 @@ def _render_html(report: StructureReport) -> str:
         "<title>PaperAlign 结构审查</title><style>body{font:16px/1.6 system-ui;max-width:1000px;"
         "margin:32px auto;padding:0 20px;color:#172b4d;background:#f5f7fa}details{background:#fff;"
         "padding:14px;border:1px solid #dce3ec;border-radius:8px;margin:10px 0}"
-        ".review{border-left:5px solid #bf7516}"
+        ".review{border-left:5px solid #bf7516}.manual{border-left:5px solid #235db0}"
         "summary{cursor:pointer;font-weight:600}pre{white-space:pre-wrap;overflow-wrap:anywhere}a{color:#235db0}</style>"
         "<h1>PaperAlign 结构审查</h1>"
         f"<p>{len(report.decisions)} 个文档块；{report.review_count} 个待确认。</p>"
@@ -218,6 +234,8 @@ def _render_html(report: StructureReport) -> str:
         "<p>点击条目查看识别依据；预览最多 20 字。段落索引从 0 开始。"
         "本报告用于结构审查，尚未生成排版副本；识别数量不能用作准确率。</p>"
         f"<p>输入 SHA-256：{report.input_sha256}</p><ul>{warning_list}</ul>"
+        "<h2>必须人工完成的 Word 复核</h2>"
+        f"<p>{escape(manual_guide.scope_statement)}</p>{manual_items}"
         f"<h2>待确认定位</h2><p>{review_links or '当前没有待确认项'}</p>"
         + "".join(cards)
         + "</html>"
@@ -244,6 +262,8 @@ def write_structure_review(
             "structure_summary.md",
             "structure_review.html",
             "corrections.template.json",
+            "manual_review_guide.json",
+            "manual_review_guide.md",
         )
     }
     if input_path.resolve() in reserved or (
@@ -257,6 +277,11 @@ def write_structure_review(
     output_dir.mkdir(parents=True, exist_ok=True)
     _write_text(output_dir / "structure_report.json", report.model_dump_json(indent=2) + "\n")
     _write_text(output_dir / "structure_review.html", _render_html(report))
+    manual_guide = build_manual_review_guide(report)
+    _write_text(
+        output_dir / "manual_review_guide.json", manual_guide.model_dump_json(indent=2) + "\n"
+    )
+    _write_text(output_dir / "manual_review_guide.md", render_manual_review_markdown(manual_guide))
     lines = [
         "# PaperAlign 结构识别摘要",
         "",
@@ -302,6 +327,11 @@ def write_structure_review(
             "同一角色可能对应多种格式范围时必须填写 scope。",
             "以 --overrides 指定 corrections.json 再运行 classify，"
             "后续分区与层级会重算；原 DOCX 不变。",
+            "",
+            "## 最终页面注意事项",
+            "",
+            "系统不能从 DOCX 静态结构可靠证明最终分页。请按 manual_review_guide.md "
+            "在桌面版 Word 中完成逐项复核。",
             "",
         ]
     )

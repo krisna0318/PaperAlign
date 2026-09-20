@@ -1,0 +1,477 @@
+{
+  "$defs": {
+    "AiCallFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "packet_id": {
+          "minLength": 1,
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "target_block_id": {
+          "minLength": 1,
+          "title": "Target Block Id",
+          "type": "string"
+        },
+        "code": {
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        },
+        "attempts": {
+          "minimum": 1,
+          "title": "Attempts",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "packet_id",
+        "target_block_id",
+        "code",
+        "message",
+        "retryable",
+        "attempts"
+      ],
+      "title": "AiCallFailure",
+      "type": "object"
+    },
+    "AiReviewProposal": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "packet_id": {
+          "minLength": 1,
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "target_block_id": {
+          "minLength": 1,
+          "title": "Target Block Id",
+          "type": "string"
+        },
+        "target_text_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Target Text Sha256",
+          "type": "string"
+        },
+        "selected_role": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SemanticRole"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "selected_scope": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RuleScope"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "abstained": {
+          "title": "Abstained",
+          "type": "boolean"
+        },
+        "reason": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "evidence_block_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Block Ids",
+          "type": "array"
+        },
+        "usage": {
+          "$ref": "#/$defs/AiUsage"
+        }
+      },
+      "required": [
+        "packet_id",
+        "target_block_id",
+        "target_text_sha256",
+        "confidence",
+        "abstained",
+        "reason",
+        "usage"
+      ],
+      "title": "AiReviewProposal",
+      "type": "object"
+    },
+    "AiUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "input_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Input Tokens"
+        },
+        "output_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Tokens"
+        },
+        "total_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Total Tokens"
+        },
+        "elapsed_ms": {
+          "minimum": 0,
+          "title": "Elapsed Ms",
+          "type": "integer"
+        },
+        "estimated_cost": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimated Cost"
+        },
+        "cost_currency": {
+          "anyOf": [
+            {
+              "const": "USD",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cost Currency"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "elapsed_ms"
+      ],
+      "title": "AiUsage",
+      "type": "object"
+    },
+    "RuleScope": {
+      "enum": [
+        "document",
+        "section",
+        "cover_title",
+        "cover_document_type",
+        "cover_metadata",
+        "declaration",
+        "abstract_zh_heading",
+        "abstract_zh_body",
+        "abstract_en_title",
+        "abstract_en_author",
+        "abstract_en_affiliation",
+        "abstract_en_body",
+        "keywords_zh",
+        "keywords_en",
+        "toc_heading",
+        "toc_entry",
+        "heading_1",
+        "heading_2",
+        "heading_3",
+        "heading_4",
+        "body",
+        "abbreviation_table",
+        "table",
+        "table_text",
+        "table_caption",
+        "table_note",
+        "figure",
+        "figure_caption",
+        "figure_note",
+        "equation",
+        "footnote",
+        "reference_heading",
+        "reference_entry",
+        "appendix_heading",
+        "appendix_body",
+        "acknowledgement_heading",
+        "acknowledgement_body"
+      ],
+      "title": "RuleScope",
+      "type": "string"
+    },
+    "SemanticRole": {
+      "enum": [
+        "cover",
+        "declaration",
+        "abstract_zh",
+        "abstract_en",
+        "keywords_zh",
+        "keywords_en",
+        "table_of_contents",
+        "heading_1",
+        "heading_2",
+        "heading_3",
+        "heading_4",
+        "body",
+        "list_item",
+        "table",
+        "table_text",
+        "abbreviation_table",
+        "abbreviation_heading",
+        "figure",
+        "equation",
+        "figure_caption",
+        "table_caption",
+        "reference_heading",
+        "reference_entry",
+        "appendix_heading",
+        "appendix_body",
+        "acknowledgement_heading",
+        "acknowledgement_body",
+        "unknown"
+      ],
+      "title": "SemanticRole",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "input_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Input Sha256",
+      "type": "string"
+    },
+    "content_fingerprint": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Fingerprint",
+      "type": "string"
+    },
+    "mode": {
+      "enum": [
+        "prompt_only",
+        "hybrid"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "provider": {
+      "enum": [
+        "openai_responses",
+        "deepseek_responses"
+      ],
+      "title": "Provider",
+      "type": "string"
+    },
+    "model": {
+      "minLength": 1,
+      "title": "Model",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "partial",
+        "failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "ai_used": {
+      "const": true,
+      "default": true,
+      "title": "Ai Used",
+      "type": "boolean"
+    },
+    "formatting_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Formatting Allowed",
+      "type": "boolean"
+    },
+    "response_store_requested": {
+      "const": false,
+      "default": false,
+      "title": "Response Store Requested",
+      "type": "boolean"
+    },
+    "raw_prompts_logged": {
+      "const": false,
+      "default": false,
+      "title": "Raw Prompts Logged",
+      "type": "boolean"
+    },
+    "rules_only_fallback_available": {
+      "const": true,
+      "default": true,
+      "title": "Rules Only Fallback Available",
+      "type": "boolean"
+    },
+    "requested_count": {
+      "minimum": 0,
+      "title": "Requested Count",
+      "type": "integer"
+    },
+    "completed_count": {
+      "minimum": 0,
+      "title": "Completed Count",
+      "type": "integer"
+    },
+    "failed_count": {
+      "minimum": 0,
+      "title": "Failed Count",
+      "type": "integer"
+    },
+    "total_input_tokens": {
+      "minimum": 0,
+      "title": "Total Input Tokens",
+      "type": "integer"
+    },
+    "total_output_tokens": {
+      "minimum": 0,
+      "title": "Total Output Tokens",
+      "type": "integer"
+    },
+    "total_tokens": {
+      "minimum": 0,
+      "title": "Total Tokens",
+      "type": "integer"
+    },
+    "elapsed_ms": {
+      "minimum": 0,
+      "title": "Elapsed Ms",
+      "type": "integer"
+    },
+    "estimated_cost": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Estimated Cost"
+    },
+    "cost_currency": {
+      "anyOf": [
+        {
+          "const": "USD",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cost Currency"
+    },
+    "proposals": {
+      "items": {
+        "$ref": "#/$defs/AiReviewProposal"
+      },
+      "title": "Proposals",
+      "type": "array"
+    },
+    "failures": {
+      "items": {
+        "$ref": "#/$defs/AiCallFailure"
+      },
+      "title": "Failures",
+      "type": "array"
+    }
+  },
+  "required": [
+    "input_sha256",
+    "content_fingerprint",
+    "mode",
+    "provider",
+    "model",
+    "status",
+    "requested_count",
+    "completed_count",
+    "failed_count",
+    "total_input_tokens",
+    "total_output_tokens",
+    "total_tokens",
+    "elapsed_ms",
+    "proposals",
+    "failures"
+  ],
+  "title": "AiReviewRun",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/ai_review_run.schema.json"
+}

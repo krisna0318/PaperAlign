@@ -25,6 +25,7 @@ class SemanticRole(StrEnum):
     HEADING_3 = "heading_3"
     HEADING_4 = "heading_4"
     BODY = "body"
+    LIST_ITEM = "list_item"
     TABLE = "table"
     TABLE_TEXT = "table_text"
     ABBREVIATION_TABLE = "abbreviation_table"

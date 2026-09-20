@@ -64,6 +64,7 @@ ROLE_SCOPE.update({role: RuleScope(role.value) for role in HEADING_ROLES.values(
 ROLE_SCOPE.update(
     {
         SemanticRole.TABLE: RuleScope.TABLE,
+        SemanticRole.LIST_ITEM: RuleScope.BODY,
         SemanticRole.TABLE_TEXT: RuleScope.TABLE_TEXT,
         SemanticRole.ABBREVIATION_TABLE: RuleScope.ABBREVIATION_TABLE,
         SemanticRole.FIGURE_CAPTION: RuleScope.FIGURE_CAPTION,

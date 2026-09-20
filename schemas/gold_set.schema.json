@@ -1,6 +1,6 @@
 {
   "$defs": {
-    "RoleOverride": {
+    "GoldAnnotation": {
       "additionalProperties": false,
       "properties": {
         "block_id": {
@@ -8,10 +8,52 @@
           "title": "Block Id",
           "type": "string"
         },
-        "role": {
-          "$ref": "#/$defs/SemanticRole"
+        "text_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
         },
-        "scope": {
+        "source": {
+          "enum": [
+            "cloud_packet",
+            "manual_only"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "source_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Reason"
+        },
+        "status": {
+          "default": "unassessed",
+          "enum": [
+            "unassessed",
+            "confirmed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "expected_role": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SemanticRole"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "expected_scope": {
           "anyOf": [
             {
               "$ref": "#/$defs/RuleScope"
@@ -22,19 +64,41 @@
           ],
           "default": null
         },
-        "reason": {
-          "maxLength": 300,
-          "minLength": 1,
-          "title": "Reason",
-          "type": "string"
+        "reviewer": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer"
+        },
+        "rationale": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rationale"
         }
       },
       "required": [
         "block_id",
-        "role",
-        "reason"
+        "text_sha256",
+        "source"
       ],
-      "title": "RoleOverride",
+      "title": "GoldAnnotation",
       "type": "object"
     },
     "RuleScope": {
@@ -128,25 +192,40 @@
       "title": "Input Sha256",
       "type": "string"
     },
-    "reviewer": {
-      "maxLength": 100,
-      "minLength": 1,
-      "title": "Reviewer",
+    "content_fingerprint": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Fingerprint",
       "type": "string"
     },
-    "decisions": {
+    "source_plan_mode": {
+      "enum": [
+        "prompt_only",
+        "hybrid"
+      ],
+      "title": "Source Plan Mode",
+      "type": "string"
+    },
+    "target_count": {
+      "minimum": 0,
+      "title": "Target Count",
+      "type": "integer"
+    },
+    "annotations": {
       "items": {
-        "$ref": "#/$defs/RoleOverride"
+        "$ref": "#/$defs/GoldAnnotation"
       },
-      "title": "Decisions",
+      "title": "Annotations",
       "type": "array"
     }
   },
   "required": [
     "input_sha256",
-    "reviewer"
+    "content_fingerprint",
+    "source_plan_mode",
+    "target_count",
+    "annotations"
   ],
-  "title": "StructureOverrides",
+  "title": "GoldSet",
   "type": "object",
-  "$id": "https://paperalign.local/schemas/structure_overrides.schema.json"
+  "$id": "https://paperalign.local/schemas/gold_set.schema.json"
 }

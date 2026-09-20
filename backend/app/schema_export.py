@@ -4,14 +4,17 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
+from app.domain.ai_review import AiReviewPlan, AiReviewProposal, AiReviewRun
 from app.domain.analysis import (
     ContentFingerprintReport,
     DocumentProfile,
     UnsupportedObjectsReport,
 )
 from app.domain.blocks import DocumentBlock
+from app.domain.evaluation import EvaluationReport, GoldSet
 from app.domain.issues import DiagnosisIssue
 from app.domain.jobs import AnalysisJob
+from app.domain.manual_review import ManualReviewGuide
 from app.domain.profile import CoverageEntry, ProfileManifest
 from app.domain.rule_validation import EvidenceSelection, RuleValidationResult
 from app.domain.rules import FormatRule
@@ -19,6 +22,12 @@ from app.domain.structure import StructureOverrides, StructureReport
 from app.domain.template_evidence import TemplateEvidenceReport
 
 SCHEMAS: dict[str, type[BaseModel]] = {
+    "evaluation_report.schema.json": EvaluationReport,
+    "gold_set.schema.json": GoldSet,
+    "ai_review_plan.schema.json": AiReviewPlan,
+    "ai_review_proposal.schema.json": AiReviewProposal,
+    "ai_review_run.schema.json": AiReviewRun,
+    "manual_review_guide.schema.json": ManualReviewGuide,
     "structure_report.schema.json": StructureReport,
     "structure_overrides.schema.json": StructureOverrides,
     "profile_manifest.schema.json": ProfileManifest,

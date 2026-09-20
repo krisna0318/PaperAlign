@@ -34,5 +34,5 @@ def health() -> HealthResponse:
         status="ok",
         service="paperalign-api",
         version=__version__,
-        stage="M3",
+        stage="M4.2",
     )

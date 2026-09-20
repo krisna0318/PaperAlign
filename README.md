@@ -2,7 +2,11 @@
 
 PaperAlign 是一个面向学术论文的可解释格式诊断与安全排版工具。
 
-当前阶段是 **M3：Rules-only 结构识别**。系统可以只读分析 DOCX，提取模板格式证据，装载华农规则 Profile，并在论文原稿中定位封面、摘要、标题、正文、图表、公式、参考文献等对象。结构结果支持本地审查和人工纠正；当前仍不会修改或排版 DOCX。
+当前阶段是 **M4.2：人工 Gold Set 与模型评测**。系统可以只读分析 DOCX、定位论文结构、生成最终人工复核步骤，并为歧义项准备最多 3 段、每段最多 240 字的自适应上下文。云端模型只能提出受 Schema 约束的建议；当前仍不会修改或排版 DOCX。
+
+2026-09-21 已完成 DeepSeek 实际联调：11 个审查包全部返回有效建议，使用 16,427 Token；发现 1 个与前次定性复核有分歧的低置信标题候选，尚未进行人工准确率验收。见 [本次测试报告](docs/reports/m41-deepseek-live-test.md)。
+
+文档入口：[文档导航](docs/README.md) · [开发上下文](CONTEXT.md) · [M4 执行方案](docs/implementation/m4-execution-plan.md)。
 
 ## MVP 边界
 
@@ -45,7 +49,7 @@ py -3.13 -m venv .venv
 打开 `http://127.0.0.1:8000/health`，应返回：
 
 ```json
-{"status":"ok","service":"paperalign-api","version":"0.7.0","stage":"M3"}
+{"status":"ok","service":"paperalign-api","version":"0.10.0","stage":"M4.2"}
 ```
 
 ## DOCX 只读分析
@@ -124,10 +128,12 @@ M2.2 已完成单位、类型、证据优先级和判定前置条件建模，规
 ├─ structure_report.json
 ├─ structure_summary.md
 ├─ structure_review.html
+├─ manual_review_guide.json
+├─ manual_review_guide.md
 └─ corrections.template.json
 ```
 
-双击 `structure_review.html`，先检查“待确认定位”。识别结果保留 Word 定位、角色、规则范围、父级、判断来源与依据；`confidence` 是启发式分数，不是准确率。默认不输出原文，`--include-preview` 只在本地报告中加入每项最多 20 字。
+双击 `structure_review.html`，先检查“待确认定位”。识别结果保留 Word 定位、角色、规则范围、父级、判断来源与依据；`confidence` 是启发式分数，不是准确率。默认不输出原文，`--include-preview` 只在本地报告中加入每项最多 20 字。报告还会按实际文档对象生成 Word 最终人工复核步骤；系统不能可靠证明的分页问题不会伪装成“已通过”。
 
 如需纠正，复制 `corrections.template.json` 为 `corrections.json`，填写 `reviewer` 和 `decisions`，再运行：
 
@@ -140,6 +146,60 @@ M2.2 已完成单位、类型、证据优先级和判定前置条件建模，规
 ```
 
 纠正文件绑定输入 SHA-256。未知块、重复纠正、错误角色/对象类型以及角色与规则范围不匹配都会被拒绝；纠正理由保留在 JSON 报告中。系统会重新计算后续分区与标题父级，原 DOCX 和内容指纹保持不变。实现与真实样本结果见 [M3 报告](docs/reports/m3-structure-report.md)。
+
+## 受控 AI 审查（M4.0 / M4.1）
+
+```powershell
+.\.venv\Scripts\python.exe -m paperalign prepare-ai-review `
+  .\.paperalign\private-test-cases\inputs\private-thesis-before-formatting.docx `
+  --out .\.paperalign\m4-review\thesis-hybrid `
+  --mode hybrid
+```
+
+该命令默认只为 M3 的优先歧义入口准备上下文，最多 3 段、每段最多 240 字。目标段必选，剩余位置优先选择父标题和有信息量的相邻段；短文本不会补齐到 240 字。输出受输入与文本哈希约束，且只能保存在 `.paperalign`。此步骤不连接模型。
+
+确认计划后，在本地 `.env` 配置以下字段；不要把真实 Key 写入命令、聊天、截图或 Git：
+
+```dotenv
+PAPERALIGN_AI_MODE=ambiguous_only
+PAPERALIGN_AI_PROVIDER=deepseek_responses
+PAPERALIGN_AI_BASE_URL=https://api.deepseek.com
+PAPERALIGN_AI_API_KEY=your-local-secret
+PAPERALIGN_AI_MODEL=deepseek-flash
+```
+
+然后显式确认发送：
+
+```powershell
+.\.venv\Scripts\python.exe -m paperalign run-ai-review `
+  .\.paperalign\m4-review\thesis-hybrid\ai_review_plan.json `
+  --out .\.paperalign\m4-review\thesis-cloud-run `
+  --confirm-send-cloud
+```
+
+DeepSeek 适配器调用其原生、无服务端会话状态的 Responses 接口，并为当前短分类任务设置 `reasoning.effort=none`，避免默认思考过程占用 500 Token 输出上限；OpenAI 适配器则显式设置 `store=false`。这些设置都不能替代对服务商数据政策和账户设置的评估。运行结果只保存校验后的建议、Token、耗时、失败码和可选成本估算，不保存原始 API 响应；任何建议都不能直接触发排版。完整说明见 [M4 执行方案](docs/implementation/m4-execution-plan.md) 和 [M4.1 报告](docs/reports/m41-cloud-provider-report.md)。
+
+## 人工 Gold Set 与评测（M4.2）
+
+先从同一个审查计划生成不含论文原文的标注模板：
+
+```powershell
+.\.venv\Scripts\python.exe -m paperalign prepare-gold-set `
+  .\.paperalign\m4-review\thesis-hybrid\ai_review_plan.json `
+  --out .\.paperalign\m4-review\gold-set-v1
+```
+
+复制 `gold_set.template.json` 为 `gold_set.json`，按同目录说明人工填写。未确认项保持 `unassessed`，不会进入准确率。完成部分或全部标注后运行：
+
+```powershell
+.\.venv\Scripts\python.exe -m paperalign evaluate-ai-review `
+  .\.paperalign\m4-review\thesis-hybrid\ai_review_plan.json `
+  .\.paperalign\m4-review\gold-set-v1\gold_set.json `
+  .\.paperalign\m4-review\runs\2026-09-21-deepseek-live\ai_review_run.json `
+  --out .\.paperalign\m4-review\evaluations\human-v1
+```
+
+评测会校验输入哈希、文本哈希、角色与范围、证据引用以及运行身份，分别报告 Rules-only 和模型建议的覆盖、角色/范围准确率、分歧、Token 与耗时。模型建议不能反向生成 Gold Set。详见 [M4.2 报告](docs/reports/m42-gold-set-report.md)。
 
 ## 前端启动
 
@@ -184,7 +244,7 @@ npm run build
 2. M1：DOCX 只读画像、内容指纹、不支持对象报告（已完成）；
 3. M2：华农规则 Profile（核心配置已完成，规则确认持续进行）；
 4. M3：Rules-only 结构识别（核心流程已完成）；
-5. M4：Prompt-only 与 Hybrid 对照；
+5. M4：Prompt-only 与 Hybrid 对照（M4.2 Gold Set 与评测运行器已完成，真实人工标注待完成）；
 6. M5–M7：诊断界面、安全排版与 Word 最终验证。
 
 ## License

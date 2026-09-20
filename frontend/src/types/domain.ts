@@ -21,6 +21,7 @@ export type SemanticRole =
   | "heading_3"
   | "heading_4"
   | "body"
+  | "list_item"
   | "table"
   | "table_text"
   | "abbreviation_table"
