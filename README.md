@@ -2,7 +2,7 @@
 
 PaperAlign 是一个面向学术论文的可解释格式诊断与安全排版工具。
 
-当前阶段是 **M4.3：保守 Hybrid 语义裁决**。系统可以只读分析 DOCX、定位论文结构、生成最终人工复核步骤，并为歧义项准备最多 3 段、每段最多 240 字的自适应上下文。云端模型只能提出受 Schema 约束的建议；当前仍不会修改或排版 DOCX。
+当前阶段是 **M5：本地只读诊断界面**。系统可以上传 DOCX、建立独立本地任务、定位论文结构并展示格式证据；云端模型仍只能提出受 Schema 约束的建议，当前不会修改或排版 DOCX。
 
 2026-09-21 已完成 DeepSeek 实际联调：11 个审查包全部返回有效建议，使用 16,427 Token；发现 1 个与前次定性复核有分歧的低置信标题候选，尚未进行人工准确率验收。见 [本次测试报告](docs/reports/m41-deepseek-live-test.md)。
 
@@ -49,7 +49,7 @@ py -3.13 -m venv .venv
 打开 `http://127.0.0.1:8000/health`，应返回：
 
 ```json
-{"status":"ok","service":"paperalign-api","version":"0.11.0","stage":"M4.3"}
+{"status":"ok","service":"paperalign-api","version":"0.12.0","stage":"M5"}
 ```
 
 ## DOCX 只读分析

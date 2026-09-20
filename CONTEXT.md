@@ -2,9 +2,9 @@
 
 ## Current state
 
-- Current milestone: M4.4 three-system engineering closeout completed (application 0.11.0). Accuracy remains unassessed because the real Gold Set has zero human-confirmed labels; full M2 normative confirmation and M3/M4 human review remain acceptance work.
+- Current milestone: M5 local read-only diagnostic UI completed (application 0.12.0). Accuracy remains unassessed because the real Gold Set has zero human-confirmed labels; full M2 normative confirmation and M3/M4 human review remain acceptance work.
 - Implemented: repository scaffold, safe DOCX package inspection, OOXML document profile, protected-content fingerprint, unsupported-object report, deterministic CLI artifacts, tests, and CI.
-- Live DeepSeek proposals and conservative Hybrid adjudication are verified. Diagnostic upload UI, deterministic formatting, and final Word validation are not implemented at this checkpoint. Full school compliance is not available while 244 rules remain provisional.
+- Live DeepSeek proposals and conservative Hybrid adjudication are verified. The local upload/diagnostic UI is implemented; deterministic formatting and final Word validation are not. Full school compliance is not available while 244 rules remain provisional.
 - M2.0 implemented: comment-optional template evidence extraction, paragraph style usage, direct-format clusters, and table border widths with OOXML-to-point conversion.
 - M2.1 implemented: document defaults, base/derived paragraph styles, character styles and direct formatting are merged into property-level effective values with provenance.
 - M2.1 audit: `audit-template --include-preview` writes HTML and short previews only under ignored `.paperalign`. Real Word 16.0 check: 13 paragraphs, 92 matching properties; source SHA unchanged. This is not human visual sign-off. Browser tool denied file:// page inspection; do not claim UI visual verification.
@@ -21,8 +21,9 @@
 - M4.2: prepare-gold-set creates a no-manuscript-text template for every plan target, including manual-only items; evaluate-ai-review validates plan/run/Gold Set identity and reports Rules-only versus model proposal coverage, role and scope metrics, disagreements, Token and latency. Only confirmed human labels count. Real no-label smoke result is 0/28 evaluated and all accuracy fields remain unassessed. Local template: .paperalign/m4-review/gold-set-v1; baseline: .paperalign/m4-review/evaluations/2026-09-21-no-label-baseline.
 - M4.3: adjudicate-review consumes plan plus model run and writes a separate HybridReview. Policy v1 requires resolved rules/model role and scope agreement plus model confidence >= configured threshold; unique role scopes may be deterministically derived. Any conflict, missing proposal, low confidence, unknown, abstention or manual-only target routes to human review. Real threshold 0.90 run: 5 semantic auto-accept, 23 manual; policy remains provisional_not_accuracy_validated and formatting_allowed=false. Local result: .paperalign/m4-review/hybrid/2026-09-21-policy-v1.
 - M4.4: the three-system engineering path is closed out. With 0/28 human labels, all accuracy metrics correctly remain unassessed. M5/M6 engineering may continue, but Hybrid output cannot authorize formatting until independent labels calibrate the policy.
+- M5: POST /api/jobs accepts a raw DOCX body (50 MB cap), creates an isolated local task, runs Rules-only structure analysis and persists hash-bound results; GET /api/jobs/{id} reloads the task. The UI displays bounded 20-character review previews, counts, warnings and at most 100 prioritized issue summaries. It never formats, calls AI or claims full compliance.
 - Real runs before final full regression: thesis 785 blocks, 28 priority review roots / 179 including inherited table-cell review; template 392 blocks, 9 review roots. Thesis located checks: 2 pass, 2 fail, 4379 evidence_insufficient. These are check occurrences, not unique-rule coverage or accuracy.
-- Latest verification after M4.3 (2026-09-21): 136 backend tests, strict mypy (63 source files), Ruff, schema check and diff check passed. Frontend was unchanged except version metadata; the preceding M4.2 typecheck, test, production build and npm audit passed with 0 vulnerabilities. Two third-party deprecation warnings remain nonblocking.
+- Latest verification after M5 (2026-09-21): 139 backend tests, strict mypy (63 source files), Ruff, frontend typecheck, Vitest and production build passed. Two third-party TestClient deprecation warnings remain nonblocking.
 - M3 implementation follows pushed M2 commit 7406931; use `git log -1 --oneline` for the current delivery commit.
 
 ## Product decisions that must survive context changes
@@ -41,7 +42,7 @@
 
 ## Next implementation target
 
-Next module is M5 read-only diagnostic UI. The real 28-target Gold Set still needs independent human review before any Hybrid threshold can be accepted. DeepSeek connectivity is already verified; do not repeat paid calls just to rediscover this. Keep M2 rule confirmation as a separate gate before consequential formatting:
+Next module is M6 deterministic safe formatting. The real 28-target Gold Set still needs independent human review before any Hybrid threshold can be accepted. DeepSeek connectivity is already verified; do not repeat paid calls just to rediscover this. Keep M2 rule confirmation as a separate gate before consequential formatting:
 
 ```text
 official template evidence
@@ -56,7 +57,8 @@ official template evidence
   → M4.2 Gold Set template and evaluation runner (implemented; human labels pending)
   → M4.3 Hybrid adjudication and optional third evaluation system (implemented; policy calibration pending)
   → M4.4 three-system engineering closeout (implemented; accuracy unassessed)
-  → M5 read-only diagnostic UI
+  → M5 read-only diagnostic UI (implemented)
+  → M6 deterministic safe formatting
 ```
 
 Planning references:
@@ -75,6 +77,9 @@ Planning references:
 - `docs/reports/m41-deepseek-live-test.md`
 - `docs/reports/m42-gold-set-report.md`
 - `docs/reports/m43-hybrid-report.md`
+- `docs/reports/m44-evaluation-closeout.md`
+- `docs/implementation/m5-execution-plan.md`
+- `docs/reports/m5-diagnostic-ui-report.md`
 - `docs/README.md`
 
 Do not re-ask the template scope or expand college-specific templates. Remaining atomic confirmation and page-layout ambiguities can be requested when needed for consequential validation or formatting, not as a blanket blocker on read-only development.

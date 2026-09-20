@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from app import __version__
+from app.api.jobs import router as jobs_router
 from app.settings import get_settings
 
 
@@ -26,6 +27,7 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
+app.include_router(jobs_router)
 
 
 @app.get("/health", response_model=HealthResponse, tags=["system"])
@@ -34,5 +36,5 @@ def health() -> HealthResponse:
         status="ok",
         service="paperalign-api",
         version=__version__,
-        stage="M4.3",
+        stage="M5",
     )
