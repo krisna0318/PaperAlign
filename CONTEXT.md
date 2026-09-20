@@ -2,17 +2,19 @@
 
 ## Current state
 
-- Current milestone: M2.3 single-template Profile implemented (application 0.6.0), with bounded M2.4 comparisons and M2.5 fixed-template sample checks. Full M2 acceptance is not complete.
+- Current milestone: M3 Rules-only structure classification implemented (application 0.7.0). Full M2 normative confirmation and M3 human review of real ambiguity remain ongoing acceptance work.
 - Implemented: repository scaffold, safe DOCX package inspection, OOXML document profile, protected-content fingerprint, unsupported-object report, deterministic CLI artifacts, tests, and CI.
-- Not implemented: whole-manuscript semantic classification, full compliance checks, formatting, AI calls. Read-only Word cross-check exists as a development script, not production Word automation.
+- Not implemented: AI ambiguity resolution, diagnostic upload UI, deterministic formatting, and final Word validation. Full school compliance is not available while 244 rules remain provisional.
 - M2.0 implemented: comment-optional template evidence extraction, paragraph style usage, direct-format clusters, and table border widths with OOXML-to-point conversion.
 - M2.1 implemented: document defaults, base/derived paragraph styles, character styles and direct formatting are merged into property-level effective values with provenance.
 - M2.1 audit: `audit-template --include-preview` writes HTML and short previews only under ignored `.paperalign`. Real Word 16.0 check: 13 paragraphs, 92 matching properties; source SHA unchanged. This is not human visual sign-off. Browser tool denied file:// page inspection; do not claim UI visual verification.
 - M2.2: FormatRule schema 2.0 (breaking from free-form 1.0); typed values/units/scopes, human confirmation record, evidence precedence, normalized observations, preflight states. Preflight None means ready for a comparator, never pass.
 - M2.3: Profile 1.0.0 has 248 atomic rules (4 confirmed, 244 provisional), 36 evidence records, 46 inventory entries (14 encoded, 23 partial, 9 deferred). Loader validates references, evidence hash, duplicate definitions and coverage. Every rule is read-only.
 - CLI: inspect-profile exports profile.json/profile_summary.md/applicability.json. verify-template checks hash-bound sample indexes only; rejects other documents. Real sample: 3 pass, 1 fail (abbreviation table separator 0.5 pt vs 1 pt), 108 evidence_insufficient. Never label these counts whole-document compliance.
-- Latest full verification: scripts/test.ps1 passed, 89 backend tests, strict mypy (48 source files), Ruff, schema check, dependency checks, 1 frontend test and build; npm audit 0 vulnerabilities. Two third-party deprecation warnings remain nonblocking.
-- Latest pushed commit remains e043724 (M2.0). M2.1–M2.3 and bounded M2.4 changes remain local and uncommitted.
+- M3: classify produces a hash-bound StructureReport for every represented M1 block, identifies four heading levels and document regions, preserves TOC fields, detects formulas/drawings, builds parentage, allows reviewed role/scope corrections, and runs located M2 rules. Local HTML/JSON/Markdown stay under .paperalign; no-key and no-write.
+- Real runs before final full regression: thesis 785 blocks, 28 priority review roots / 179 including inherited table-cell review; template 392 blocks, 9 review roots. Thesis located checks: 2 pass, 2 fail, 4379 evidence_insufficient. These are check occurrences, not unique-rule coverage or accuracy.
+- Latest full verification: scripts/test.ps1 passed, 113 backend tests, strict mypy (52 source files), Ruff, schema check, dependency checks, 1 frontend test and build; npm audit 0 vulnerabilities. Two third-party deprecation warnings remain nonblocking.
+- M3 implementation follows pushed M2 commit 7406931; use `git log -1 --oneline` for the current delivery commit.
 
 ## Product decisions that must survive context changes
 
@@ -30,7 +32,7 @@
 
 ## Next implementation target
 
-Continue bounded M2.4 adapter/validator coverage and M2 acceptance evidence; then implement M3 Rules-only structural classification. Keep unresolved normative/layout decisions separate from supported code:
+Complete M3 real-document human review, then implement M4 AI ambiguity comparison. Keep M2 rule confirmation as a separate gate before any consequential formatting:
 
 ```text
 official template evidence
@@ -39,7 +41,8 @@ official template evidence
   → manually confirmed P0 rules
   → versioned manifest.json
   → validators and evidence locators (fixed template samples working)
-  → M3 role recognition for arbitrary manuscript objects
+  → M3 role recognition and hash-bound human corrections (implemented)
+  → M4 model proposals for ambiguous items only, with schema validation and rules-only fallback
 ```
 
 Planning references:
@@ -50,6 +53,8 @@ Planning references:
 - `docs/architecture/rule-contract-v2.md`
 - `docs/decisions/0003-single-template-profile.md`
 - `docs/reports/m23-profile-report.md`
+- `docs/implementation/m3-execution-plan.md`
+- `docs/reports/m3-structure-report.md`
 
 Do not re-ask the template scope or expand college-specific templates. Remaining atomic confirmation and page-layout ambiguities can be requested when needed for consequential validation or formatting, not as a blanket blocker on read-only development.
 

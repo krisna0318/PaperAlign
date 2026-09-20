@@ -10,6 +10,7 @@ from app.profiles.loader import ProfileLoadError, check_applicability, load_prof
 from app.services.analyzer import analyze_docx, write_artifacts
 from app.services.format_audit import write_format_audit
 from app.services.profile_service import export_profile, verify_template_samples
+from app.services.structure_service import write_structure_review
 from app.services.template_inspector import inspect_template, write_template_artifacts
 
 
@@ -61,12 +62,36 @@ def build_parser() -> argparse.ArgumentParser:
     )
     verify.add_argument("input", type=Path)
     verify.add_argument("--out", type=Path, required=True)
+    classify = subparsers.add_parser(
+        "classify", help="classify manuscript structure and review ambiguity locally"
+    )
+    classify.add_argument("input", type=Path)
+    classify.add_argument("--out", type=Path, required=True, help="directory under .paperalign")
+    classify.add_argument(
+        "--include-preview", action="store_true", help="include at most 20 characters per block"
+    )
+    classify.add_argument("--overrides", type=Path, help="hash-bound manual role corrections")
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
+        if args.command == "classify":
+            structure = write_structure_review(
+                args.input,
+                args.out,
+                overrides_path=args.overrides,
+                include_preview=args.include_preview,
+            )
+            print(
+                f"Structure classified: {len(structure.decisions)} blocks, "
+                f"{structure.review_count} need review"
+            )
+            print(f"Located rule checks: {structure.validation_counts}")
+            print(f"Review: {args.out.resolve() / 'structure_review.html'}")
+            print("Rules-only; no formatting or whole-document compliance conclusion")
+            return 0
         if args.command == "inspect-profile":
             bundle = load_profile()
             scope_result = None

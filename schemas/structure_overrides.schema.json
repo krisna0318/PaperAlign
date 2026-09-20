@@ -1,0 +1,151 @@
+{
+  "$defs": {
+    "RoleOverride": {
+      "additionalProperties": false,
+      "properties": {
+        "block_id": {
+          "minLength": 1,
+          "title": "Block Id",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/SemanticRole"
+        },
+        "scope": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RuleScope"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "reason": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "block_id",
+        "role",
+        "reason"
+      ],
+      "title": "RoleOverride",
+      "type": "object"
+    },
+    "RuleScope": {
+      "enum": [
+        "document",
+        "section",
+        "cover_title",
+        "cover_document_type",
+        "cover_metadata",
+        "declaration",
+        "abstract_zh_heading",
+        "abstract_zh_body",
+        "abstract_en_title",
+        "abstract_en_author",
+        "abstract_en_affiliation",
+        "abstract_en_body",
+        "keywords_zh",
+        "keywords_en",
+        "toc_heading",
+        "toc_entry",
+        "heading_1",
+        "heading_2",
+        "heading_3",
+        "heading_4",
+        "body",
+        "abbreviation_table",
+        "table",
+        "table_text",
+        "table_caption",
+        "table_note",
+        "figure",
+        "figure_caption",
+        "figure_note",
+        "equation",
+        "footnote",
+        "reference_heading",
+        "reference_entry",
+        "appendix_heading",
+        "appendix_body",
+        "acknowledgement_heading",
+        "acknowledgement_body"
+      ],
+      "title": "RuleScope",
+      "type": "string"
+    },
+    "SemanticRole": {
+      "enum": [
+        "cover",
+        "declaration",
+        "abstract_zh",
+        "abstract_en",
+        "keywords_zh",
+        "keywords_en",
+        "table_of_contents",
+        "heading_1",
+        "heading_2",
+        "heading_3",
+        "heading_4",
+        "body",
+        "table",
+        "table_text",
+        "abbreviation_table",
+        "abbreviation_heading",
+        "figure",
+        "equation",
+        "figure_caption",
+        "table_caption",
+        "reference_heading",
+        "reference_entry",
+        "appendix_heading",
+        "appendix_body",
+        "acknowledgement_heading",
+        "acknowledgement_body",
+        "unknown"
+      ],
+      "title": "SemanticRole",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "input_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Input Sha256",
+      "type": "string"
+    },
+    "reviewer": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "decisions": {
+      "items": {
+        "$ref": "#/$defs/RoleOverride"
+      },
+      "title": "Decisions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "input_sha256",
+    "reviewer"
+  ],
+  "title": "StructureOverrides",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/structure_overrides.schema.json"
+}

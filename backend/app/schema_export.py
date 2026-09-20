@@ -15,9 +15,12 @@ from app.domain.jobs import AnalysisJob
 from app.domain.profile import CoverageEntry, ProfileManifest
 from app.domain.rule_validation import EvidenceSelection, RuleValidationResult
 from app.domain.rules import FormatRule
+from app.domain.structure import StructureOverrides, StructureReport
 from app.domain.template_evidence import TemplateEvidenceReport
 
 SCHEMAS: dict[str, type[BaseModel]] = {
+    "structure_report.schema.json": StructureReport,
+    "structure_overrides.schema.json": StructureOverrides,
     "profile_manifest.schema.json": ProfileManifest,
     "profile_coverage_entry.schema.json": CoverageEntry,
     "rule_validation.schema.json": RuleValidationResult,

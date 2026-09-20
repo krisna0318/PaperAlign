@@ -1,0 +1,984 @@
+{
+  "$defs": {
+    "BlockKind": {
+      "enum": [
+        "paragraph",
+        "table",
+        "table_cell",
+        "image",
+        "section_break",
+        "page_break",
+        "field",
+        "unknown"
+      ],
+      "title": "BlockKind",
+      "type": "string"
+    },
+    "BooleanValue": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "boolean",
+          "default": "boolean",
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "title": "BooleanValue",
+      "type": "object"
+    },
+    "DecisionSource": {
+      "enum": [
+        "word_style",
+        "rule",
+        "model",
+        "hybrid",
+        "user",
+        "unknown"
+      ],
+      "title": "DecisionSource",
+      "type": "string"
+    },
+    "FixedSpacing": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "line_spacing",
+          "default": "line_spacing",
+          "title": "Kind",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "exact",
+            "at_least"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "value": {
+          "exclusiveMinimum": 0,
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "const": "pt",
+          "default": "pt",
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "mode",
+        "value"
+      ],
+      "title": "FixedSpacing",
+      "type": "object"
+    },
+    "MultipleSpacing": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "line_spacing",
+          "default": "line_spacing",
+          "title": "Kind",
+          "type": "string"
+        },
+        "mode": {
+          "const": "multiple",
+          "default": "multiple",
+          "title": "Mode",
+          "type": "string"
+        },
+        "value": {
+          "exclusiveMinimum": 0,
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "const": "lines",
+          "default": "lines",
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "mode",
+        "value"
+      ],
+      "title": "MultipleSpacing",
+      "type": "object"
+    },
+    "NumberValue": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "number",
+          "default": "number",
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "pt",
+            "mm",
+            "chars",
+            "count",
+            "level"
+          ],
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "value",
+        "unit"
+      ],
+      "title": "NumberValue",
+      "type": "object"
+    },
+    "RoleOverride": {
+      "additionalProperties": false,
+      "properties": {
+        "block_id": {
+          "minLength": 1,
+          "title": "Block Id",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/SemanticRole"
+        },
+        "scope": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RuleScope"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "reason": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "block_id",
+        "role",
+        "reason"
+      ],
+      "title": "RoleOverride",
+      "type": "object"
+    },
+    "RuleScope": {
+      "enum": [
+        "document",
+        "section",
+        "cover_title",
+        "cover_document_type",
+        "cover_metadata",
+        "declaration",
+        "abstract_zh_heading",
+        "abstract_zh_body",
+        "abstract_en_title",
+        "abstract_en_author",
+        "abstract_en_affiliation",
+        "abstract_en_body",
+        "keywords_zh",
+        "keywords_en",
+        "toc_heading",
+        "toc_entry",
+        "heading_1",
+        "heading_2",
+        "heading_3",
+        "heading_4",
+        "body",
+        "abbreviation_table",
+        "table",
+        "table_text",
+        "table_caption",
+        "table_note",
+        "figure",
+        "figure_caption",
+        "figure_note",
+        "equation",
+        "footnote",
+        "reference_heading",
+        "reference_entry",
+        "appendix_heading",
+        "appendix_body",
+        "acknowledgement_heading",
+        "acknowledgement_body"
+      ],
+      "title": "RuleScope",
+      "type": "string"
+    },
+    "RuleSource": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "school_comment",
+            "written_spec",
+            "template_observation"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "document": {
+          "minLength": 1,
+          "title": "Document",
+          "type": "string"
+        },
+        "evidence": {
+          "minLength": 1,
+          "title": "Evidence",
+          "type": "string"
+        },
+        "locator": {
+          "minLength": 1,
+          "title": "Locator",
+          "type": "string"
+        },
+        "document_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Sha256"
+        }
+      },
+      "required": [
+        "type",
+        "document",
+        "evidence",
+        "locator"
+      ],
+      "title": "RuleSource",
+      "type": "object"
+    },
+    "RuleStatus": {
+      "enum": [
+        "confirmed",
+        "provisional",
+        "needs_review"
+      ],
+      "title": "RuleStatus",
+      "type": "string"
+    },
+    "RuleValidationResult": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "rule_id": {
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "property_path": {
+          "title": "Property Path",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "fail",
+            "not_evaluated",
+            "evidence_insufficient"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "rule_status": {
+          "$ref": "#/$defs/RuleStatus"
+        },
+        "expected": {
+          "discriminator": {
+            "mapping": {
+              "boolean": "#/$defs/BooleanValue",
+              "line_spacing": {
+                "discriminator": {
+                  "mapping": {
+                    "at_least": "#/$defs/FixedSpacing",
+                    "exact": "#/$defs/FixedSpacing",
+                    "multiple": "#/$defs/MultipleSpacing"
+                  },
+                  "propertyName": "mode"
+                },
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/MultipleSpacing"
+                  },
+                  {
+                    "$ref": "#/$defs/FixedSpacing"
+                  }
+                ]
+              },
+              "number": "#/$defs/NumberValue",
+              "text": "#/$defs/TextValue"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/NumberValue"
+            },
+            {
+              "$ref": "#/$defs/TextValue"
+            },
+            {
+              "$ref": "#/$defs/BooleanValue"
+            },
+            {
+              "discriminator": {
+                "mapping": {
+                  "at_least": "#/$defs/FixedSpacing",
+                  "exact": "#/$defs/FixedSpacing",
+                  "multiple": "#/$defs/MultipleSpacing"
+                },
+                "propertyName": "mode"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/MultipleSpacing"
+                },
+                {
+                  "$ref": "#/$defs/FixedSpacing"
+                }
+              ]
+            }
+          ],
+          "title": "Expected"
+        },
+        "actual": {
+          "anyOf": [
+            {
+              "discriminator": {
+                "mapping": {
+                  "boolean": "#/$defs/BooleanValue",
+                  "line_spacing": {
+                    "discriminator": {
+                      "mapping": {
+                        "at_least": "#/$defs/FixedSpacing",
+                        "exact": "#/$defs/FixedSpacing",
+                        "multiple": "#/$defs/MultipleSpacing"
+                      },
+                      "propertyName": "mode"
+                    },
+                    "oneOf": [
+                      {
+                        "$ref": "#/$defs/MultipleSpacing"
+                      },
+                      {
+                        "$ref": "#/$defs/FixedSpacing"
+                      }
+                    ]
+                  },
+                  "number": "#/$defs/NumberValue",
+                  "text": "#/$defs/TextValue"
+                },
+                "propertyName": "kind"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/NumberValue"
+                },
+                {
+                  "$ref": "#/$defs/TextValue"
+                },
+                {
+                  "$ref": "#/$defs/BooleanValue"
+                },
+                {
+                  "discriminator": {
+                    "mapping": {
+                      "at_least": "#/$defs/FixedSpacing",
+                      "exact": "#/$defs/FixedSpacing",
+                      "multiple": "#/$defs/MultipleSpacing"
+                    },
+                    "propertyName": "mode"
+                  },
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/MultipleSpacing"
+                    },
+                    {
+                      "$ref": "#/$defs/FixedSpacing"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Actual"
+        },
+        "source": {
+          "$ref": "#/$defs/RuleSource"
+        },
+        "locator": {
+          "$ref": "#/$defs/SourceAnchor"
+        },
+        "actual_sources": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Actual Sources",
+          "type": "object"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rule_id",
+        "property_path",
+        "status",
+        "rule_status",
+        "expected",
+        "actual",
+        "source",
+        "locator",
+        "actual_sources",
+        "reason"
+      ],
+      "title": "RuleValidationResult",
+      "type": "object"
+    },
+    "SemanticRole": {
+      "enum": [
+        "cover",
+        "declaration",
+        "abstract_zh",
+        "abstract_en",
+        "keywords_zh",
+        "keywords_en",
+        "table_of_contents",
+        "heading_1",
+        "heading_2",
+        "heading_3",
+        "heading_4",
+        "body",
+        "table",
+        "table_text",
+        "abbreviation_table",
+        "abbreviation_heading",
+        "figure",
+        "equation",
+        "figure_caption",
+        "table_caption",
+        "reference_heading",
+        "reference_entry",
+        "appendix_heading",
+        "appendix_body",
+        "acknowledgement_heading",
+        "acknowledgement_body",
+        "unknown"
+      ],
+      "title": "SemanticRole",
+      "type": "string"
+    },
+    "SourceAnchor": {
+      "additionalProperties": false,
+      "properties": {
+        "part_name": {
+          "default": "word/document.xml",
+          "title": "Part Name",
+          "type": "string"
+        },
+        "paragraph_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Paragraph Index"
+        },
+        "table_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Table Index"
+        },
+        "row_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Row Index"
+        },
+        "cell_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cell Index"
+        },
+        "xml_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Xml Path"
+        }
+      },
+      "title": "SourceAnchor",
+      "type": "object"
+    },
+    "StructureDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "block_id": {
+          "title": "Block Id",
+          "type": "string"
+        },
+        "order": {
+          "minimum": 0,
+          "title": "Order",
+          "type": "integer"
+        },
+        "kind": {
+          "$ref": "#/$defs/BlockKind"
+        },
+        "locator": {
+          "$ref": "#/$defs/SourceAnchor"
+        },
+        "role": {
+          "$ref": "#/$defs/SemanticRole"
+        },
+        "scope": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RuleScope"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "decision_source": {
+          "$ref": "#/$defs/DecisionSource"
+        },
+        "requires_confirmation": {
+          "title": "Requires Confirmation",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Reasons",
+          "type": "array"
+        },
+        "heading_level": {
+          "anyOf": [
+            {
+              "maximum": 4,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Heading Level"
+        },
+        "parent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Id"
+        },
+        "container_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Container Id"
+        },
+        "region": {
+          "default": "unknown",
+          "title": "Region",
+          "type": "string"
+        },
+        "section_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section Id"
+        },
+        "text_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "character_count": {
+          "minimum": 0,
+          "title": "Character Count",
+          "type": "integer"
+        },
+        "preview": {
+          "anyOf": [
+            {
+              "maxLength": 20,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preview"
+        }
+      },
+      "required": [
+        "block_id",
+        "order",
+        "kind",
+        "locator",
+        "role",
+        "confidence",
+        "decision_source",
+        "requires_confirmation",
+        "reasons",
+        "text_sha256",
+        "character_count"
+      ],
+      "title": "StructureDecision",
+      "type": "object"
+    },
+    "StructureOverrides": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "input_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Input Sha256",
+          "type": "string"
+        },
+        "reviewer": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Reviewer",
+          "type": "string"
+        },
+        "decisions": {
+          "items": {
+            "$ref": "#/$defs/RoleOverride"
+          },
+          "title": "Decisions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "input_sha256",
+        "reviewer"
+      ],
+      "title": "StructureOverrides",
+      "type": "object"
+    },
+    "StructureWarning": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "block_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Block Id"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "StructureWarning",
+      "type": "object"
+    },
+    "TextValue": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "text",
+          "default": "text",
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "title": "TextValue",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "classifier_version": {
+      "title": "Classifier Version",
+      "type": "string"
+    },
+    "profile_id": {
+      "title": "Profile Id",
+      "type": "string"
+    },
+    "input_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Input Sha256",
+      "type": "string"
+    },
+    "content_fingerprint": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Fingerprint",
+      "type": "string"
+    },
+    "mode": {
+      "const": "rules_only",
+      "default": "rules_only",
+      "title": "Mode",
+      "type": "string"
+    },
+    "ai_used": {
+      "const": false,
+      "default": false,
+      "title": "Ai Used",
+      "type": "boolean"
+    },
+    "full_document_evaluated": {
+      "const": false,
+      "default": false,
+      "title": "Full Document Evaluated",
+      "type": "boolean"
+    },
+    "formatting_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Formatting Allowed",
+      "type": "boolean"
+    },
+    "previews_included": {
+      "default": false,
+      "title": "Previews Included",
+      "type": "boolean"
+    },
+    "override_reviewer": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Override Reviewer"
+    },
+    "applied_overrides": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/StructureOverrides"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "decisions": {
+      "items": {
+        "$ref": "#/$defs/StructureDecision"
+      },
+      "title": "Decisions",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "$ref": "#/$defs/StructureWarning"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "role_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Role Counts",
+      "type": "object"
+    },
+    "review_count": {
+      "minimum": 0,
+      "title": "Review Count",
+      "type": "integer"
+    },
+    "review_root_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Review Root Ids",
+      "type": "array"
+    },
+    "unsupported_object_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Unsupported Object Counts",
+      "type": "object"
+    },
+    "validation_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Validation Counts",
+      "type": "object"
+    },
+    "rule_checks": {
+      "items": {
+        "$ref": "#/$defs/RuleValidationResult"
+      },
+      "title": "Rule Checks",
+      "type": "array"
+    },
+    "unapplied_rule_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unapplied Rule Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "classifier_version",
+    "profile_id",
+    "input_sha256",
+    "content_fingerprint",
+    "decisions",
+    "warnings",
+    "role_counts",
+    "review_count",
+    "review_root_ids",
+    "unsupported_object_counts",
+    "validation_counts",
+    "rule_checks",
+    "unapplied_rule_ids"
+  ],
+  "title": "StructureReport",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/structure_report.schema.json"
+}

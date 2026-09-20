@@ -18,11 +18,11 @@ onMounted(async () => {
 <template>
   <main class="shell">
     <section class="hero">
-      <p class="eyebrow">PaperAlign · M2</p>
+      <p class="eyebrow">PaperAlign · M3</p>
       <h1>可解释的论文格式诊断与安全排版</h1>
       <p class="summary">
-        当前版本支持 DOCX 只读分析、模板证据提取、有效格式解析和单模板规则配置。
-        已定位样本可通过命令行验证；未确认规则保留审查状态，尚不进行整篇自动排版。
+        当前版本可通过命令行识别论文结构、查看识别依据，并应用人工纠正重新检查。
+        结构审查报告支持本地打开；自动排版和文件上传界面尚在后续开发阶段。
       </p>
       <div class="status" :class="{ online: health }" role="status">
         <span class="dot" aria-hidden="true" />

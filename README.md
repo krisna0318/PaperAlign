@@ -2,7 +2,7 @@
 
 PaperAlign 是一个面向学术论文的可解释格式诊断与安全排版工具。
 
-当前阶段是 **M2：格式模板证据与规则 Profile**。M1 的 DOCX 只读分析已经完成；项目现在可以在不依赖批注的情况下提取模板页面、样式、表格边框证据，并解析正文段落的有效格式及来源。当前仍不会修改或排版 DOCX。
+当前阶段是 **M3：Rules-only 结构识别**。系统可以只读分析 DOCX，提取模板格式证据，装载华农规则 Profile，并在论文原稿中定位封面、摘要、标题、正文、图表、公式、参考文献等对象。结构结果支持本地审查和人工纠正；当前仍不会修改或排版 DOCX。
 
 ## MVP 边界
 
@@ -45,7 +45,7 @@ py -3.13 -m venv .venv
 打开 `http://127.0.0.1:8000/health`，应返回：
 
 ```json
-{"status":"ok","service":"paperalign-api","version":"0.6.0","stage":"M2"}
+{"status":"ok","service":"paperalign-api","version":"0.7.0","stage":"M3"}
 ```
 
 ## DOCX 只读分析
@@ -108,6 +108,39 @@ M2.2 已完成单位、类型、证据优先级和判定前置条件建模，规
 
 模板样本验证输出 `template_rule_checks.json` 和 Markdown 报告，明确 `full_document_evaluated=false`。缩略词表分隔线实际 0.5 pt、批注要求 1 pt，应如实失败；未确认规则返回证据不足。完整实施说明见 [M2.3 报告](docs/reports/m23-profile-report.md)。
 
+## 论文结构识别与人工纠正（M3）
+
+```powershell
+.\.venv\Scripts\python.exe -m paperalign classify `
+  .\.paperalign\private-test-cases\inputs\private-thesis-before-formatting.docx `
+  --out .\.paperalign\m3-review\thesis `
+  --include-preview
+```
+
+命令生成以下本地产物：
+
+```text
+.paperalign/m3-review/thesis/
+├─ structure_report.json
+├─ structure_summary.md
+├─ structure_review.html
+└─ corrections.template.json
+```
+
+双击 `structure_review.html`，先检查“待确认定位”。识别结果保留 Word 定位、角色、规则范围、父级、判断来源与依据；`confidence` 是启发式分数，不是准确率。默认不输出原文，`--include-preview` 只在本地报告中加入每项最多 20 字。
+
+如需纠正，复制 `corrections.template.json` 为 `corrections.json`，填写 `reviewer` 和 `decisions`，再运行：
+
+```powershell
+.\.venv\Scripts\python.exe -m paperalign classify `
+  .\.paperalign\private-test-cases\inputs\private-thesis-before-formatting.docx `
+  --out .\.paperalign\m3-review\thesis-corrected `
+  --overrides .\.paperalign\m3-review\thesis\corrections.json `
+  --include-preview
+```
+
+纠正文件绑定输入 SHA-256。未知块、重复纠正、错误角色/对象类型以及角色与规则范围不匹配都会被拒绝；纠正理由保留在 JSON 报告中。系统会重新计算后续分区与标题父级，原 DOCX 和内容指纹保持不变。实现与真实样本结果见 [M3 报告](docs/reports/m3-structure-report.md)。
+
 ## 前端启动
 
 ```powershell
@@ -149,8 +182,8 @@ npm run build
 
 1. M0：仓库、环境、健康检查、数据模型（已完成）；
 2. M1：DOCX 只读画像、内容指纹、不支持对象报告（已完成）；
-3. M2：华农规则 Profile；
-4. M3：Rules-only 结构识别；
+3. M2：华农规则 Profile（核心配置已完成，规则确认持续进行）；
+4. M3：Rules-only 结构识别（核心流程已完成）；
 5. M4：Prompt-only 与 Hybrid 对照；
 6. M5–M7：诊断界面、安全排版与 Word 最终验证。
 
