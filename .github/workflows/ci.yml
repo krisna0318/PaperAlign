@@ -22,8 +22,7 @@ jobs:
       - run: python -m mypy app paperalign
       - run: python -m pytest
       - run: python -m pip check
-      - run: python -m app.schema_export
-      - run: git -C .. diff --exit-code -- schemas
+      - run: python -m app.schema_export --check
 
   frontend:
     runs-on: ubuntu-latest

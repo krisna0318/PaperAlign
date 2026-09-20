@@ -91,6 +91,7 @@ def render_template_summary(report: TemplateEvidenceReport) -> str:
         f"- 分节：{len(report.sections)}",
         f"- 段落样式种类：{len(report.paragraph_style_usage)}",
         f"- 直接格式簇：{len(report.direct_format_clusters)}",
+        f"- 有效格式段落：{len(report.effective_formats)}",
         f"- 表格：{len(report.tables)}",
         "",
         "> 以下内容是从 DOCX 结构与格式中提取的观察值，不会自动升级为学校规则。",

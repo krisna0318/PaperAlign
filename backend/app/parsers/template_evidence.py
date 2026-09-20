@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections import Counter, defaultdict
 from dataclasses import dataclass
+from typing import Literal
 
 from lxml import etree
 
@@ -14,6 +15,7 @@ from app.domain.template_evidence import (
     TemplateEvidenceReport,
 )
 from app.parsers.docx_package import DocxPackage
+from app.parsers.effective_format import EffectiveFormatResolver
 from app.parsers.namespaces import NS, M, W, qn
 from app.parsers.xml_utils import parse_xml
 
@@ -185,7 +187,7 @@ def _parse_paragraph_evidence(
 def _parse_border_container(
     parent: etree._Element | None,
     container_name: str,
-    source_scope: str,
+    source_scope: Literal["table", "table_style", "cell"],
 ) -> list[BorderObservation]:
     if parent is None:
         return []
@@ -202,7 +204,7 @@ def _parse_border_container(
                 size_eighth_points=size,
                 size_pt=size / 8 if size is not None else None,
                 color=_word_value(border, "color"),
-                source_scope=source_scope,  # type: ignore[arg-type]
+                source_scope=source_scope,
             )
         )
     return observations
@@ -367,7 +369,7 @@ def _parse_tables(
         )
         positive_borders = [border for border in all_borders if _is_positive(border)]
         if top_widths and bottom_widths and header_widths and not vertical_present:
-            pattern = "three_line"
+            pattern: Literal["three_line", "grid", "borderless", "mixed", "unknown"] = "three_line"
             widths_are_consistent = all(
                 len(value) == 1
                 for value in (top_widths, header_widths, bottom_widths)
@@ -426,7 +428,7 @@ def _parse_tables(
                 header_separator_widths_pt=header_widths,
                 outer_bottom_widths_pt=bottom_widths,
                 vertical_borders_present=vertical_present,
-                inferred_pattern=pattern,  # type: ignore[arg-type]
+                inferred_pattern=pattern,
                 confidence=confidence,
             )
         )
@@ -448,6 +450,8 @@ def extract_template_evidence(
     )
     style_names = _parse_style_names(styles_root)
     style_usage, format_clusters = _parse_paragraph_evidence(document_root, style_names)
+    effective_format_resolver = EffectiveFormatResolver(styles_root)
+    effective_formats = effective_format_resolver.resolve(document_root)
     table_style_names, style_borders = _table_style_borders(styles_root)
     tables = _parse_tables(document_root, table_style_names, style_borders)
 
@@ -466,6 +470,7 @@ def extract_template_evidence(
         "Direct-format clusters use the first visible text run and are not "
         "resolved effective styles."
     ]
+    warnings.extend(effective_format_resolver.warnings)
     if comment_count == 0:
         warnings.append(
             "No comments were present; observations were derived from document "
@@ -495,6 +500,7 @@ def extract_template_evidence(
         sections=_parse_sections(document_root),
         paragraph_style_usage=style_usage,
         direct_format_clusters=format_clusters,
+        effective_formats=effective_formats,
         tables=tables,
         warnings=warnings,
     )

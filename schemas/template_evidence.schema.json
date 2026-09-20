@@ -248,6 +248,401 @@
       "title": "DirectFormatCluster",
       "type": "object"
     },
+    "EffectiveParagraphFormat": {
+      "additionalProperties": false,
+      "properties": {
+        "paragraph_index": {
+          "minimum": 0,
+          "title": "Paragraph Index",
+          "type": "integer"
+        },
+        "paragraph_style_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Paragraph Style Id"
+        },
+        "paragraph_style_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Paragraph Style Name"
+        },
+        "paragraph": {
+          "$ref": "#/$defs/EffectiveParagraphProperties"
+        },
+        "runs": {
+          "items": {
+            "$ref": "#/$defs/EffectiveRunFormatGroup"
+          },
+          "title": "Runs",
+          "type": "array"
+        },
+        "resolution_warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Resolution Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "paragraph_index",
+        "paragraph"
+      ],
+      "title": "EffectiveParagraphFormat",
+      "type": "object"
+    },
+    "EffectiveParagraphProperties": {
+      "additionalProperties": false,
+      "properties": {
+        "alignment": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Alignment"
+        },
+        "line_rule": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Rule"
+        },
+        "line_value": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Value"
+        },
+        "space_before_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Space Before Twips"
+        },
+        "space_after_twips": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Space After Twips"
+        },
+        "first_line_indent_twips": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First Line Indent Twips"
+        },
+        "first_line_indent_chars": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First Line Indent Chars"
+        },
+        "left_indent_twips": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Left Indent Twips"
+        },
+        "right_indent_twips": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Right Indent Twips"
+        },
+        "outline_level": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Outline Level"
+        },
+        "keep_with_next": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Keep With Next"
+        },
+        "page_break_before": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Break Before"
+        },
+        "sources": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "object"
+        },
+        "unresolved": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Unresolved",
+          "type": "object"
+        }
+      },
+      "title": "EffectiveParagraphProperties",
+      "type": "object"
+    },
+    "EffectiveRunFormatGroup": {
+      "additionalProperties": false,
+      "properties": {
+        "character_style_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Character Style Id"
+        },
+        "character_style_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Character Style Name"
+        },
+        "properties": {
+          "$ref": "#/$defs/EffectiveRunProperties"
+        },
+        "run_count": {
+          "minimum": 1,
+          "title": "Run Count",
+          "type": "integer"
+        },
+        "sample_run_indexes": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 5,
+          "title": "Sample Run Indexes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "properties",
+        "run_count"
+      ],
+      "title": "EffectiveRunFormatGroup",
+      "type": "object"
+    },
+    "EffectiveRunProperties": {
+      "additionalProperties": false,
+      "properties": {
+        "font_east_asia": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Font East Asia"
+        },
+        "font_latin": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Font Latin"
+        },
+        "font_high_ansi": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Font High Ansi"
+        },
+        "font_complex_script": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Font Complex Script"
+        },
+        "size_pt": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size Pt"
+        },
+        "bold": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bold"
+        },
+        "italic": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Italic"
+        },
+        "color": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Color"
+        },
+        "sources": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "object"
+        },
+        "unresolved": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Unresolved",
+          "type": "object"
+        }
+      },
+      "title": "EffectiveRunProperties",
+      "type": "object"
+    },
     "ParagraphStyleUsage": {
       "additionalProperties": false,
       "properties": {
@@ -648,6 +1043,13 @@
         "$ref": "#/$defs/DirectFormatCluster"
       },
       "title": "Direct Format Clusters",
+      "type": "array"
+    },
+    "effective_formats": {
+      "items": {
+        "$ref": "#/$defs/EffectiveParagraphFormat"
+      },
+      "title": "Effective Formats",
       "type": "array"
     },
     "tables": {

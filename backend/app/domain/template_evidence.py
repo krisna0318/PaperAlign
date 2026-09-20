@@ -34,6 +34,61 @@ class DirectFormatCluster(BaseModel):
     source_method: Literal["direct_first_text_run"] = "direct_first_text_run"
 
 
+class EffectiveParagraphProperties(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    alignment: str | None = None
+    line_rule: str | None = None
+    line_value: int | None = Field(default=None, ge=0)
+    space_before_twips: int | None = Field(default=None, ge=0)
+    space_after_twips: int | None = Field(default=None, ge=0)
+    first_line_indent_twips: int | None = None
+    first_line_indent_chars: int | None = None
+    left_indent_twips: int | None = None
+    right_indent_twips: int | None = None
+    outline_level: int | None = Field(default=None, ge=0)
+    keep_with_next: bool | None = None
+    page_break_before: bool | None = None
+    sources: dict[str, str] = Field(default_factory=dict)
+    unresolved: dict[str, str] = Field(default_factory=dict)
+
+
+class EffectiveRunProperties(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    font_east_asia: str | None = None
+    font_latin: str | None = None
+    font_high_ansi: str | None = None
+    font_complex_script: str | None = None
+    size_pt: float | None = Field(default=None, gt=0)
+    bold: bool | None = None
+    italic: bool | None = None
+    color: str | None = None
+    sources: dict[str, str] = Field(default_factory=dict)
+    unresolved: dict[str, str] = Field(default_factory=dict)
+
+
+class EffectiveRunFormatGroup(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    character_style_id: str | None = None
+    character_style_name: str | None = None
+    properties: EffectiveRunProperties
+    run_count: int = Field(ge=1)
+    sample_run_indexes: list[int] = Field(default_factory=list, max_length=5)
+
+
+class EffectiveParagraphFormat(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    paragraph_index: int = Field(ge=0)
+    paragraph_style_id: str | None = None
+    paragraph_style_name: str | None = None
+    paragraph: EffectiveParagraphProperties
+    runs: list[EffectiveRunFormatGroup] = Field(default_factory=list)
+    resolution_warnings: list[str] = Field(default_factory=list)
+
+
 class BorderObservation(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -84,5 +139,6 @@ class TemplateEvidenceReport(BaseModel):
     sections: list[SectionSnapshot] = Field(default_factory=list)
     paragraph_style_usage: list[ParagraphStyleUsage] = Field(default_factory=list)
     direct_format_clusters: list[DirectFormatCluster] = Field(default_factory=list)
+    effective_formats: list[EffectiveParagraphFormat] = Field(default_factory=list)
     tables: list[TableFormatObservation] = Field(default_factory=list)
     warnings: list[str] = Field(default_factory=list)

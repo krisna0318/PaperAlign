@@ -1,0 +1,315 @@
+{
+  "$defs": {
+    "BooleanValue": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "boolean",
+          "default": "boolean",
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "title": "BooleanValue",
+      "type": "object"
+    },
+    "EvidenceCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "boolean": "#/$defs/BooleanValue",
+              "line_spacing": {
+                "discriminator": {
+                  "mapping": {
+                    "at_least": "#/$defs/FixedSpacing",
+                    "exact": "#/$defs/FixedSpacing",
+                    "multiple": "#/$defs/MultipleSpacing"
+                  },
+                  "propertyName": "mode"
+                },
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/MultipleSpacing"
+                  },
+                  {
+                    "$ref": "#/$defs/FixedSpacing"
+                  }
+                ]
+              },
+              "number": "#/$defs/NumberValue",
+              "text": "#/$defs/TextValue"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/NumberValue"
+            },
+            {
+              "$ref": "#/$defs/TextValue"
+            },
+            {
+              "$ref": "#/$defs/BooleanValue"
+            },
+            {
+              "discriminator": {
+                "mapping": {
+                  "at_least": "#/$defs/FixedSpacing",
+                  "exact": "#/$defs/FixedSpacing",
+                  "multiple": "#/$defs/MultipleSpacing"
+                },
+                "propertyName": "mode"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/MultipleSpacing"
+                },
+                {
+                  "$ref": "#/$defs/FixedSpacing"
+                }
+              ]
+            }
+          ],
+          "title": "Value"
+        },
+        "source": {
+          "$ref": "#/$defs/RuleSource"
+        }
+      },
+      "required": [
+        "value",
+        "source"
+      ],
+      "title": "EvidenceCandidate",
+      "type": "object"
+    },
+    "FixedSpacing": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "line_spacing",
+          "default": "line_spacing",
+          "title": "Kind",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "exact",
+            "at_least"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "value": {
+          "exclusiveMinimum": 0,
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "const": "pt",
+          "default": "pt",
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "mode",
+        "value"
+      ],
+      "title": "FixedSpacing",
+      "type": "object"
+    },
+    "MultipleSpacing": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "line_spacing",
+          "default": "line_spacing",
+          "title": "Kind",
+          "type": "string"
+        },
+        "mode": {
+          "const": "multiple",
+          "default": "multiple",
+          "title": "Mode",
+          "type": "string"
+        },
+        "value": {
+          "exclusiveMinimum": 0,
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "const": "lines",
+          "default": "lines",
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "mode",
+        "value"
+      ],
+      "title": "MultipleSpacing",
+      "type": "object"
+    },
+    "NumberValue": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "number",
+          "default": "number",
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "pt",
+            "mm",
+            "chars",
+            "count",
+            "level"
+          ],
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "value",
+        "unit"
+      ],
+      "title": "NumberValue",
+      "type": "object"
+    },
+    "RuleSource": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "school_comment",
+            "written_spec",
+            "template_observation"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "document": {
+          "minLength": 1,
+          "title": "Document",
+          "type": "string"
+        },
+        "evidence": {
+          "minLength": 1,
+          "title": "Evidence",
+          "type": "string"
+        },
+        "locator": {
+          "minLength": 1,
+          "title": "Locator",
+          "type": "string"
+        },
+        "document_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Sha256"
+        }
+      },
+      "required": [
+        "type",
+        "document",
+        "evidence",
+        "locator"
+      ],
+      "title": "RuleSource",
+      "type": "object"
+    },
+    "TextValue": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "text",
+          "default": "text",
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "title": "TextValue",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "enum": [
+        "provisional",
+        "needs_review"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "selected": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EvidenceCandidate"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "alternatives": {
+      "items": {
+        "$ref": "#/$defs/EvidenceCandidate"
+      },
+      "title": "Alternatives",
+      "type": "array"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "alternatives",
+    "reason"
+  ],
+  "title": "EvidenceSelection",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/evidence_selection.schema.json"
+}

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "paperalign-backend"
-version = "0.3.0"
+version = "0.6.0"
 description = "Explainable thesis structure analysis and safe formatting backend"
 readme = "README.md"
 requires-python = ">=3.12,<3.14"
@@ -21,6 +21,7 @@ paperalign = "paperalign.cli:main"
 
 [project.optional-dependencies]
 dev = [
+  "jsonschema>=4.23,<5.0",
   "httpx>=0.27,<1.0",
   "lxml-stubs>=0.5,<1.0",
   "mypy>=1.11,<2.0",

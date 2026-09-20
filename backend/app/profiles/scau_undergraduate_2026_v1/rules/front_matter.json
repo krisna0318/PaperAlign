@@ -1,0 +1,2102 @@
+[
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-001-01",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_heading",
+    "target": {},
+    "property_path": "run.font_east_asia",
+    "expected_value": {
+      "kind": "text",
+      "value": "黑体"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:10",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-001-02",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_heading",
+    "target": {},
+    "property_path": "run.size_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 14,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:10",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false,
+    "display_alias": "四号"
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-001-03",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_heading",
+    "target": {},
+    "property_path": "paragraph.alignment",
+    "expected_value": {
+      "kind": "text",
+      "value": "center"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:10",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-001-04",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_heading",
+    "target": {},
+    "property_path": "paragraph.first_line_indent_chars",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "chars"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:10",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-001-05",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_heading",
+    "target": {},
+    "property_path": "paragraph.space_before_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:10",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-001-06",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_heading",
+    "target": {},
+    "property_path": "paragraph.space_after_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:10",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-001-07",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_heading",
+    "target": {},
+    "property_path": "paragraph.line_spacing",
+    "expected_value": {
+      "kind": "line_spacing",
+      "mode": "multiple",
+      "value": 1.5,
+      "unit": "lines"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:10",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-001-08",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_heading",
+    "target": {},
+    "property_path": "paragraph.outline_level",
+    "expected_value": {
+      "kind": "number",
+      "value": 9,
+      "unit": "level"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:10",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-002-01",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_body",
+    "target": {},
+    "property_path": "run.font_east_asia",
+    "expected_value": {
+      "kind": "text",
+      "value": "宋体"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:11",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-002-02",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_body",
+    "target": {},
+    "property_path": "run.font_latin",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:11",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-002-03",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_body",
+    "target": {},
+    "property_path": "run.font_high_ansi",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:11",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-002-04",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_body",
+    "target": {},
+    "property_path": "run.size_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 12,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:11",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false,
+    "display_alias": "小四"
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-002-05",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_body",
+    "target": {},
+    "property_path": "paragraph.alignment",
+    "expected_value": {
+      "kind": "text",
+      "value": "both"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:11",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-002-06",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_body",
+    "target": {},
+    "property_path": "paragraph.first_line_indent_chars",
+    "expected_value": {
+      "kind": "number",
+      "value": 2,
+      "unit": "chars"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:11",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-002-07",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_body",
+    "target": {},
+    "property_path": "paragraph.space_before_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:11",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-002-08",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_body",
+    "target": {},
+    "property_path": "paragraph.space_after_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:11",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-002-09",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_body",
+    "target": {},
+    "property_path": "paragraph.line_spacing",
+    "expected_value": {
+      "kind": "line_spacing",
+      "mode": "multiple",
+      "value": 1.5,
+      "unit": "lines"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:11",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-003-01",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_body",
+    "target": {},
+    "property_path": "content.character_count",
+    "expected_value": {
+      "kind": "number",
+      "value": 300,
+      "unit": "count"
+    },
+    "comparison": "gte",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:11",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-ZH-003-02",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_zh_body",
+    "target": {},
+    "property_path": "content.character_count",
+    "expected_value": {
+      "kind": "number",
+      "value": 600,
+      "unit": "count"
+    },
+    "comparison": "lte",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:11",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-KEYWORDS-ZH-001-01",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "keywords_zh",
+    "target": {},
+    "property_path": "run.size_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 12,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:12",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false,
+    "display_alias": "小四"
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-KEYWORDS-ZH-001-02",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "keywords_zh",
+    "target": {},
+    "property_path": "content.separator",
+    "expected_value": {
+      "kind": "text",
+      "value": "；"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:12",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-KEYWORDS-ZH-001-03",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "keywords_zh",
+    "target": {
+      "text_part": "label"
+    },
+    "property_path": "run.font_east_asia",
+    "expected_value": {
+      "kind": "text",
+      "value": "黑体"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:12",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-KEYWORDS-ZH-001-04",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "keywords_zh",
+    "target": {
+      "text_part": "value"
+    },
+    "property_path": "run.font_east_asia",
+    "expected_value": {
+      "kind": "text",
+      "value": "宋体"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:12",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-KEYWORDS-ZH-001-05",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "keywords_zh",
+    "target": {
+      "text_part": "value"
+    },
+    "property_path": "run.font_latin",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:12",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-KEYWORDS-ZH-001-06",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "keywords_zh",
+    "target": {
+      "text_part": "value"
+    },
+    "property_path": "run.font_high_ansi",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:12",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-KEYWORDS-ZH-001-07",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "keywords_zh",
+    "target": {},
+    "property_path": "content.keyword_count",
+    "expected_value": {
+      "kind": "number",
+      "value": 3,
+      "unit": "count"
+    },
+    "comparison": "gte",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:12",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-KEYWORDS-ZH-001-08",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "keywords_zh",
+    "target": {},
+    "property_path": "content.keyword_count",
+    "expected_value": {
+      "kind": "number",
+      "value": 5,
+      "unit": "count"
+    },
+    "comparison": "lte",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:12",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-001-01",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_title",
+    "target": {},
+    "property_path": "run.font_latin",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:13",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-001-02",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_title",
+    "target": {},
+    "property_path": "run.font_high_ansi",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:13",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-001-03",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_title",
+    "target": {},
+    "property_path": "run.size_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 14,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:13",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false,
+    "display_alias": "四号"
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-001-04",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_title",
+    "target": {},
+    "property_path": "run.bold",
+    "expected_value": {
+      "kind": "boolean",
+      "value": true
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:13",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-001-05",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_title",
+    "target": {},
+    "property_path": "paragraph.alignment",
+    "expected_value": {
+      "kind": "text",
+      "value": "center"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:13",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-001-06",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_title",
+    "target": {},
+    "property_path": "paragraph.space_before_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:13",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-001-07",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_title",
+    "target": {},
+    "property_path": "paragraph.space_after_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:13",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-001-08",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_title",
+    "target": {},
+    "property_path": "paragraph.line_spacing",
+    "expected_value": {
+      "kind": "line_spacing",
+      "mode": "multiple",
+      "value": 1.5,
+      "unit": "lines"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:13",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-002-01",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_author",
+    "target": {},
+    "property_path": "run.font_latin",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:14",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-002-02",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_author",
+    "target": {},
+    "property_path": "run.font_high_ansi",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:14",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-002-03",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_author",
+    "target": {},
+    "property_path": "run.size_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 12,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:14",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false,
+    "display_alias": "小四"
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-002-04",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_author",
+    "target": {},
+    "property_path": "paragraph.alignment",
+    "expected_value": {
+      "kind": "text",
+      "value": "center"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:14",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-002-05",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_author",
+    "target": {},
+    "property_path": "paragraph.space_before_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:14",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-002-06",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_author",
+    "target": {},
+    "property_path": "paragraph.space_after_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:14",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-002-07",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_author",
+    "target": {},
+    "property_path": "paragraph.line_spacing",
+    "expected_value": {
+      "kind": "line_spacing",
+      "mode": "multiple",
+      "value": 1.5,
+      "unit": "lines"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:14",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-003-01",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_affiliation",
+    "target": {},
+    "property_path": "run.font_latin",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:15",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-003-02",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_affiliation",
+    "target": {},
+    "property_path": "run.font_high_ansi",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:15",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-003-03",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_affiliation",
+    "target": {},
+    "property_path": "run.size_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 12,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:15",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false,
+    "display_alias": "小四"
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-003-04",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_affiliation",
+    "target": {},
+    "property_path": "paragraph.alignment",
+    "expected_value": {
+      "kind": "text",
+      "value": "center"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:15",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-003-05",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_affiliation",
+    "target": {},
+    "property_path": "paragraph.space_before_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:15",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-003-06",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_affiliation",
+    "target": {},
+    "property_path": "paragraph.space_after_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:15",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-003-07",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_affiliation",
+    "target": {},
+    "property_path": "paragraph.line_spacing",
+    "expected_value": {
+      "kind": "line_spacing",
+      "mode": "multiple",
+      "value": 1.5,
+      "unit": "lines"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:15",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-004-01",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_body",
+    "target": {},
+    "property_path": "run.font_latin",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:16",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-004-02",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_body",
+    "target": {},
+    "property_path": "run.font_high_ansi",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:16",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-004-03",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_body",
+    "target": {},
+    "property_path": "run.size_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 12,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:16",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false,
+    "display_alias": "小四"
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-004-04",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_body",
+    "target": {},
+    "property_path": "paragraph.alignment",
+    "expected_value": {
+      "kind": "text",
+      "value": "both"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:16",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-004-05",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_body",
+    "target": {},
+    "property_path": "paragraph.space_before_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:16",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-004-06",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_body",
+    "target": {},
+    "property_path": "paragraph.space_after_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:16",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-004-07",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_body",
+    "target": {},
+    "property_path": "paragraph.line_spacing",
+    "expected_value": {
+      "kind": "line_spacing",
+      "mode": "multiple",
+      "value": 1.5,
+      "unit": "lines"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:16",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-004-08",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_body",
+    "target": {
+      "text_part": "label",
+      "paragraph_position": "first"
+    },
+    "property_path": "run.bold",
+    "expected_value": {
+      "kind": "boolean",
+      "value": true
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:16",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-004-09",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_body",
+    "target": {
+      "paragraph_position": "first"
+    },
+    "property_path": "paragraph.first_line_indent_chars",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "chars"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:16",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-ABSTRACT-EN-004-10",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "abstract_en_body",
+    "target": {
+      "paragraph_position": "following"
+    },
+    "property_path": "paragraph.first_line_indent_chars",
+    "expected_value": {
+      "kind": "number",
+      "value": 2,
+      "unit": "chars"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:16",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-KEYWORDS-EN-001-01",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "keywords_en",
+    "target": {},
+    "property_path": "run.font_latin",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:17",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-KEYWORDS-EN-001-02",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "keywords_en",
+    "target": {},
+    "property_path": "run.font_high_ansi",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:17",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-KEYWORDS-EN-001-03",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "keywords_en",
+    "target": {},
+    "property_path": "run.size_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 12,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:17",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false,
+    "display_alias": "小四"
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-KEYWORDS-EN-001-04",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "keywords_en",
+    "target": {},
+    "property_path": "content.separator",
+    "expected_value": {
+      "kind": "text",
+      "value": ";"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:17",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-KEYWORDS-EN-001-05",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "keywords_en",
+    "target": {
+      "text_part": "label"
+    },
+    "property_path": "run.bold",
+    "expected_value": {
+      "kind": "boolean",
+      "value": true
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:17",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-TOC-001-01",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "toc_heading",
+    "target": {},
+    "property_path": "run.font_east_asia",
+    "expected_value": {
+      "kind": "text",
+      "value": "黑体"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:19",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-TOC-001-02",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "toc_heading",
+    "target": {},
+    "property_path": "run.size_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 14,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:19",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false,
+    "display_alias": "四号"
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-TOC-001-03",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "toc_heading",
+    "target": {},
+    "property_path": "paragraph.alignment",
+    "expected_value": {
+      "kind": "text",
+      "value": "center"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:19",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-TOC-001-04",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "toc_heading",
+    "target": {},
+    "property_path": "paragraph.first_line_indent_chars",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "chars"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:19",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-TOC-001-05",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "toc_heading",
+    "target": {},
+    "property_path": "paragraph.space_before_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:19",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-TOC-001-06",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "toc_heading",
+    "target": {},
+    "property_path": "paragraph.space_after_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 0,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:19",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-TOC-001-07",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "toc_heading",
+    "target": {},
+    "property_path": "paragraph.line_spacing",
+    "expected_value": {
+      "kind": "line_spacing",
+      "mode": "multiple",
+      "value": 1.5,
+      "unit": "lines"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:19",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-TOC-002-01",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "toc_entry",
+    "target": {},
+    "property_path": "run.font_east_asia",
+    "expected_value": {
+      "kind": "text",
+      "value": "宋体"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:19",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-TOC-002-02",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "toc_entry",
+    "target": {},
+    "property_path": "run.font_latin",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:19",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-TOC-002-03",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "toc_entry",
+    "target": {},
+    "property_path": "run.font_high_ansi",
+    "expected_value": {
+      "kind": "text",
+      "value": "Times New Roman"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:19",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "exact_equal",
+    "priority": "P0",
+    "auto_fixable": false
+  },
+  {
+    "schema_version": "2.0",
+    "id": "SCAU-P0-TOC-002-04",
+    "profile_id": "scau_undergraduate_2026_v1",
+    "scope": "toc_entry",
+    "target": {},
+    "property_path": "run.size_pt",
+    "expected_value": {
+      "kind": "number",
+      "value": 12,
+      "unit": "pt"
+    },
+    "comparison": "eq",
+    "tolerance": 0,
+    "status": "provisional",
+    "confidence": 1,
+    "source": {
+      "type": "school_comment",
+      "document": "scau-official-template.docx",
+      "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+      "locator": "template_comment:19",
+      "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+    },
+    "implementation": "read_only",
+    "validator": "numeric_compare",
+    "priority": "P0",
+    "auto_fixable": false,
+    "display_alias": "小四"
+  }
+]

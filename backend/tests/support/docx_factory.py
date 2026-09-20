@@ -35,6 +35,35 @@ STYLES = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </w:styles>
 """
 
+CASCADE_STYLES = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:docDefaults>
+    <w:rPrDefault><w:rPr><w:rFonts w:eastAsia="宋体" w:ascii="Times New Roman"/><w:sz w:val="21"/></w:rPr></w:rPrDefault>
+    <w:pPrDefault><w:pPr><w:jc w:val="both"/><w:spacing w:line="360" w:lineRule="auto"/></w:pPr></w:pPrDefault>
+  </w:docDefaults>
+  <w:style w:type="paragraph" w:default="1" w:styleId="Normal">
+    <w:name w:val="Normal"/>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading1">
+    <w:name w:val="heading 1"/><w:basedOn w:val="Normal"/>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Base">
+    <w:name w:val="Base"/><w:basedOn w:val="Normal"/>
+    <w:pPr><w:jc w:val="left"/></w:pPr>
+    <w:rPr><w:rFonts w:eastAsia="黑体"/><w:sz w:val="24"/><w:b/></w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Derived">
+    <w:name w:val="Derived"/><w:basedOn w:val="Base"/>
+    <w:pPr><w:jc w:val="center"/></w:pPr>
+    <w:rPr><w:sz w:val="28"/></w:rPr>
+  </w:style>
+  <w:style w:type="character" w:styleId="Emphasis">
+    <w:name w:val="Emphasis"/>
+    <w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:i/></w:rPr>
+  </w:style>
+</w:styles>
+"""
+
 HEADER = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:hdr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
   <w:p><w:r><w:t>华南农业大学本科毕业论文</w:t></w:r></w:p>
@@ -73,11 +102,14 @@ def create_synthetic_docx(
     font_name: str = "宋体",
     include_unsupported: bool = False,
     include_three_line_table: bool = False,
+    include_style_cascade: bool = False,
 ) -> Path:
     extra_body = ""
     extra_relationships = ""
     extra_overrides = ""
     extra_parts: dict[str, bytes | str] = {}
+    styles = STYLES
+    cascade_body = ""
 
     if include_unsupported:
         extra_body = """
@@ -128,6 +160,16 @@ def create_synthetic_docx(
       </w:tr>
 """
 
+    if include_style_cascade:
+        styles = CASCADE_STYLES
+        cascade_body = """
+    <w:p>
+      <w:pPr><w:pStyle w:val="Derived"/></w:pPr>
+      <w:r><w:rPr><w:rStyle w:val="Emphasis"/></w:rPr><w:t>级联样本一</w:t></w:r>
+      <w:r><w:rPr><w:rStyle w:val="Emphasis"/><w:sz w:val="30"/></w:rPr><w:t>级联样本二</w:t></w:r>
+    </w:p>
+"""
+
     document = f"""<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
  xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
@@ -153,6 +195,7 @@ def create_synthetic_docx(
       {second_row}
     </w:tbl>
     {extra_body}
+    {cascade_body}
     <w:sectPr>
       <w:headerReference w:type="default" r:id="rIdHeader"/>
       <w:footerReference w:type="default" r:id="rIdFooter"/>
@@ -180,7 +223,7 @@ def create_synthetic_docx(
         "_rels/.rels": ROOT_RELS,
         "word/document.xml": document,
         "word/_rels/document.xml.rels": document_rels,
-        "word/styles.xml": STYLES,
+        "word/styles.xml": styles,
         "word/header1.xml": HEADER,
         "word/footer1.xml": FOOTER,
         "word/footnotes.xml": FOOTNOTES,

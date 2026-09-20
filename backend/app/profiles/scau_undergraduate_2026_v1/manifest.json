@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0",
+  "profile_id": "scau_undergraduate_2026_v1",
+  "version": "1.0.0",
+  "format_rule_schema_version": "2.0",
+  "name": "华南农业大学当前届本科毕业论文（单模板）",
+  "applicability": {
+    "school": "华南农业大学",
+    "education_level": "undergraduate",
+    "cohort": "current_graduates_at_2026-09-20",
+    "confirmed_on": "2026-09-20",
+    "confirmation_reference": "docs/decisions/0003-single-template-profile.md",
+    "excluded_colleges": [
+      "外国语学院"
+    ],
+    "college_customizations": false
+  },
+  "template_document": "scau-official-template.docx",
+  "template_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322",
+  "rule_files": [
+    "rules/page_layout.json",
+    "rules/cover.json",
+    "rules/front_matter.json",
+    "rules/headings_and_body.json",
+    "rules/figures_tables_equations.json",
+    "rules/back_matter.json"
+  ],
+  "evidence_file": "evidence/evidence-index.json",
+  "coverage_file": "coverage.json",
+  "template_samples": [
+    {
+      "kind": "section",
+      "index": 0,
+      "scope": "document"
+    },
+    {
+      "kind": "paragraph",
+      "index": 1,
+      "scope": "cover_document_type"
+    },
+    {
+      "kind": "paragraph",
+      "index": 3,
+      "scope": "cover_title"
+    },
+    {
+      "kind": "paragraph",
+      "index": 38,
+      "scope": "abstract_zh_heading"
+    },
+    {
+      "kind": "paragraph",
+      "index": 39,
+      "scope": "abstract_zh_body"
+    },
+    {
+      "kind": "paragraph",
+      "index": 42,
+      "scope": "abstract_en_title"
+    },
+    {
+      "kind": "paragraph",
+      "index": 45,
+      "scope": "abstract_en_body"
+    },
+    {
+      "kind": "paragraph",
+      "index": 74,
+      "scope": "heading_1"
+    },
+    {
+      "kind": "paragraph",
+      "index": 75,
+      "scope": "heading_2"
+    },
+    {
+      "kind": "paragraph",
+      "index": 76,
+      "scope": "body"
+    },
+    {
+      "kind": "paragraph",
+      "index": 86,
+      "scope": "table_caption"
+    },
+    {
+      "kind": "paragraph",
+      "index": 90,
+      "scope": "heading_3"
+    },
+    {
+      "kind": "table",
+      "index": 0,
+      "scope": "abbreviation_table"
+    },
+    {
+      "kind": "table",
+      "index": 1,
+      "scope": "table"
+    },
+    {
+      "kind": "table",
+      "index": 2,
+      "scope": "table"
+    },
+    {
+      "kind": "table",
+      "index": 3,
+      "scope": "table"
+    }
+  ]
+}

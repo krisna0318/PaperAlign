@@ -1,0 +1,627 @@
+[
+  {
+    "inventory_id": "SCAU-P0-PAGE-001",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-PAGE-001-01",
+      "SCAU-P0-PAGE-001-02"
+    ],
+    "deferred_requirements": []
+  },
+  {
+    "inventory_id": "SCAU-P0-PAGE-002",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-PAGE-002-01",
+      "SCAU-P0-PAGE-002-02",
+      "SCAU-P0-PAGE-002-03",
+      "SCAU-P0-PAGE-002-04"
+    ],
+    "deferred_requirements": []
+  },
+  {
+    "inventory_id": "SCAU-P0-PAGE-003",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-PAGE-003-01"
+    ],
+    "deferred_requirements": []
+  },
+  {
+    "inventory_id": "SCAU-P0-PAGE-004",
+    "state": "deferred",
+    "rule_ids": [],
+    "deferred_requirements": [
+      "前置页边界尚未定位；大写罗马页码及起始值需按节确认。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-PAGE-005",
+    "state": "deferred",
+    "rule_ids": [],
+    "deferred_requirements": [
+      "正文起始页、页码格式和续编关系证据不足。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-COVER-001",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-COVER-001-01",
+      "SCAU-P0-COVER-001-02",
+      "SCAU-P0-COVER-001-03",
+      "SCAU-P0-COVER-001-04"
+    ],
+    "deferred_requirements": [
+      "论文或设计的标题文字选择留给用户，不自动改写。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-COVER-002",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-COVER-002-01",
+      "SCAU-P0-COVER-002-02",
+      "SCAU-P0-COVER-002-03",
+      "SCAU-P0-COVER-002-04"
+    ],
+    "deferred_requirements": []
+  },
+  {
+    "inventory_id": "SCAU-P0-COVER-003",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-COVER-003-01",
+      "SCAU-P0-COVER-003-02",
+      "SCAU-P0-COVER-003-03",
+      "SCAU-P0-COVER-003-04",
+      "SCAU-P0-COVER-003-05",
+      "SCAU-P0-COVER-003-06",
+      "SCAU-P0-COVER-003-07",
+      "SCAU-P0-COVER-003-08"
+    ],
+    "deferred_requirements": []
+  },
+  {
+    "inventory_id": "SCAU-P0-COVER-004",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-COVER-004-01",
+      "SCAU-P0-COVER-004-02",
+      "SCAU-P0-COVER-004-03"
+    ],
+    "deferred_requirements": []
+  },
+  {
+    "inventory_id": "SCAU-P0-COVER-005",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-COVER-005-01",
+      "SCAU-P0-COVER-005-02",
+      "SCAU-P0-COVER-005-03"
+    ],
+    "deferred_requirements": []
+  },
+  {
+    "inventory_id": "SCAU-P0-ABSTRACT-ZH-001",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-ABSTRACT-ZH-001-01",
+      "SCAU-P0-ABSTRACT-ZH-001-02",
+      "SCAU-P0-ABSTRACT-ZH-001-03",
+      "SCAU-P0-ABSTRACT-ZH-001-04",
+      "SCAU-P0-ABSTRACT-ZH-001-05",
+      "SCAU-P0-ABSTRACT-ZH-001-06",
+      "SCAU-P0-ABSTRACT-ZH-001-07",
+      "SCAU-P0-ABSTRACT-ZH-001-08"
+    ],
+    "deferred_requirements": [
+      "标题中间四字距需文字/字间距级验证。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-ABSTRACT-ZH-002",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-ABSTRACT-ZH-002-01",
+      "SCAU-P0-ABSTRACT-ZH-002-02",
+      "SCAU-P0-ABSTRACT-ZH-002-03",
+      "SCAU-P0-ABSTRACT-ZH-002-04",
+      "SCAU-P0-ABSTRACT-ZH-002-05",
+      "SCAU-P0-ABSTRACT-ZH-002-06",
+      "SCAU-P0-ABSTRACT-ZH-002-07",
+      "SCAU-P0-ABSTRACT-ZH-002-08",
+      "SCAU-P0-ABSTRACT-ZH-002-09"
+    ],
+    "deferred_requirements": []
+  },
+  {
+    "inventory_id": "SCAU-P0-ABSTRACT-ZH-003",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-ABSTRACT-ZH-003-01",
+      "SCAU-P0-ABSTRACT-ZH-003-02"
+    ],
+    "deferred_requirements": [
+      "摘要引用识别未实现；字数统计口径需定义后才能比较。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-KEYWORDS-ZH-001",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-KEYWORDS-ZH-001-01",
+      "SCAU-P0-KEYWORDS-ZH-001-02",
+      "SCAU-P0-KEYWORDS-ZH-001-03",
+      "SCAU-P0-KEYWORDS-ZH-001-04",
+      "SCAU-P0-KEYWORDS-ZH-001-05",
+      "SCAU-P0-KEYWORDS-ZH-001-06",
+      "SCAU-P0-KEYWORDS-ZH-001-07",
+      "SCAU-P0-KEYWORDS-ZH-001-08"
+    ],
+    "deferred_requirements": [
+      "末尾标点检查及标签/值片段定位留给结构识别。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-ABSTRACT-EN-001",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-ABSTRACT-EN-001-01",
+      "SCAU-P0-ABSTRACT-EN-001-02",
+      "SCAU-P0-ABSTRACT-EN-001-03",
+      "SCAU-P0-ABSTRACT-EN-001-04",
+      "SCAU-P0-ABSTRACT-EN-001-05",
+      "SCAU-P0-ABSTRACT-EN-001-06",
+      "SCAU-P0-ABSTRACT-EN-001-07",
+      "SCAU-P0-ABSTRACT-EN-001-08"
+    ],
+    "deferred_requirements": [
+      "实词首字母大写属于语言判断，暂不自动验证。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-ABSTRACT-EN-002",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-ABSTRACT-EN-002-01",
+      "SCAU-P0-ABSTRACT-EN-002-02",
+      "SCAU-P0-ABSTRACT-EN-002-03",
+      "SCAU-P0-ABSTRACT-EN-002-04",
+      "SCAU-P0-ABSTRACT-EN-002-05",
+      "SCAU-P0-ABSTRACT-EN-002-06",
+      "SCAU-P0-ABSTRACT-EN-002-07"
+    ],
+    "deferred_requirements": []
+  },
+  {
+    "inventory_id": "SCAU-P0-ABSTRACT-EN-003",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-ABSTRACT-EN-003-01",
+      "SCAU-P0-ABSTRACT-EN-003-02",
+      "SCAU-P0-ABSTRACT-EN-003-03",
+      "SCAU-P0-ABSTRACT-EN-003-04",
+      "SCAU-P0-ABSTRACT-EN-003-05",
+      "SCAU-P0-ABSTRACT-EN-003-06",
+      "SCAU-P0-ABSTRACT-EN-003-07"
+    ],
+    "deferred_requirements": [
+      "单位括号包围需文本结构检查。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-ABSTRACT-EN-004",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-ABSTRACT-EN-004-01",
+      "SCAU-P0-ABSTRACT-EN-004-02",
+      "SCAU-P0-ABSTRACT-EN-004-03",
+      "SCAU-P0-ABSTRACT-EN-004-04",
+      "SCAU-P0-ABSTRACT-EN-004-05",
+      "SCAU-P0-ABSTRACT-EN-004-06",
+      "SCAU-P0-ABSTRACT-EN-004-07",
+      "SCAU-P0-ABSTRACT-EN-004-08",
+      "SCAU-P0-ABSTRACT-EN-004-09",
+      "SCAU-P0-ABSTRACT-EN-004-10"
+    ],
+    "deferred_requirements": []
+  },
+  {
+    "inventory_id": "SCAU-P0-KEYWORDS-EN-001",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-KEYWORDS-EN-001-01",
+      "SCAU-P0-KEYWORDS-EN-001-02",
+      "SCAU-P0-KEYWORDS-EN-001-03",
+      "SCAU-P0-KEYWORDS-EN-001-04",
+      "SCAU-P0-KEYWORDS-EN-001-05"
+    ],
+    "deferred_requirements": [
+      "末尾标点检查及标签/值片段定位留给结构识别。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-TOC-001",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-TOC-001-01",
+      "SCAU-P0-TOC-001-02",
+      "SCAU-P0-TOC-001-03",
+      "SCAU-P0-TOC-001-04",
+      "SCAU-P0-TOC-001-05",
+      "SCAU-P0-TOC-001-06",
+      "SCAU-P0-TOC-001-07"
+    ],
+    "deferred_requirements": [
+      "标题中间四字距未实现。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-TOC-002",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-TOC-002-01",
+      "SCAU-P0-TOC-002-02",
+      "SCAU-P0-TOC-002-03",
+      "SCAU-P0-TOC-002-04"
+    ],
+    "deferred_requirements": [
+      "目录级数、制表位、前导符及页码对齐需要目录域检查。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-TOC-003",
+    "state": "deferred",
+    "rule_ids": [],
+    "deferred_requirements": [
+      "目录文字/条目范围和正文同步关系需目录域与结构识别。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-HEADING-001",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-HEADING-001-01",
+      "SCAU-P0-HEADING-001-02",
+      "SCAU-P0-HEADING-001-03",
+      "SCAU-P0-HEADING-001-04",
+      "SCAU-P0-HEADING-001-05",
+      "SCAU-P0-HEADING-001-06",
+      "SCAU-P0-HEADING-001-07",
+      "SCAU-P0-HEADING-001-08",
+      "SCAU-P0-HEADING-001-09",
+      "SCAU-P0-HEADING-001-10"
+    ],
+    "deferred_requirements": [
+      "题序后一字距需编号与字符级检查。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-HEADING-002",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-HEADING-002-01",
+      "SCAU-P0-HEADING-002-02",
+      "SCAU-P0-HEADING-002-03",
+      "SCAU-P0-HEADING-002-04",
+      "SCAU-P0-HEADING-002-05",
+      "SCAU-P0-HEADING-002-06",
+      "SCAU-P0-HEADING-002-07",
+      "SCAU-P0-HEADING-002-08",
+      "SCAU-P0-HEADING-002-09",
+      "SCAU-P0-HEADING-002-10"
+    ],
+    "deferred_requirements": [
+      "题序后一字距需编号与字符级检查。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-HEADING-003",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-HEADING-003-01",
+      "SCAU-P0-HEADING-003-02",
+      "SCAU-P0-HEADING-003-03",
+      "SCAU-P0-HEADING-003-04",
+      "SCAU-P0-HEADING-003-05",
+      "SCAU-P0-HEADING-003-06",
+      "SCAU-P0-HEADING-003-07",
+      "SCAU-P0-HEADING-003-08",
+      "SCAU-P0-HEADING-003-09",
+      "SCAU-P0-HEADING-003-10"
+    ],
+    "deferred_requirements": [
+      "题序后一字距需编号与字符级检查。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-HEADING-004",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-HEADING-004-01",
+      "SCAU-P0-HEADING-004-02",
+      "SCAU-P0-HEADING-004-03",
+      "SCAU-P0-HEADING-004-04",
+      "SCAU-P0-HEADING-004-05",
+      "SCAU-P0-HEADING-004-06",
+      "SCAU-P0-HEADING-004-07",
+      "SCAU-P0-HEADING-004-08",
+      "SCAU-P0-HEADING-004-09",
+      "SCAU-P0-HEADING-004-10"
+    ],
+    "deferred_requirements": [
+      "题序后一字距需编号与字符级检查。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-BODY-001",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-BODY-001-01",
+      "SCAU-P0-BODY-001-02",
+      "SCAU-P0-BODY-001-03",
+      "SCAU-P0-BODY-001-04",
+      "SCAU-P0-BODY-001-05",
+      "SCAU-P0-BODY-001-06",
+      "SCAU-P0-BODY-001-07",
+      "SCAU-P0-BODY-001-08",
+      "SCAU-P0-BODY-001-09",
+      "SCAU-P0-BODY-001-10"
+    ],
+    "deferred_requirements": []
+  },
+  {
+    "inventory_id": "SCAU-P0-ABBREVIATION-TABLE-001",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-ABBREVIATION-TABLE-001-01",
+      "SCAU-P0-ABBREVIATION-TABLE-001-02",
+      "SCAU-P0-ABBREVIATION-TABLE-001-03",
+      "SCAU-P0-ABBREVIATION-TABLE-001-04"
+    ],
+    "deferred_requirements": []
+  },
+  {
+    "inventory_id": "SCAU-P0-TABLE-001",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-TABLE-001-01",
+      "SCAU-P0-TABLE-001-02",
+      "SCAU-P0-TABLE-001-03",
+      "SCAU-P0-TABLE-001-04"
+    ],
+    "deferred_requirements": [
+      "上下空行、连续编号及左右边线的完整检查未实现。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-TABLE-002",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-TABLE-002-01",
+      "SCAU-P0-TABLE-002-02",
+      "SCAU-P0-TABLE-002-03",
+      "SCAU-P0-TABLE-002-04",
+      "SCAU-P0-TABLE-002-05",
+      "SCAU-P0-TABLE-002-06",
+      "SCAU-P0-TABLE-002-07",
+      "SCAU-P0-TABLE-002-08"
+    ],
+    "deferred_requirements": [
+      "表号后一字距需字符级验证。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-TABLE-003",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-TABLE-003-01",
+      "SCAU-P0-TABLE-003-02",
+      "SCAU-P0-TABLE-003-03",
+      "SCAU-P0-TABLE-003-04",
+      "SCAU-P0-TABLE-003-05",
+      "SCAU-P0-TABLE-003-06",
+      "SCAU-P0-TABLE-003-07",
+      "SCAU-P0-TABLE-003-08"
+    ],
+    "deferred_requirements": []
+  },
+  {
+    "inventory_id": "SCAU-P0-TABLE-004",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-TABLE-004-01",
+      "SCAU-P0-TABLE-004-02",
+      "SCAU-P0-TABLE-004-03",
+      "SCAU-P0-TABLE-004-04",
+      "SCAU-P0-TABLE-004-05",
+      "SCAU-P0-TABLE-004-06",
+      "SCAU-P0-TABLE-004-07"
+    ],
+    "deferred_requirements": [
+      "表注与表起始位置关系需布局验证。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-TABLE-005",
+    "state": "deferred",
+    "rule_ids": [],
+    "deferred_requirements": [
+      "模板续表由独立表格表示，不能等同 tblHeader 开关；需页布局和续表关联。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-FIGURE-001",
+    "state": "deferred",
+    "rule_ids": [],
+    "deferred_requirements": [
+      "上下空行、连续编号、图片和图题同页需对象关系与页布局，不能等同 keepNext。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-FIGURE-002",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-FIGURE-002-01",
+      "SCAU-P0-FIGURE-002-02",
+      "SCAU-P0-FIGURE-002-03",
+      "SCAU-P0-FIGURE-002-04",
+      "SCAU-P0-FIGURE-002-05",
+      "SCAU-P0-FIGURE-002-06",
+      "SCAU-P0-FIGURE-002-07",
+      "SCAU-P0-FIGURE-002-08"
+    ],
+    "deferred_requirements": [
+      "图号后一字距需字符级验证。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-FIGURE-003",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-FIGURE-003-01",
+      "SCAU-P0-FIGURE-003-02",
+      "SCAU-P0-FIGURE-003-03",
+      "SCAU-P0-FIGURE-003-04",
+      "SCAU-P0-FIGURE-003-05",
+      "SCAU-P0-FIGURE-003-06",
+      "SCAU-P0-FIGURE-003-07"
+    ],
+    "deferred_requirements": [
+      "图注与图片起始位置关系需布局验证。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-FIGURE-004",
+    "state": "deferred",
+    "rule_ids": [],
+    "deferred_requirements": [
+      "分图标签、分图标题和主图标题的位置关系需对象及页布局。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-EQUATION-001",
+    "state": "deferred",
+    "rule_ids": [],
+    "deferred_requirements": [
+      "公式一般居中及显示不全时最小20pt存在条件；编号和公式对象需专门解析。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-FOOTNOTE-001",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-FOOTNOTE-001-01",
+      "SCAU-P0-FOOTNOTE-001-02",
+      "SCAU-P0-FOOTNOTE-001-03",
+      "SCAU-P0-FOOTNOTE-001-04",
+      "SCAU-P0-FOOTNOTE-001-05",
+      "SCAU-P0-FOOTNOTE-001-06",
+      "SCAU-P0-FOOTNOTE-001-07",
+      "SCAU-P0-FOOTNOTE-001-08",
+      "SCAU-P0-FOOTNOTE-001-09"
+    ],
+    "deferred_requirements": [
+      "脚注全文连续编号检查及脚注有效格式解析暂未接入。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-REFERENCE-001",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-REFERENCE-001-01",
+      "SCAU-P0-REFERENCE-001-02",
+      "SCAU-P0-REFERENCE-001-03",
+      "SCAU-P0-REFERENCE-001-04",
+      "SCAU-P0-REFERENCE-001-05",
+      "SCAU-P0-REFERENCE-001-06",
+      "SCAU-P0-REFERENCE-001-07"
+    ],
+    "deferred_requirements": [
+      "参考文献标题字间距需字符级检查。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-REFERENCE-002",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-REFERENCE-002-01",
+      "SCAU-P0-REFERENCE-002-02",
+      "SCAU-P0-REFERENCE-002-03",
+      "SCAU-P0-REFERENCE-002-04",
+      "SCAU-P0-REFERENCE-002-05",
+      "SCAU-P0-REFERENCE-002-06",
+      "SCAU-P0-REFERENCE-002-07",
+      "SCAU-P0-REFERENCE-002-08",
+      "SCAU-P0-REFERENCE-002-09"
+    ],
+    "deferred_requirements": [
+      "不编号检查未接入；悬挂缩进虽已建模，实际值解析尚未支持。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-REFERENCE-003",
+    "state": "deferred",
+    "rule_ids": [],
+    "deferred_requirements": [
+      "中文/外文排序和专项著录规范需额外规则文件。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-APPENDIX-001",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-APPENDIX-001-01",
+      "SCAU-P0-APPENDIX-001-02",
+      "SCAU-P0-APPENDIX-001-03",
+      "SCAU-P0-APPENDIX-001-04",
+      "SCAU-P0-APPENDIX-001-05",
+      "SCAU-P0-APPENDIX-001-06",
+      "SCAU-P0-APPENDIX-001-07"
+    ],
+    "deferred_requirements": [
+      "附录序号后一字距需字符级检查。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-APPENDIX-002",
+    "state": "deferred",
+    "rule_ids": [],
+    "deferred_requirements": [
+      "附录独立编号需结构分区与编号序列验证；内容类型需分别套用正文规则。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-ACK-001",
+    "state": "partial",
+    "rule_ids": [
+      "SCAU-P0-ACK-001-01",
+      "SCAU-P0-ACK-001-02",
+      "SCAU-P0-ACK-001-03",
+      "SCAU-P0-ACK-001-05",
+      "SCAU-P0-ACK-001-06",
+      "SCAU-P0-ACK-001-07",
+      "SCAU-P0-ACK-001-08"
+    ],
+    "deferred_requirements": [
+      "标题中间四字距需字符级检查。"
+    ]
+  },
+  {
+    "inventory_id": "SCAU-P0-ACK-002",
+    "state": "encoded",
+    "rule_ids": [
+      "SCAU-P0-ACK-002-01",
+      "SCAU-P0-ACK-002-02",
+      "SCAU-P0-ACK-002-03",
+      "SCAU-P0-ACK-002-04",
+      "SCAU-P0-ACK-002-05",
+      "SCAU-P0-ACK-002-06",
+      "SCAU-P0-ACK-002-07",
+      "SCAU-P0-ACK-002-08",
+      "SCAU-P0-ACK-002-09"
+    ],
+    "deferred_requirements": []
+  }
+]

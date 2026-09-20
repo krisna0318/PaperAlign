@@ -71,28 +71,7 @@ export interface DocumentBlock {
   metadata: Record<string, unknown>;
 }
 
-export interface RuleSource {
-  type: string;
-  document: string;
-  evidence: string;
-  locator?: string | null;
-}
-
-export interface FormatRule {
-  schema_version: "1.0";
-  id: string;
-  profile_id: string;
-  scope: string;
-  property_path: string;
-  expected_value: unknown;
-  status: "confirmed" | "provisional" | "needs_review";
-  confidence: number;
-  source: RuleSource;
-  implementation: string;
-  validator: string;
-  priority: "P0" | "P1" | "P2";
-  auto_fixable: boolean;
-}
+export type { FormatRule, RuleSource, RuleValidationResult } from "./rules";
 
 export interface DiagnosisIssue {
   schema_version: "1.0";

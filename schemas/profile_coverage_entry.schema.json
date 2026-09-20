@@ -1,0 +1,41 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "inventory_id": {
+      "pattern": "^SCAU-P0-[A-Z0-9-]+$",
+      "title": "Inventory Id",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "encoded",
+        "partial",
+        "deferred"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "rule_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rule Ids",
+      "type": "array"
+    },
+    "deferred_requirements": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Deferred Requirements",
+      "type": "array"
+    }
+  },
+  "required": [
+    "inventory_id",
+    "state",
+    "rule_ids"
+  ],
+  "title": "CoverageEntry",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/profile_coverage_entry.schema.json"
+}

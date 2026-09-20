@@ -1,0 +1,254 @@
+[
+  {
+    "type": "template_observation",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_ooxml:word/document.xml/sectPr/pgSz",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "template_observation",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_ooxml:word/document.xml/sectPr/pgMar",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:9",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:0",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:1",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:2",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:3",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:4",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:6",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:5",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:8",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:10",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:11",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:12",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:13",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:14",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:15",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:16",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:17",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:19",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:21",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:22",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:30",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:35",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:23",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:18",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:27",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:28",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:29",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:33",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:34",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:32",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:38",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:47",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:48",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  },
+  {
+    "type": "school_comment",
+    "document": "scau-official-template.docx",
+    "evidence": "官方模板格式依据（参见 P0 清单及本定位器）。",
+    "locator": "template_comment:49",
+    "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
+  }
+]

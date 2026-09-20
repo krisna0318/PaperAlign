@@ -1,0 +1,209 @@
+{
+  "$defs": {
+    "Applicability": {
+      "additionalProperties": false,
+      "properties": {
+        "school": {
+          "minLength": 1,
+          "title": "School",
+          "type": "string"
+        },
+        "education_level": {
+          "const": "undergraduate",
+          "default": "undergraduate",
+          "title": "Education Level",
+          "type": "string"
+        },
+        "cohort": {
+          "minLength": 1,
+          "title": "Cohort",
+          "type": "string"
+        },
+        "confirmed_on": {
+          "format": "date",
+          "title": "Confirmed On",
+          "type": "string"
+        },
+        "confirmation_reference": {
+          "minLength": 1,
+          "title": "Confirmation Reference",
+          "type": "string"
+        },
+        "excluded_colleges": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Excluded Colleges",
+          "type": "array"
+        },
+        "college_customizations": {
+          "const": false,
+          "default": false,
+          "title": "College Customizations",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "school",
+        "cohort",
+        "confirmed_on",
+        "confirmation_reference",
+        "excluded_colleges"
+      ],
+      "title": "Applicability",
+      "type": "object"
+    },
+    "RuleScope": {
+      "enum": [
+        "document",
+        "section",
+        "cover_title",
+        "cover_document_type",
+        "cover_metadata",
+        "declaration",
+        "abstract_zh_heading",
+        "abstract_zh_body",
+        "abstract_en_title",
+        "abstract_en_author",
+        "abstract_en_affiliation",
+        "abstract_en_body",
+        "keywords_zh",
+        "keywords_en",
+        "toc_heading",
+        "toc_entry",
+        "heading_1",
+        "heading_2",
+        "heading_3",
+        "heading_4",
+        "body",
+        "abbreviation_table",
+        "table",
+        "table_text",
+        "table_caption",
+        "table_note",
+        "figure",
+        "figure_caption",
+        "figure_note",
+        "equation",
+        "footnote",
+        "reference_heading",
+        "reference_entry",
+        "appendix_heading",
+        "appendix_body",
+        "acknowledgement_heading",
+        "acknowledgement_body"
+      ],
+      "title": "RuleScope",
+      "type": "string"
+    },
+    "TemplateSample": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "paragraph",
+            "table",
+            "section"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "index": {
+          "minimum": 0,
+          "title": "Index",
+          "type": "integer"
+        },
+        "scope": {
+          "$ref": "#/$defs/RuleScope"
+        }
+      },
+      "required": [
+        "kind",
+        "index",
+        "scope"
+      ],
+      "title": "TemplateSample",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "profile_id": {
+      "pattern": "^[a-z0-9_]+$",
+      "title": "Profile Id",
+      "type": "string"
+    },
+    "version": {
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "title": "Version",
+      "type": "string"
+    },
+    "format_rule_schema_version": {
+      "const": "2.0",
+      "default": "2.0",
+      "title": "Format Rule Schema Version",
+      "type": "string"
+    },
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "applicability": {
+      "$ref": "#/$defs/Applicability"
+    },
+    "template_document": {
+      "title": "Template Document",
+      "type": "string"
+    },
+    "template_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Template Sha256",
+      "type": "string"
+    },
+    "rule_files": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Rule Files",
+      "type": "array"
+    },
+    "evidence_file": {
+      "title": "Evidence File",
+      "type": "string"
+    },
+    "coverage_file": {
+      "title": "Coverage File",
+      "type": "string"
+    },
+    "template_samples": {
+      "items": {
+        "$ref": "#/$defs/TemplateSample"
+      },
+      "title": "Template Samples",
+      "type": "array"
+    }
+  },
+  "required": [
+    "profile_id",
+    "version",
+    "name",
+    "applicability",
+    "template_document",
+    "template_sha256",
+    "rule_files",
+    "evidence_file",
+    "coverage_file"
+  ],
+  "title": "ProfileManifest",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/profile_manifest.schema.json"
+}

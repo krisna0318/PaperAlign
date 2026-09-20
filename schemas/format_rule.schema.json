@@ -1,5 +1,200 @@
 {
   "$defs": {
+    "BooleanValue": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "boolean",
+          "default": "boolean",
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "title": "BooleanValue",
+      "type": "object"
+    },
+    "FixedSpacing": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "line_spacing",
+          "default": "line_spacing",
+          "title": "Kind",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "exact",
+            "at_least"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "value": {
+          "exclusiveMinimum": 0,
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "const": "pt",
+          "default": "pt",
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "mode",
+        "value"
+      ],
+      "title": "FixedSpacing",
+      "type": "object"
+    },
+    "MultipleSpacing": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "line_spacing",
+          "default": "line_spacing",
+          "title": "Kind",
+          "type": "string"
+        },
+        "mode": {
+          "const": "multiple",
+          "default": "multiple",
+          "title": "Mode",
+          "type": "string"
+        },
+        "value": {
+          "exclusiveMinimum": 0,
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "const": "lines",
+          "default": "lines",
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "mode",
+        "value"
+      ],
+      "title": "MultipleSpacing",
+      "type": "object"
+    },
+    "NumberValue": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "number",
+          "default": "number",
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "pt",
+            "mm",
+            "chars",
+            "count",
+            "level"
+          ],
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "value",
+        "unit"
+      ],
+      "title": "NumberValue",
+      "type": "object"
+    },
+    "PropertyPath": {
+      "enum": [
+        "page.width_mm",
+        "page.height_mm",
+        "page.margin_top_mm",
+        "page.margin_bottom_mm",
+        "page.margin_left_mm",
+        "page.margin_right_mm",
+        "page.number_format",
+        "page.number_start",
+        "page.number_visible",
+        "run.font_east_asia",
+        "run.font_latin",
+        "run.font_high_ansi",
+        "run.size_pt",
+        "run.bold",
+        "run.italic",
+        "paragraph.alignment",
+        "paragraph.line_spacing",
+        "paragraph.space_before_pt",
+        "paragraph.space_after_pt",
+        "paragraph.first_line_indent_pt",
+        "paragraph.first_line_indent_chars",
+        "paragraph.hanging_indent_chars",
+        "paragraph.left_indent_pt",
+        "paragraph.right_indent_pt",
+        "paragraph.outline_level",
+        "paragraph.keep_with_next",
+        "paragraph.page_break_before",
+        "table.top_pt",
+        "table.header_separator_pt",
+        "table.bottom_pt",
+        "table.vertical_borders_present",
+        "table.repeat_header",
+        "content.character_count",
+        "content.keyword_count",
+        "content.separator"
+      ],
+      "title": "PropertyPath",
+      "type": "string"
+    },
+    "RuleConfirmation": {
+      "additionalProperties": false,
+      "properties": {
+        "reviewer": {
+          "minLength": 1,
+          "title": "Reviewer",
+          "type": "string"
+        },
+        "confirmed_at": {
+          "format": "date-time",
+          "title": "Confirmed At",
+          "type": "string"
+        },
+        "reference": {
+          "description": "Human decision record including applicability",
+          "minLength": 1,
+          "title": "Reference",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reviewer",
+        "confirmed_at",
+        "reference"
+      ],
+      "title": "RuleConfirmation",
+      "type": "object"
+    },
     "RulePriority": {
       "enum": [
         "P0",
@@ -9,11 +204,58 @@
       "title": "RulePriority",
       "type": "string"
     },
+    "RuleScope": {
+      "enum": [
+        "document",
+        "section",
+        "cover_title",
+        "cover_document_type",
+        "cover_metadata",
+        "declaration",
+        "abstract_zh_heading",
+        "abstract_zh_body",
+        "abstract_en_title",
+        "abstract_en_author",
+        "abstract_en_affiliation",
+        "abstract_en_body",
+        "keywords_zh",
+        "keywords_en",
+        "toc_heading",
+        "toc_entry",
+        "heading_1",
+        "heading_2",
+        "heading_3",
+        "heading_4",
+        "body",
+        "abbreviation_table",
+        "table",
+        "table_text",
+        "table_caption",
+        "table_note",
+        "figure",
+        "figure_caption",
+        "figure_note",
+        "equation",
+        "footnote",
+        "reference_heading",
+        "reference_entry",
+        "appendix_heading",
+        "appendix_body",
+        "acknowledgement_heading",
+        "acknowledgement_body"
+      ],
+      "title": "RuleScope",
+      "type": "string"
+    },
     "RuleSource": {
       "additionalProperties": false,
       "properties": {
         "type": {
-          "minLength": 1,
+          "enum": [
+            "school_comment",
+            "written_spec",
+            "template_observation"
+          ],
           "title": "Type",
           "type": "string"
         },
@@ -28,8 +270,14 @@
           "type": "string"
         },
         "locator": {
+          "minLength": 1,
+          "title": "Locator",
+          "type": "string"
+        },
+        "document_sha256": {
           "anyOf": [
             {
+              "pattern": "^[0-9a-f]{64}$",
               "type": "string"
             },
             {
@@ -37,13 +285,14 @@
             }
           ],
           "default": null,
-          "title": "Locator"
+          "title": "Document Sha256"
         }
       },
       "required": [
         "type",
         "document",
-        "evidence"
+        "evidence",
+        "locator"
       ],
       "title": "RuleSource",
       "type": "object"
@@ -56,13 +305,1110 @@
       ],
       "title": "RuleStatus",
       "type": "string"
+    },
+    "RuleTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "text_part": {
+          "default": "whole",
+          "enum": [
+            "whole",
+            "label",
+            "value"
+          ],
+          "title": "Text Part",
+          "type": "string"
+        },
+        "paragraph_position": {
+          "default": "all",
+          "enum": [
+            "all",
+            "first",
+            "following"
+          ],
+          "title": "Paragraph Position",
+          "type": "string"
+        },
+        "metadata_field": {
+          "anyOf": [
+            {
+              "enum": [
+                "college",
+                "major",
+                "name",
+                "student_id",
+                "advisor",
+                "date"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Metadata Field"
+        }
+      },
+      "title": "RuleTarget",
+      "type": "object"
+    },
+    "TextValue": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "text",
+          "default": "text",
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "title": "TextValue",
+      "type": "object"
     }
   },
   "additionalProperties": false,
-  "description": "A versioned formatting requirement with evidence and a validator.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "page.width_mm"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "exclusiveMinimum": 0
+              },
+              "unit": {
+                "const": "mm"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "page.height_mm"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "exclusiveMinimum": 0
+              },
+              "unit": {
+                "const": "mm"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "page.margin_top_mm"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "minimum": 0
+              },
+              "unit": {
+                "const": "mm"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "page.margin_bottom_mm"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "minimum": 0
+              },
+              "unit": {
+                "const": "mm"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "page.margin_left_mm"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "minimum": 0
+              },
+              "unit": {
+                "const": "mm"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "page.margin_right_mm"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "minimum": 0
+              },
+              "unit": {
+                "const": "mm"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "page.number_format"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "text"
+              },
+              "value": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "page.number_start"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "minimum": 0,
+                "multipleOf": 1
+              },
+              "unit": {
+                "const": "count"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "page.number_visible"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "boolean"
+              },
+              "value": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "run.font_east_asia"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "text"
+              },
+              "value": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "run.font_latin"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "text"
+              },
+              "value": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "run.font_high_ansi"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "text"
+              },
+              "value": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "run.size_pt"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "exclusiveMinimum": 0
+              },
+              "unit": {
+                "const": "pt"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "run.bold"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "boolean"
+              },
+              "value": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "run.italic"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "boolean"
+              },
+              "value": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "paragraph.alignment"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "text"
+              },
+              "value": {
+                "enum": [
+                  "left",
+                  "right",
+                  "center",
+                  "both",
+                  "distribute",
+                  "start",
+                  "end"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "paragraph.line_spacing"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "line_spacing"
+              },
+              "value": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "paragraph.space_before_pt"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "minimum": 0
+              },
+              "unit": {
+                "const": "pt"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "paragraph.space_after_pt"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "minimum": 0
+              },
+              "unit": {
+                "const": "pt"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "paragraph.first_line_indent_pt"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {},
+              "unit": {
+                "const": "pt"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "paragraph.first_line_indent_chars"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {},
+              "unit": {
+                "const": "chars"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "paragraph.hanging_indent_chars"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "minimum": 0
+              },
+              "unit": {
+                "const": "chars"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "paragraph.left_indent_pt"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {},
+              "unit": {
+                "const": "pt"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "paragraph.right_indent_pt"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {},
+              "unit": {
+                "const": "pt"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "paragraph.outline_level"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "maximum": 9,
+                "minimum": 0,
+                "multipleOf": 1
+              },
+              "unit": {
+                "const": "level"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "paragraph.keep_with_next"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "boolean"
+              },
+              "value": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "paragraph.page_break_before"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "boolean"
+              },
+              "value": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "table.top_pt"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "minimum": 0
+              },
+              "unit": {
+                "const": "pt"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "table.header_separator_pt"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "minimum": 0
+              },
+              "unit": {
+                "const": "pt"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "table.bottom_pt"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "minimum": 0
+              },
+              "unit": {
+                "const": "pt"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "table.vertical_borders_present"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "boolean"
+              },
+              "value": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "table.repeat_header"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "boolean"
+              },
+              "value": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "content.character_count"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "minimum": 0,
+                "multipleOf": 1
+              },
+              "unit": {
+                "const": "count"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "content.keyword_count"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "number"
+              },
+              "value": {
+                "minimum": 0,
+                "multipleOf": 1
+              },
+              "unit": {
+                "const": "count"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "property_path": {
+            "const": "content.separator"
+          }
+        },
+        "required": [
+          "property_path"
+        ]
+      },
+      "then": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "const": "text"
+              },
+              "value": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "confirmed"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "confirmation": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "confirmation"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "provisional",
+              "needs_review"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "auto_fixable": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "expected_value": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "text",
+                  "boolean"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "comparison": {
+            "const": "eq"
+          },
+          "tolerance": {
+            "const": 0
+          }
+        }
+      }
+    }
+  ],
+  "description": "One property, one canonical unit, with evidence and explicit confirmation.",
   "properties": {
     "schema_version": {
-      "default": "1.0",
+      "const": "2.0",
+      "default": "2.0",
       "title": "Schema Version",
       "type": "string"
     },
@@ -77,17 +1423,87 @@
       "type": "string"
     },
     "scope": {
-      "minLength": 1,
-      "title": "Scope",
-      "type": "string"
+      "$ref": "#/$defs/RuleScope"
+    },
+    "target": {
+      "$ref": "#/$defs/RuleTarget"
     },
     "property_path": {
-      "minLength": 1,
-      "title": "Property Path",
-      "type": "string"
+      "$ref": "#/$defs/PropertyPath"
     },
     "expected_value": {
+      "discriminator": {
+        "mapping": {
+          "boolean": "#/$defs/BooleanValue",
+          "line_spacing": {
+            "discriminator": {
+              "mapping": {
+                "at_least": "#/$defs/FixedSpacing",
+                "exact": "#/$defs/FixedSpacing",
+                "multiple": "#/$defs/MultipleSpacing"
+              },
+              "propertyName": "mode"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/MultipleSpacing"
+              },
+              {
+                "$ref": "#/$defs/FixedSpacing"
+              }
+            ]
+          },
+          "number": "#/$defs/NumberValue",
+          "text": "#/$defs/TextValue"
+        },
+        "propertyName": "kind"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NumberValue"
+        },
+        {
+          "$ref": "#/$defs/TextValue"
+        },
+        {
+          "$ref": "#/$defs/BooleanValue"
+        },
+        {
+          "discriminator": {
+            "mapping": {
+              "at_least": "#/$defs/FixedSpacing",
+              "exact": "#/$defs/FixedSpacing",
+              "multiple": "#/$defs/MultipleSpacing"
+            },
+            "propertyName": "mode"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MultipleSpacing"
+            },
+            {
+              "$ref": "#/$defs/FixedSpacing"
+            }
+          ]
+        }
+      ],
       "title": "Expected Value"
+    },
+    "comparison": {
+      "default": "eq",
+      "enum": [
+        "eq",
+        "gte",
+        "lte"
+      ],
+      "title": "Comparison",
+      "type": "string"
+    },
+    "tolerance": {
+      "default": 0.0,
+      "minimum": 0,
+      "title": "Tolerance",
+      "type": "number"
     },
     "status": {
       "$ref": "#/$defs/RuleStatus"
@@ -100,6 +1516,29 @@
     },
     "source": {
       "$ref": "#/$defs/RuleSource"
+    },
+    "confirmation": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RuleConfirmation"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "display_alias": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Display Alias"
     },
     "implementation": {
       "minLength": 1,

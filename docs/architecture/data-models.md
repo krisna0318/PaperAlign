@@ -8,6 +8,8 @@ DOCX 中可定位的内容单元。保存原始顺序、语义角色、判定来
 
 版本化格式要求。每条规则必须包含适用范围、期望值、证据、实现器和验证器。
 
+M2.2 已升级为 2.0：原子期望值带 kind 和规范单位，scope/property_path 为登记枚举；confirmed 需要人工确认记录。迁移方式和状态边界见 [规则契约 2.0](rule-contract-v2.md)。RuleObservation 保存实际值及来源；RuleValidationResult 将规则证据不足与解析未支持分别表达。
+
 ## DiagnosisIssue
 
 内容块与规则之间的可追溯差异。问题可以是错误、警告或信息，也可以明确标记为未评估。

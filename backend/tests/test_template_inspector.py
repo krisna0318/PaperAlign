@@ -42,6 +42,36 @@ def test_template_evidence_does_not_copy_document_text(tmp_path: Path) -> None:
     assert "样本" not in payload
 
 
+def test_resolves_effective_format_cascade_and_sources(tmp_path: Path) -> None:
+    input_path = create_synthetic_docx(
+        tmp_path / "cascade.docx",
+        include_style_cascade=True,
+    )
+
+    report = inspect_template(input_path).report
+    paragraph = report.effective_formats[2]
+
+    assert paragraph.paragraph_style_id == "Derived"
+    assert paragraph.paragraph.alignment == "center"
+    assert paragraph.paragraph.line_value == 360
+    assert paragraph.paragraph.sources["alignment"] == "paragraph_style:Derived"
+    assert paragraph.paragraph.sources["line_value"] == "doc_defaults"
+
+    first_run = paragraph.runs[0].properties
+    assert first_run.font_east_asia == "黑体"
+    assert first_run.font_latin == "Arial"
+    assert first_run.size_pt == 14
+    assert first_run.bold is True
+    assert first_run.italic is True
+    assert first_run.sources["font_east_asia"] == "paragraph_style:Base"
+    assert first_run.sources["font_latin"] == "character_style:Emphasis"
+    assert first_run.sources["size_pt"] == "paragraph_style:Derived"
+
+    second_run = paragraph.runs[1].properties
+    assert second_run.size_pt == 15
+    assert second_run.sources["size_pt"] == "direct_run"
+
+
 def test_template_evidence_artifacts_are_deterministic(tmp_path: Path) -> None:
     input_path = create_synthetic_docx(
         tmp_path / "template.docx",
