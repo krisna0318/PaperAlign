@@ -2,7 +2,7 @@
 
 ## Current state
 
-- Current milestone: M4.2 human Gold Set and evaluation runner implemented (application 0.10.0). Full M2 normative confirmation and M3/M4 human review of real ambiguity remain ongoing acceptance work.
+- Current milestone: M4.3 conservative Hybrid semantic adjudication implemented (application 0.11.0). Full M2 normative confirmation and M3/M4 human review of real ambiguity remain ongoing acceptance work.
 - Implemented: repository scaffold, safe DOCX package inspection, OOXML document profile, protected-content fingerprint, unsupported-object report, deterministic CLI artifacts, tests, and CI.
 - Live DeepSeek proposals are verified; automatic Hybrid adjudication, diagnostic upload UI, deterministic formatting, and final Word validation are not implemented. Full school compliance is not available while 244 rules remain provisional.
 - M2.0 implemented: comment-optional template evidence extraction, paragraph style usage, direct-format clusters, and table border widths with OOXML-to-point conversion.
@@ -19,8 +19,9 @@
 - Live test on 2026-09-21: deepseek-flash, reasoning=none, 11/11 valid responses, 0 failures/abstentions, 15,262 input + 1,165 output = 16,427 tokens, 41,019 ms. Roles: 5 list_item, 1 heading_4, 5 table_caption. p-0123 (0.57) disagrees with prior qualitative review; 3 null scopes and 4 confidence scores below 0.70 need review. No model output was applied to the DOCX. Original source hash unchanged. Local result: .paperalign/m4-review/runs/2026-09-21-deepseek-live/ai_review_run.json. Earlier one-packet connectivity probe used 1,507 tokens (17,934 known successful tokens for the session).
 - Local .env stays AI_MODE=off; this authorized test temporarily set ambiguous_only in the process environment. Optional blank configuration values now fall back to defaults. Never print .env or secret values.
 - M4.2: prepare-gold-set creates a no-manuscript-text template for every plan target, including manual-only items; evaluate-ai-review validates plan/run/Gold Set identity and reports Rules-only versus model proposal coverage, role and scope metrics, disagreements, Token and latency. Only confirmed human labels count. Real no-label smoke result is 0/28 evaluated and all accuracy fields remain unassessed. Local template: .paperalign/m4-review/gold-set-v1; baseline: .paperalign/m4-review/evaluations/2026-09-21-no-label-baseline.
+- M4.3: adjudicate-review consumes plan plus model run and writes a separate HybridReview. Policy v1 requires resolved rules/model role and scope agreement plus model confidence >= configured threshold; unique role scopes may be deterministically derived. Any conflict, missing proposal, low confidence, unknown, abstention or manual-only target routes to human review. Real threshold 0.90 run: 5 semantic auto-accept, 23 manual; policy remains provisional_not_accuracy_validated and formatting_allowed=false. Local result: .paperalign/m4-review/hybrid/2026-09-21-policy-v1.
 - Real runs before final full regression: thesis 785 blocks, 28 priority review roots / 179 including inherited table-cell review; template 392 blocks, 9 review roots. Thesis located checks: 2 pass, 2 fail, 4379 evidence_insufficient. These are check occurrences, not unique-rule coverage or accuracy.
-- Latest verification (2026-09-21): 132 backend tests, strict mypy (61 source files), Ruff, schema check, Python dependency check, frontend typecheck, 1 frontend test, production build and npm audit passed; audit found 0 vulnerabilities. Documentation diff and secret scan passed. Two third-party deprecation warnings remain nonblocking.
+- Latest verification after M4.3 (2026-09-21): 136 backend tests, strict mypy (63 source files), Ruff, schema check and diff check passed. Frontend was unchanged except version metadata; the preceding M4.2 typecheck, test, production build and npm audit passed with 0 vulnerabilities. Two third-party deprecation warnings remain nonblocking.
 - M3 implementation follows pushed M2 commit 7406931; use `git log -1 --oneline` for the current delivery commit.
 
 ## Product decisions that must survive context changes
@@ -39,7 +40,7 @@
 
 ## Next implementation target
 
-Complete the real 28-target Gold Set with independent human review, then add M4.3 Hybrid adjudication. DeepSeek connectivity is already verified; do not repeat paid calls just to rediscover this. Prioritize list-versus-heading disagreements and missing scopes. Keep M2 rule confirmation as a separate gate before any consequential formatting:
+Next module is M5 read-only diagnostic UI. The real 28-target Gold Set still needs independent human review before any Hybrid threshold can be accepted. DeepSeek connectivity is already verified; do not repeat paid calls just to rediscover this. Keep M2 rule confirmation as a separate gate before consequential formatting:
 
 ```text
 official template evidence
@@ -52,7 +53,8 @@ official template evidence
   → M4.0 bounded local model packets and response validation (implemented)
   → M4.1 provider calls, metrics and rules-only fallback (implemented; DeepSeek live test complete)
   → M4.2 Gold Set template and evaluation runner (implemented; human labels pending)
-  → M4.3 Hybrid adjudication and three-mode evaluation
+  → M4.3 Hybrid adjudication and optional third evaluation system (implemented; policy calibration pending)
+  → M5 read-only diagnostic UI
 ```
 
 Planning references:
@@ -70,6 +72,7 @@ Planning references:
 - `docs/reports/m41-cloud-provider-report.md`
 - `docs/reports/m41-deepseek-live-test.md`
 - `docs/reports/m42-gold-set-report.md`
+- `docs/reports/m43-hybrid-report.md`
 - `docs/README.md`
 
 Do not re-ask the template scope or expand college-specific templates. Remaining atomic confirmation and page-layout ambiguities can be requested when needed for consequential validation or formatting, not as a blanket blocker on read-only development.

@@ -15,6 +15,7 @@ from app.services.ai_runner import load_ai_review_plan, write_ai_review_run
 from app.services.analyzer import analyze_docx, write_artifacts
 from app.services.evaluation import write_evaluation_report, write_gold_set_template
 from app.services.format_audit import write_format_audit
+from app.services.hybrid import write_hybrid_review
 from app.services.profile_service import export_profile, verify_template_samples
 from app.services.structure_service import write_structure_review
 from app.services.template_inspector import inspect_template, write_template_artifacts
@@ -111,19 +112,43 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate.add_argument("plan", type=Path)
     evaluate.add_argument("gold_set", type=Path)
     evaluate.add_argument("run", type=Path)
+    evaluate.add_argument("--hybrid", type=Path, help="optional hybrid_review.json")
     evaluate.add_argument("--out", type=Path, required=True, help="directory under .paperalign")
+    adjudicate = subparsers.add_parser(
+        "adjudicate-review",
+        help="combine rules and model proposals with a conservative review policy",
+    )
+    adjudicate.add_argument("plan", type=Path)
+    adjudicate.add_argument("run", type=Path)
+    adjudicate.add_argument("--out", type=Path, required=True, help="directory under .paperalign")
+    adjudicate.add_argument("--confidence-threshold", type=float, default=0.9)
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
+        if args.command == "adjudicate-review":
+            review = write_hybrid_review(
+                args.plan,
+                args.run,
+                args.out,
+                confidence_threshold=args.confidence_threshold,
+            )
+            print(
+                f"Hybrid review: {review.auto_accept_count} accepted, "
+                f"{review.manual_review_count} manual"
+            )
+            print("Semantic proposals only; formatting_allowed=false")
+            print(f"Result: {args.out.resolve() / 'hybrid_review.json'}")
+            return 0
         if args.command == "evaluate-ai-review":
             report = write_evaluation_report(
                 args.plan,
                 args.gold_set,
                 args.run,
                 args.out,
+                hybrid_path=args.hybrid,
             )
             print(
                 f"Evaluation {report.status}: {report.evaluated_count}/{report.target_count} "

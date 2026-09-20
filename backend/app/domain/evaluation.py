@@ -51,7 +51,7 @@ class GoldSet(ContractModel):
 
 
 class SystemEvaluation(ContractModel):
-    system: Literal["rules_only", "model_proposal"]
+    system: Literal["rules_only", "model_proposal", "hybrid"]
     evaluated_count: int = Field(ge=0)
     prediction_count: int = Field(ge=0)
     correct_role_count: int = Field(ge=0)
@@ -83,4 +83,4 @@ class EvaluationReport(ContractModel):
     evaluated_count: int = Field(ge=0)
     unassessed_count: int = Field(ge=0)
     formatting_allowed: Literal[False] = False
-    systems: list[SystemEvaluation] = Field(min_length=2, max_length=2)
+    systems: list[SystemEvaluation] = Field(min_length=2, max_length=3)

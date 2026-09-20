@@ -15,6 +15,7 @@ from app.domain.evaluation import (
     GoldSet,
     SystemEvaluation,
 )
+from app.domain.hybrid import HybridReview
 from app.domain.rules import RuleScope
 from app.parsers.errors import DocxAnalysisError
 from app.services.ai_review import validate_ai_proposal
@@ -109,6 +110,16 @@ def load_ai_review_run(path: Path) -> AiReviewRun:
         raise DocxAnalysisError("invalid_ai_run", "Could not load AI review run") from exc
 
 
+def load_hybrid_review(path: Path) -> HybridReview:
+    path = _require_private(path, "Hybrid review results must stay under .paperalign")
+    try:
+        if path.stat().st_size > 10_000_000:
+            raise DocxAnalysisError("invalid_hybrid_review", "Hybrid review exceeds 10 MB")
+        return HybridReview.model_validate_json(path.read_text(encoding="utf-8"))
+    except (OSError, ValidationError) as exc:
+        raise DocxAnalysisError("invalid_hybrid_review", "Could not load Hybrid review") from exc
+
+
 def _validate_inputs(plan: AiReviewPlan, gold_set: GoldSet, run: AiReviewRun) -> None:
     identity = (plan.input_sha256, plan.content_fingerprint)
     if (gold_set.input_sha256, gold_set.content_fingerprint) != identity:
@@ -145,7 +156,7 @@ def _safe_ratio(numerator: int, denominator: int) -> float | None:
 
 
 def _evaluate_system(
-    system: Literal["rules_only", "model_proposal"],
+    system: Literal["rules_only", "model_proposal", "hybrid"],
     annotations: list[GoldAnnotation],
     predictions: dict[str, Prediction],
     *,
@@ -206,6 +217,7 @@ def evaluate_review(
     run: AiReviewRun,
     *,
     gold_set_sha256: str,
+    hybrid_review: HybridReview | None = None,
 ) -> EvaluationReport:
     _validate_inputs(plan, gold_set, run)
     confirmed = [item for item in gold_set.annotations if item.status == "confirmed"]
@@ -239,6 +251,40 @@ def evaluate_review(
             elapsed_ms=run.elapsed_ms,
         ),
     ]
+    if hybrid_review is not None:
+        if (
+            hybrid_review.input_sha256 != plan.input_sha256
+            or hybrid_review.content_fingerprint != plan.content_fingerprint
+            or hybrid_review.plan_mode != plan.mode
+            or hybrid_review.model_provider != run.provider
+            or hybrid_review.model != run.model
+        ):
+            raise DocxAnalysisError(
+                "stale_hybrid_review", "Hybrid review does not match plan and model run"
+            )
+        expected_hashes = {item.block_id: item.text_sha256 for item in gold_set.annotations}
+        hybrid_hashes = {item.block_id: item.text_sha256 for item in hybrid_review.decisions}
+        if hybrid_hashes != expected_hashes:
+            raise DocxAnalysisError(
+                "stale_hybrid_review", "Hybrid review targets or hashes changed"
+            )
+        hybrid_predictions = {
+            item.block_id: Prediction(
+                role=item.selected_role,
+                scope=item.selected_scope,
+                abstained=item.outcome != "auto_accept",
+            )
+            for item in hybrid_review.decisions
+        }
+        systems.append(
+            _evaluate_system(
+                "hybrid",
+                confirmed,
+                hybrid_predictions,
+                total_tokens=run.total_tokens,
+                elapsed_ms=run.elapsed_ms,
+            )
+        )
     status: Literal["no_confirmed_labels", "partial_gold_set", "complete_gold_set"] = (
         "no_confirmed_labels"
         if not confirmed
@@ -289,13 +335,21 @@ def write_evaluation_report(
     gold_set_path: Path,
     run_path: Path,
     output_dir: Path,
+    hybrid_path: Path | None = None,
 ) -> EvaluationReport:
     output_dir = _require_private(output_dir, "Evaluation results must stay under .paperalign")
     plan = load_ai_review_plan(plan_path)
     gold_set = load_gold_set(gold_set_path)
     run = load_ai_review_run(run_path)
+    hybrid_review = load_hybrid_review(hybrid_path) if hybrid_path is not None else None
     gold_sha = hashlib.sha256(gold_set_path.read_bytes()).hexdigest()
-    report = evaluate_review(plan, gold_set, run, gold_set_sha256=gold_sha)
+    report = evaluate_review(
+        plan,
+        gold_set,
+        run,
+        gold_set_sha256=gold_sha,
+        hybrid_review=hybrid_review,
+    )
     output_dir.mkdir(parents=True, exist_ok=True)
     _write_text(output_dir / "evaluation_report.json", report.model_dump_json(indent=2) + "\n")
     _write_text(output_dir / "evaluation_summary.md", render_evaluation_summary(report))

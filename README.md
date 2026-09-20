@@ -2,7 +2,7 @@
 
 PaperAlign 是一个面向学术论文的可解释格式诊断与安全排版工具。
 
-当前阶段是 **M4.2：人工 Gold Set 与模型评测**。系统可以只读分析 DOCX、定位论文结构、生成最终人工复核步骤，并为歧义项准备最多 3 段、每段最多 240 字的自适应上下文。云端模型只能提出受 Schema 约束的建议；当前仍不会修改或排版 DOCX。
+当前阶段是 **M4.3：保守 Hybrid 语义裁决**。系统可以只读分析 DOCX、定位论文结构、生成最终人工复核步骤，并为歧义项准备最多 3 段、每段最多 240 字的自适应上下文。云端模型只能提出受 Schema 约束的建议；当前仍不会修改或排版 DOCX。
 
 2026-09-21 已完成 DeepSeek 实际联调：11 个审查包全部返回有效建议，使用 16,427 Token；发现 1 个与前次定性复核有分歧的低置信标题候选，尚未进行人工准确率验收。见 [本次测试报告](docs/reports/m41-deepseek-live-test.md)。
 
@@ -49,7 +49,7 @@ py -3.13 -m venv .venv
 打开 `http://127.0.0.1:8000/health`，应返回：
 
 ```json
-{"status":"ok","service":"paperalign-api","version":"0.10.0","stage":"M4.2"}
+{"status":"ok","service":"paperalign-api","version":"0.11.0","stage":"M4.3"}
 ```
 
 ## DOCX 只读分析
@@ -201,6 +201,18 @@ DeepSeek 适配器调用其原生、无服务端会话状态的 Responses 接口
 
 评测会校验输入哈希、文本哈希、角色与范围、证据引用以及运行身份，分别报告 Rules-only 和模型建议的覆盖、角色/范围准确率、分歧、Token 与耗时。模型建议不能反向生成 Gold Set。详见 [M4.2 报告](docs/reports/m42-gold-set-report.md)。
 
+## Hybrid 语义裁决（M4.3）
+
+```powershell
+.\.venv\Scripts\python.exe -m paperalign adjudicate-review `
+  .\.paperalign\m4-review\thesis-hybrid\ai_review_plan.json `
+  .\.paperalign\m4-review\runs\2026-09-21-deepseek-live\ai_review_run.json `
+  --out .\.paperalign\m4-review\hybrid\policy-v1 `
+  --confidence-threshold 0.9
+```
+
+规则和模型必须在角色与范围上完全一致，模型未弃权且达到阈值，系统才会自动接受语义；其余结果进入人工复核。唯一范围可由角色确定性补全，例如 `list_item → body`。策略状态始终记录为尚未通过 Gold Set 校准，输出也固定 `formatting_allowed=false`。实现说明见 [M4.3 报告](docs/reports/m43-hybrid-report.md)。
+
 ## 前端启动
 
 ```powershell
@@ -244,7 +256,7 @@ npm run build
 2. M1：DOCX 只读画像、内容指纹、不支持对象报告（已完成）；
 3. M2：华农规则 Profile（核心配置已完成，规则确认持续进行）；
 4. M3：Rules-only 结构识别（核心流程已完成）；
-5. M4：Prompt-only 与 Hybrid 对照（M4.2 Gold Set 与评测运行器已完成，真实人工标注待完成）；
+5. M4：Prompt-only 与 Hybrid 对照（M4.3 Hybrid 裁决已完成，真实人工标注和策略校准待完成）；
 6. M5–M7：诊断界面、安全排版与 Word 最终验证。
 
 ## License

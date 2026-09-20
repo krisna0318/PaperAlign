@@ -6,6 +6,7 @@ from jsonschema import Draft202012Validator
 from app.domain.ai_review import AiReviewProposal, AiReviewRun, AiUsage
 from app.domain.enums import SemanticRole
 from app.domain.evaluation import EvaluationReport, GoldSet
+from app.domain.hybrid import HybridDecision, HybridReview
 from app.domain.rules import RuleScope
 from app.parsers.errors import DocxAnalysisError
 from app.services.ai_review import prepare_ai_review, write_ai_review_plan
@@ -121,6 +122,47 @@ def test_no_labels_produces_no_accuracy_claim(tmp_path: Path) -> None:
     assert report.status == "no_confirmed_labels"
     assert report.evaluated_count == 0 and report.unassessed_count == 1
     assert all(item.role_accuracy is None for item in report.systems)
+
+
+def test_evaluation_optionally_includes_hybrid_results(tmp_path: Path) -> None:
+    plan, gold_set, run = _confirmed_gold_and_run(tmp_path)
+    annotation = gold_set.annotations[0]
+    hybrid = HybridReview(
+        input_sha256=plan.input_sha256,
+        content_fingerprint=plan.content_fingerprint,
+        plan_mode=plan.mode,
+        model_provider=run.provider,
+        model=run.model,
+        confidence_threshold=0.9,
+        target_count=1,
+        auto_accept_count=1,
+        manual_review_count=0,
+        decisions=[
+            HybridDecision(
+                block_id=annotation.block_id,
+                text_sha256=annotation.text_sha256,
+                outcome="auto_accept",
+                selected_role=SemanticRole.LIST_ITEM,
+                selected_scope=RuleScope.BODY,
+                rules_role=SemanticRole.LIST_ITEM,
+                rules_scope=RuleScope.BODY,
+                model_role=SemanticRole.LIST_ITEM,
+                model_scope=RuleScope.BODY,
+                model_confidence=0.95,
+                reasons=["rules_and_model_agree"],
+            )
+        ],
+    )
+    report = evaluate_review(
+        plan,
+        gold_set,
+        run,
+        gold_set_sha256="c" * 64,
+        hybrid_review=hybrid,
+    )
+    assert len(report.systems) == 3
+    assert report.systems[2].system == "hybrid"
+    assert report.systems[2].role_accuracy == 1
 
 
 def test_stale_or_incompatible_gold_set_is_rejected(tmp_path: Path) -> None:

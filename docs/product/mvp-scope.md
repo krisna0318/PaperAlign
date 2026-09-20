@@ -24,7 +24,7 @@
 2. M1：DOCX 只读画像；
 3. M2：华农规则 Profile（核心配置已完成，确认与验证持续进行）；
 4. M3：Rules-only 结构识别（核心流程已完成）；
-5. M4：Prompt-only 与 Hybrid 基线（M4.2 Gold Set 与评测运行器完成，真实人工标注待完成）；
+5. M4：Prompt-only 与 Hybrid 基线（M4.3 Hybrid 裁决完成，真实人工标注和策略校准待完成）；
 6. M5：只读诊断 UI；
 7. M6：确定性排版；
 8. M7：Word 完成与验证。

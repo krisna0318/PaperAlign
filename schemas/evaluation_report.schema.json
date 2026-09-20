@@ -6,7 +6,8 @@
         "system": {
           "enum": [
             "rules_only",
-            "model_proposal"
+            "model_proposal",
+            "hybrid"
           ],
           "title": "System",
           "type": "string"
@@ -241,7 +242,7 @@
       "items": {
         "$ref": "#/$defs/SystemEvaluation"
       },
-      "maxItems": 2,
+      "maxItems": 3,
       "minItems": 2,
       "title": "Systems",
       "type": "array"
