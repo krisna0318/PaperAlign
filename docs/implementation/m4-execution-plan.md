@@ -1,6 +1,6 @@
 # M4 执行方案：受控 AI 建议与三模式对照
 
-更新：2026-09-21。状态：M4.3 保守 Hybrid 裁决与三系统评测接口已完成；真实人工标注和策略校准待执行。见 [联调报告](../reports/m41-deepseek-live-test.md)、[M4.2 报告](../reports/m42-gold-set-report.md) 和 [M4.3 报告](../reports/m43-hybrid-report.md)。
+更新：2026-09-21。状态：M4.4 工程收口已完成；真实人工标注和策略校准仍是发布门槛。见 [联调报告](../reports/m41-deepseek-live-test.md)、[M4.2 报告](../reports/m42-gold-set-report.md)、[M4.3 报告](../reports/m43-hybrid-report.md) 和 [M4.4 收口报告](../reports/m44-evaluation-closeout.md)。
 
 ## 目标
 
@@ -12,7 +12,7 @@ AI 只对结构歧义提出建议，不直接修改 DOCX，也不把置信度包
 2. M4.1：接入 DeepSeek 与 OpenAI Responses Provider。配置超时、重试和可选价格参数；不在日志记录论文正文、原始响应或 API Key。真正发送前同时要求环境开关和 `--confirm-send-cloud`。
 3. M4.2：建立人工 Gold Set 和评测运行器（运行器已完成，真实标注待完成）。JSON、哈希、角色范围及证据校验已并入 M4.1；本阶段用人工判断形成独立标签，先比较 Rules-only 和模型建议，输出覆盖率、准确率、Precision/Recall/F1、弃权、人工复核量、耗时与 Token；未标注对象记为“未评估”。
 4. M4.3：实现 Hybrid 裁决并加入同一评测（已完成，阈值校准待真实标签）。规则与模型一致且满足阈值时可减少语义复核；冲突、低置信、缺少范围、越权、过期或无证据输出交给人工。
-5. M4.4：完成三模式验收与结论报告，明确可自动处理、必须复核和未评估的范围，再衔接 M5 诊断界面。
+5. M4.4：完成三模式工程验收与结论报告（已完成）。因真实人工标签为 0，准确率相关结论保持“未评估”；Gold Set 校准作为发布门槛，不阻塞只读 UI 和受限格式化引擎开发。
 
 以上编号统一了旧计划与 CONTEXT 的分歧；已实现的 JSON 校验归入 M4.1，下一阶段统一称为 M4.2 Gold Set 评测。
 
