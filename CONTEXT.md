@@ -2,9 +2,9 @@
 
 ## Current state
 
-- Current milestone: M6 deterministic safe formatting completed for the only four confirmed auto-fixable rules (application 0.13.0). Accuracy remains unassessed because the real Gold Set has zero human-confirmed labels; the other 244 rules remain diagnostic-only.
+- Current milestone: M7 delivery validation completed (application 0.14.0). The MVP engineering loop is closed, but accuracy remains unassessed because the real Gold Set has zero human-confirmed labels; 244 rules remain diagnostic-only.
 - Implemented: repository scaffold, safe DOCX package inspection, OOXML document profile, protected-content fingerprint, unsupported-object report, deterministic CLI artifacts, tests, and CI.
-- Live DeepSeek proposals, conservative Hybrid adjudication, local diagnosis and the confirmed abbreviation-table formatter are implemented. Final Word validation is not. Full school compliance is not available while 244 rules remain provisional.
+- Live DeepSeek proposals, conservative Hybrid adjudication, local diagnosis, the confirmed abbreviation-table formatter, static delivery gate and optional Word renderer are implemented. Full school compliance is not available while 244 rules remain provisional.
 - M2.0 implemented: comment-optional template evidence extraction, paragraph style usage, direct-format clusters, and table border widths with OOXML-to-point conversion.
 - M2.1 implemented: document defaults, base/derived paragraph styles, character styles and direct formatting are merged into property-level effective values with provenance.
 - M2.1 audit: `audit-template --include-preview` writes HTML and short previews only under ignored `.paperalign`. Real Word 16.0 check: 13 paragraphs, 92 matching properties; source SHA unchanged. This is not human visual sign-off. Browser tool denied file:// page inspection; do not claim UI visual verification.
@@ -23,6 +23,8 @@
 - M4.4: the three-system engineering path is closed out. With 0/28 human labels, all accuracy metrics correctly remain unassessed. M5/M6 engineering may continue, but Hybrid output cannot authorize formatting until independent labels calibrate the policy.
 - M5: POST /api/jobs accepts a raw DOCX body (50 MB cap), creates an isolated local task, runs Rules-only structure analysis and persists hash-bound results; GET /api/jobs/{id} reloads the task. The UI displays bounded 20-character review previews, counts, warnings and at most 100 prioritized issue summaries. It never formats, calls AI or claims full compliance.
 - M6: only four confirmed abbreviation-table border rules are auto-fixable. A deterministic adapter requires the complete approved rule group and an unambiguous abbreviation_table target, rejects blocking objects and existing outputs, writes a new DOCX, then re-parses it and requires the protected content fingerprint to remain identical. CLI, task API, download endpoint and UI confirmation are separate adapters over the same core.
+- M7: delivery validation rechecks original/output hashes, protected content fingerprint, package safety, formatting report identity and every applied rule. Optional PowerShell Word automation opens read-only, repaginates and exports PDF; manual visual validation always remains required. On this host Word COM returned COMException and neither WINWORD.EXE nor soffice.exe was found, so the verified behavior is safe unavailable fallback, not a visual pass.
+- Latest verification after M7 (2026-09-21): 148 backend tests, Ruff, strict mypy (72 source files), schema synchronization, frontend typecheck, Vitest and production build passed. Browser smoke at 1280x720 showed M7 health, upload UI, no horizontal overflow and no console warnings/errors. Browser file-chooser automation could not attach the local synthetic file, so post-upload UI remains a user acceptance item; API integration covers the same backend workflow.
 - Real runs before final full regression: thesis 785 blocks, 28 priority review roots / 179 including inherited table-cell review; template 392 blocks, 9 review roots. Thesis located checks: 2 pass, 2 fail, 4379 evidence_insufficient. These are check occurrences, not unique-rule coverage or accuracy.
 - Latest verification after M5 (2026-09-21): 139 backend tests, strict mypy (63 source files), Ruff, frontend typecheck, Vitest and production build passed. Two third-party TestClient deprecation warnings remain nonblocking.
 - M3 implementation follows pushed M2 commit 7406931; use `git log -1 --oneline` for the current delivery commit.
@@ -43,7 +45,7 @@
 
 ## Next implementation target
 
-Next module is M7 Word validation and delivery. The real 28-target Gold Set still needs independent human review before any Hybrid threshold can be accepted. DeepSeek connectivity is already verified; do not repeat paid calls just to rediscover this. Keep M2 rule confirmation as a separate gate before expanding consequential formatting:
+M0-M7 engineering is implemented. Next work is user acceptance using the final checklist, independent Gold Set labeling and confirmation of additional P0 rules before expanding formatting. DeepSeek connectivity is already verified; do not repeat paid calls just to rediscover this:
 
 ```text
 official template evidence
@@ -60,7 +62,7 @@ official template evidence
   → M4.4 three-system engineering closeout (implemented; accuracy unassessed)
   → M5 read-only diagnostic UI (implemented)
   → M6 deterministic safe formatting (implemented for 4 confirmed rules)
-  → M7 Word validation and delivery
+  → M7 Word validation and delivery (implemented; Word unavailable fallback verified)
 ```
 
 Planning references:
@@ -84,6 +86,9 @@ Planning references:
 - `docs/reports/m5-diagnostic-ui-report.md`
 - `docs/implementation/m6-execution-plan.md`
 - `docs/reports/m6-safe-formatting-report.md`
+- `docs/implementation/m7-execution-plan.md`
+- `docs/reports/m7-delivery-report.md`
+- `docs/product/final-acceptance-checklist.md`
 - `docs/README.md`
 
 Do not re-ask the template scope or expand college-specific templates. Remaining atomic confirmation and page-layout ambiguities can be requested when needed for consequential validation or formatting, not as a blanket blocker on read-only development.

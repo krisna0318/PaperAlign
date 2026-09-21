@@ -11,6 +11,7 @@ from app.domain.analysis import (
     UnsupportedObjectsReport,
 )
 from app.domain.blocks import DocumentBlock
+from app.domain.delivery import DeliveryValidationReport
 from app.domain.evaluation import EvaluationReport, GoldSet
 from app.domain.formatting import FormattingPlan, FormattingReport
 from app.domain.hybrid import HybridReview
@@ -24,6 +25,7 @@ from app.domain.structure import StructureOverrides, StructureReport
 from app.domain.template_evidence import TemplateEvidenceReport
 
 SCHEMAS: dict[str, type[BaseModel]] = {
+    "delivery_validation.schema.json": DeliveryValidationReport,
     "formatting_plan.schema.json": FormattingPlan,
     "formatting_report.schema.json": FormattingReport,
     "evaluation_report.schema.json": EvaluationReport,

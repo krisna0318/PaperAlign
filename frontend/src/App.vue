@@ -4,15 +4,22 @@ import { onMounted, ref } from "vue";
 import { getHealth, type HealthResponse } from "./api/health";
 import {
   createDiagnosticJob,
+  artifactDownloadUrl,
   DiagnosticApiError,
   formatDiagnosticJob,
   formattedDownloadUrl,
+  validateDiagnosticJob,
 } from "./api/jobs";
 import DiagnosisSummary from "./components/DiagnosisSummary.vue";
 import FileUploader from "./components/FileUploader.vue";
 import FormatPanel from "./components/FormatPanel.vue";
 import ReviewPanel from "./components/ReviewPanel.vue";
-import type { DiagnosticJobView, FormatJobResult } from "./types/diagnosis";
+import ValidationPanel from "./components/ValidationPanel.vue";
+import type {
+  DeliveryValidationResult,
+  DiagnosticJobView,
+  FormatJobResult,
+} from "./types/diagnosis";
 
 const health = ref<HealthResponse | null>(null);
 const healthError = ref<string | null>(null);
@@ -21,6 +28,8 @@ const error = ref<string | null>(null);
 const result = ref<DiagnosticJobView | null>(null);
 const formatting = ref(false);
 const formatted = ref<FormatJobResult | null>(null);
+const validating = ref(false);
+const validation = ref<DeliveryValidationResult | null>(null);
 
 onMounted(async () => {
   try {
@@ -35,6 +44,7 @@ async function analyze(file: File): Promise<void> {
   error.value = null;
   result.value = null;
   formatted.value = null;
+  validation.value = null;
   try {
     result.value = await createDiagnosticJob(file);
   } catch (caught) {
@@ -53,10 +63,24 @@ async function formatCopy(): Promise<void> {
       result.value.job.id,
       result.value.summary.formatting_rule_ids,
     );
+    validation.value = null;
   } catch (caught) {
     error.value = caught instanceof DiagnosticApiError ? caught.message : "排版失败，请检查任务报告。";
   } finally {
     formatting.value = false;
+  }
+}
+
+async function validateCopy(renderWithWord: boolean): Promise<void> {
+  if (!result.value || !formatted.value) return;
+  validating.value = true;
+  error.value = null;
+  try {
+    validation.value = await validateDiagnosticJob(result.value.job.id, renderWithWord);
+  } catch (caught) {
+    error.value = caught instanceof DiagnosticApiError ? caught.message : "最终验证失败，请检查任务报告。";
+  } finally {
+    validating.value = false;
   }
 }
 </script>
@@ -96,6 +120,14 @@ async function formatCopy(): Promise<void> {
         :formatted="formatted"
         :download-url="formatted ? formattedDownloadUrl(result.job.id) : null"
         @format="formatCopy"
+      />
+      <ValidationPanel
+        v-if="formatted && result"
+        :busy="validating"
+        :validation="validation"
+        :checklist-url="validation ? artifactDownloadUrl(result.job.id, 'delivery_checklist') : null"
+        :pdf-url="validation?.pdf_artifact ? artifactDownloadUrl(result.job.id, 'word_pdf') : null"
+        @validate="validateCopy"
       />
     </main>
 

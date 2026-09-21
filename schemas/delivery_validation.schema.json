@@ -1,0 +1,228 @@
+{
+  "$defs": {
+    "RuleRecheck": {
+      "additionalProperties": false,
+      "properties": {
+        "rule_id": {
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "result_count": {
+          "minimum": 0,
+          "title": "Result Count",
+          "type": "integer"
+        },
+        "pass_count": {
+          "minimum": 0,
+          "title": "Pass Count",
+          "type": "integer"
+        },
+        "fail_count": {
+          "minimum": 0,
+          "title": "Fail Count",
+          "type": "integer"
+        },
+        "unresolved_count": {
+          "minimum": 0,
+          "title": "Unresolved Count",
+          "type": "integer"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "rule_id",
+        "result_count",
+        "pass_count",
+        "fail_count",
+        "unresolved_count",
+        "passed"
+      ],
+      "title": "RuleRecheck",
+      "type": "object"
+    },
+    "WordRenderResult": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "not_requested",
+            "passed",
+            "unavailable",
+            "failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "page_count": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Count"
+        },
+        "pdf_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pdf Sha256"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "note"
+      ],
+      "title": "WordRenderResult",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "validator_version": {
+      "title": "Validator Version",
+      "type": "string"
+    },
+    "job_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Job Id"
+    },
+    "original_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Original Sha256",
+      "type": "string"
+    },
+    "formatted_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Formatted Sha256",
+      "type": "string"
+    },
+    "content_fingerprint_original": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Fingerprint Original",
+      "type": "string"
+    },
+    "content_fingerprint_formatted": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Fingerprint Formatted",
+      "type": "string"
+    },
+    "content_preserved": {
+      "title": "Content Preserved",
+      "type": "boolean"
+    },
+    "package_safe": {
+      "title": "Package Safe",
+      "type": "boolean"
+    },
+    "formatting_report_matches": {
+      "title": "Formatting Report Matches",
+      "type": "boolean"
+    },
+    "rule_rechecks": {
+      "items": {
+        "$ref": "#/$defs/RuleRecheck"
+      },
+      "title": "Rule Rechecks",
+      "type": "array"
+    },
+    "static_status": {
+      "enum": [
+        "passed",
+        "failed"
+      ],
+      "title": "Static Status",
+      "type": "string"
+    },
+    "word_render": {
+      "$ref": "#/$defs/WordRenderResult"
+    },
+    "delivery_ready": {
+      "title": "Delivery Ready",
+      "type": "boolean"
+    },
+    "manual_validation_required": {
+      "const": true,
+      "default": true,
+      "title": "Manual Validation Required",
+      "type": "boolean"
+    },
+    "manual_checklist": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Manual Checklist",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "validator_version",
+    "original_sha256",
+    "formatted_sha256",
+    "content_fingerprint_original",
+    "content_fingerprint_formatted",
+    "content_preserved",
+    "package_safe",
+    "formatting_report_matches",
+    "rule_rechecks",
+    "static_status",
+    "word_render",
+    "delivery_ready",
+    "manual_checklist",
+    "limitations"
+  ],
+  "title": "DeliveryValidationReport",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/delivery_validation.schema.json"
+}

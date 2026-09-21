@@ -1,6 +1,6 @@
 # PaperAlign 文档导航
 
-更新：2026-09-21。当前阶段 M6 已完成确定性安全排版基础设施及首个已确认规则适配器，下一模块是 M7 Word 验证与交付；真实 Gold Set 人工标注仍是验收项。
+更新：2026-09-21。M0—M7 工程链路已闭合；下一步按最终验收清单测试、完成人工 Gold Set，并逐批确认更多 P0 规则。
 
 ## 从这里开始
 
@@ -14,6 +14,8 @@
 | 查看三模式收口边界 | [M4.4 收口报告](reports/m44-evaluation-closeout.md) |
 | 查看本地诊断界面 | [M5 实施报告](reports/m5-diagnostic-ui-report.md) |
 | 查看安全排版边界 | [M6 实施报告](reports/m6-safe-formatting-report.md) |
+| 查看验证与交付结论 | [M7 实施报告](reports/m7-delivery-report.md) |
+| 开始逐项验收 | [最终验收清单](product/final-acceptance-checklist.md) |
 | 了解下一步开发顺序 | [M4 执行方案](implementation/m4-execution-plan.md) |
 | 查看范围与里程碑 | [MVP 范围](product/mvp-scope.md) |
 

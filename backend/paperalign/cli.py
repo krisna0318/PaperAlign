@@ -4,16 +4,20 @@ import argparse
 import sys
 from pathlib import Path
 
+from pydantic import ValidationError
+
 from app import __version__
 from app.ai.deepseek_responses import DeepSeekResponsesProvider
 from app.ai.openai_responses import OpenAIResponsesProvider
 from app.domain.enums import AiMode
+from app.domain.formatting import FormattingReport
 from app.formatting.safe_formatter import ABBREVIATION_RULE_IDS, format_docx
 from app.parsers.errors import DocxAnalysisError
 from app.profiles.loader import ProfileLoadError, check_applicability, load_profile
 from app.services.ai_review import write_ai_review_plan
 from app.services.ai_runner import load_ai_review_plan, write_ai_review_run
 from app.services.analyzer import analyze_docx, write_artifacts
+from app.services.delivery_validation import render_delivery_checklist, validate_delivery
 from app.services.evaluation import write_evaluation_report, write_gold_set_template
 from app.services.format_audit import write_format_audit
 from app.services.hybrid import write_hybrid_review
@@ -139,12 +143,51 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="approve the four confirmed abbreviation-table border rules",
     )
+    validate_copy = subparsers.add_parser(
+        "validate-delivery",
+        help="recheck a formatted copy and create a final manual checklist",
+    )
+    validate_copy.add_argument("original", type=Path)
+    validate_copy.add_argument("formatted", type=Path)
+    validate_copy.add_argument("formatting_report", type=Path)
+    validate_copy.add_argument("--out", type=Path, required=True)
+    validate_copy.add_argument("--render-with-word", action="store_true")
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
+        if args.command == "validate-delivery":
+            try:
+                source_report = FormattingReport.model_validate_json(
+                    args.formatting_report.read_text(encoding="utf-8")
+                )
+            except (OSError, ValidationError) as exc:
+                raise DocxAnalysisError(
+                    "invalid_formatting_report", "Formatting report is invalid or unreadable"
+                ) from exc
+            args.out.mkdir(parents=True, exist_ok=True)
+            pdf_path = args.out / "PaperAlign-word-preview.pdf"
+            delivery_report = validate_delivery(
+                args.original,
+                args.formatted,
+                source_report,
+                render_with_word=args.render_with_word,
+                pdf_path=pdf_path if args.render_with_word else None,
+            )
+            _write_text(
+                args.out / "delivery_validation.json",
+                delivery_report.model_dump_json(indent=2) + "\n",
+            )
+            _write_text(
+                args.out / "delivery_checklist.md",
+                render_delivery_checklist(delivery_report),
+            )
+            print(f"Static validation: {delivery_report.static_status}")
+            print(f"Word render probe: {delivery_report.word_render.status}")
+            print("Manual visual validation remains required")
+            return 0 if delivery_report.delivery_ready else 4
         if args.command == "format-copy":
             if not args.approve_confirmed_abbreviation_table:
                 raise DocxAnalysisError(

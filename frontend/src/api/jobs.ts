@@ -1,4 +1,8 @@
-import type { DiagnosticJobView, FormatJobResult } from "../types/diagnosis";
+import type {
+  DeliveryValidationResult,
+  DiagnosticJobView,
+  FormatJobResult,
+} from "../types/diagnosis";
 
 interface ApiErrorBody {
   detail?: { code?: string; message?: string; job_id?: string | null } | string;
@@ -67,4 +71,24 @@ export async function formatDiagnosticJob(
 
 export function formattedDownloadUrl(jobId: string): string {
   return `/api/jobs/${encodeURIComponent(jobId)}/download`;
+}
+
+export async function validateDiagnosticJob(
+  jobId: string,
+  renderWithWord: boolean,
+): Promise<DeliveryValidationResult> {
+  const response = await fetch(`/api/jobs/${encodeURIComponent(jobId)}/validate`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ render_with_word: renderWithWord }),
+  });
+  if (!response.ok) {
+    await parseResponse(response);
+    throw new DiagnosticApiError("验证请求失败。");
+  }
+  return (await response.json()) as DeliveryValidationResult;
+}
+
+export function artifactDownloadUrl(jobId: string, kind: string): string {
+  return `/api/jobs/${encodeURIComponent(jobId)}/artifacts/${encodeURIComponent(kind)}`;
 }

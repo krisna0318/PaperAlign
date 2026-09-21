@@ -77,3 +77,40 @@ export interface FormatJobResult {
   output_artifact: string;
   report: FormattingReport;
 }
+
+export interface RuleRecheck {
+  rule_id: string;
+  result_count: number;
+  pass_count: number;
+  fail_count: number;
+  unresolved_count: number;
+  passed: boolean;
+}
+
+export interface DeliveryValidationReport {
+  schema_version: "1.0";
+  content_preserved: boolean;
+  package_safe: boolean;
+  formatting_report_matches: boolean;
+  rule_rechecks: RuleRecheck[];
+  static_status: "passed" | "failed";
+  word_render: {
+    status: "not_requested" | "passed" | "unavailable" | "failed";
+    page_count: number | null;
+    pdf_sha256: string | null;
+    error_code: string | null;
+    note: string;
+  };
+  delivery_ready: boolean;
+  manual_validation_required: true;
+  manual_checklist: string[];
+  limitations: string[];
+}
+
+export interface DeliveryValidationResult {
+  schema_version: "1.0";
+  job_id: string;
+  report: DeliveryValidationReport;
+  checklist_artifact: string;
+  pdf_artifact: string | null;
+}

@@ -110,5 +110,15 @@ def test_job_can_generate_and_download_a_content_preserving_copy(tmp_path: Path)
         stored = client.get(f"/api/jobs/{job_id}").json()
         assert stored["job"]["status"] == "completed"
         assert any(item["kind"] == "formatted_docx" for item in stored["job"]["artifacts"])
+
+        validated = client.post(
+            f"/api/jobs/{job_id}/validate", json={"render_with_word": False}
+        )
+        assert validated.status_code == 200
+        assert validated.json()["report"]["static_status"] == "passed"
+        assert validated.json()["report"]["word_render"]["status"] == "not_requested"
+        checklist = client.get(f"/api/jobs/{job_id}/artifacts/delivery_checklist")
+        assert checklist.status_code == 200
+        assert "最终交付检查单" in checklist.text
     finally:
         app.dependency_overrides.clear()

@@ -4,8 +4,10 @@ from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from fastapi.responses import FileResponse
 from starlette.concurrency import run_in_threadpool
 
+from app.domain.delivery import DeliveryValidationRequest, DeliveryValidationResult
 from app.domain.diagnostic_jobs import DiagnosticJobView
 from app.domain.formatting import FormatJobRequest, FormatJobResult
+from app.services.delivery_jobs import resolve_downloadable_artifact, validate_job
 from app.services.diagnostic_jobs import (
     MAX_UPLOAD_BYTES,
     DiagnosticJobError,
@@ -79,6 +81,36 @@ def download_formatted_copy(
             ),
             filename="PaperAlign-formatted.docx",
         )
+    except DiagnosticJobError as exc:
+        _raise_http(exc)
+
+
+@router.post("/{job_id}/validate", response_model=DeliveryValidationResult)
+async def validate_formatted_copy(
+    job_id: str,
+    body: DeliveryValidationRequest,
+    settings: Annotated[Settings, Depends(get_settings)],
+) -> DeliveryValidationResult:
+    try:
+        return await run_in_threadpool(
+            validate_job,
+            settings.data_dir,
+            job_id,
+            render_with_word=body.render_with_word,
+        )
+    except DiagnosticJobError as exc:
+        _raise_http(exc)
+
+
+@router.get("/{job_id}/artifacts/{kind}")
+def download_job_artifact(
+    job_id: str,
+    kind: str,
+    settings: Annotated[Settings, Depends(get_settings)],
+) -> FileResponse:
+    try:
+        path, media_type = resolve_downloadable_artifact(settings.data_dir, job_id, kind)
+        return FileResponse(path, media_type=media_type, filename=path.name)
     except DiagnosticJobError as exc:
         _raise_http(exc)
 
