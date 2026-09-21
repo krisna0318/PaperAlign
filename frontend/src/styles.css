@@ -28,7 +28,7 @@ h1 em { color:var(--green); font-style:normal; }
 .paper-sheet i:nth-child(2) { width:78%; } .paper-sheet i:nth-child(4) { width:62%; }
 .align-line { position:absolute; z-index:2; height:3px; border-radius:3px; background:var(--green); }
 .line-one { top:185px; right:30px; width:180px; } .line-two { top:250px; right:115px; width:210px; background:#9cb660; }
-.upload-card,.result-stack,.review-card { margin-top:26px; border:1px solid var(--line); border-radius:24px; background:var(--paper); box-shadow:0 14px 50px rgba(35,70,54,.05); }
+.upload-card,.result-stack,.review-card,.format-card { margin-top:26px; border:1px solid var(--line); border-radius:24px; background:var(--paper); box-shadow:0 14px 50px rgba(35,70,54,.05); }
 .upload-card { display:grid; grid-template-columns:minmax(210px,.7fr) minmax(340px,1.3fr) auto; gap:28px; align-items:center; padding:28px; }
 h2 { margin-bottom:8px; font-family:Georgia,"Noto Serif SC",serif; font-size:clamp(1.6rem,3vw,2.3rem); font-weight:500; letter-spacing:-.03em; }
 .muted { margin-bottom:0; color:var(--muted); line-height:1.65; }
@@ -59,7 +59,7 @@ h2 { margin-bottom:8px; font-family:Georgia,"Noto Serif SC",serif; font-size:cla
 .trace { margin-top:24px; color:var(--muted); font-size:.8rem; } .trace summary { cursor:pointer; font-weight:650; }
 .trace dl { display:grid; gap:8px; padding:14px; border-radius:12px; background:#f5f7f2; } .trace dl>div { display:grid; grid-template-columns:100px 1fr; gap:12px; }
 .trace dt { font-weight:700; } .trace dd { margin:0; overflow-wrap:anywhere; font-family:ui-monospace,monospace; }
-.review-card { overflow:hidden; margin-bottom:60px; }
+.review-card { overflow:hidden; }
 .tabs { display:flex; padding:12px 18px 0; border-bottom:1px solid var(--line); }
 .tabs button { padding:15px 13px; border:0; border-bottom:2px solid transparent; background:transparent; cursor:pointer; font-weight:700; }
 .tabs button.active { color:var(--green); border-bottom-color:var(--green); }
@@ -77,6 +77,13 @@ blockquote { margin:10px 0; padding-left:12px; border-left:3px solid var(--lime)
 .issue-item p { margin:4px 0; color:var(--muted); font-size:.82rem; } .issue-item small { color:#839089; }
 .empty { padding:24px; border-radius:12px; color:var(--muted); background:#f6f8f4; text-align:center; }
 footer { display:flex; justify-content:space-between; gap:20px; padding:0 0 35px; color:#77837d; font-size:.75rem; }
-@media (max-width:900px) { .hero { grid-template-columns:1fr; } .hero-mark { display:none; } .upload-card { grid-template-columns:1fr; } .inline-error { grid-column:1; margin:-16px 0 0; } .metrics { grid-template-columns:repeat(2,1fr); } }
+.format-card { display:grid; grid-template-columns:1fr 1.15fr auto; gap:24px; align-items:center; margin-bottom:60px; padding:28px; }
+.approval-box { display:flex; gap:12px; align-items:flex-start; padding:16px; border:1px solid var(--line); border-radius:14px; background:#f7f9f4; cursor:pointer; }
+.approval-box input { margin-top:3px; accent-color:var(--green); }
+.approval-box span { display:flex; flex-direction:column; gap:5px; } .approval-box small { color:var(--muted); line-height:1.5; }
+.format-success { display:flex; min-width:220px; flex-direction:column; gap:6px; color:var(--green); }
+.format-success span { color:var(--muted); font-size:.78rem; }
+.download { display:inline-flex; align-self:flex-start; margin-top:6px; padding:10px 14px; border-radius:10px; color:white; background:var(--green); text-decoration:none; font-weight:700; }
+@media (max-width:900px) { .hero { grid-template-columns:1fr; } .hero-mark { display:none; } .upload-card,.format-card { grid-template-columns:1fr; } .inline-error { grid-column:1; margin:-16px 0 0; } .metrics { grid-template-columns:repeat(2,1fr); } }
 @media (max-width:580px) { .topbar,main,footer,.notice.error { width:min(100% - 24px,1180px); } .hero { min-height:0; border-radius:22px; } .hero-copy { padding:36px 25px; } .safety-row { gap:10px 16px; } .upload-card,.result-stack,.item-list { padding:20px; } .metrics { grid-template-columns:1fr 1fr; } .metrics article { min-height:100px; } .review-item { grid-template-columns:1fr 58px; } .item-index { grid-column:1/-1; } .object-strip,footer { align-items:flex-start; flex-direction:column; } .object-strip>div { justify-content:flex-start; } }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; transition-duration:.01ms!important; } }

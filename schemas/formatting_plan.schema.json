@@ -1,0 +1,173 @@
+{
+  "$defs": {
+    "FormattingTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "block_id": {
+          "title": "Block Id",
+          "type": "string"
+        },
+        "table_index": {
+          "minimum": 0,
+          "title": "Table Index",
+          "type": "integer"
+        },
+        "rule_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Rule Ids",
+          "type": "array"
+        },
+        "locator": {
+          "$ref": "#/$defs/SourceAnchor"
+        }
+      },
+      "required": [
+        "block_id",
+        "table_index",
+        "rule_ids",
+        "locator"
+      ],
+      "title": "FormattingTarget",
+      "type": "object"
+    },
+    "SourceAnchor": {
+      "additionalProperties": false,
+      "properties": {
+        "part_name": {
+          "default": "word/document.xml",
+          "title": "Part Name",
+          "type": "string"
+        },
+        "paragraph_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Paragraph Index"
+        },
+        "table_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Table Index"
+        },
+        "row_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Row Index"
+        },
+        "cell_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cell Index"
+        },
+        "xml_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Xml Path"
+        }
+      },
+      "title": "SourceAnchor",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "engine_version": {
+      "title": "Engine Version",
+      "type": "string"
+    },
+    "profile_id": {
+      "title": "Profile Id",
+      "type": "string"
+    },
+    "input_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Input Sha256",
+      "type": "string"
+    },
+    "content_fingerprint_before": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Fingerprint Before",
+      "type": "string"
+    },
+    "approved_rule_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Approved Rule Ids",
+      "type": "array"
+    },
+    "targets": {
+      "items": {
+        "$ref": "#/$defs/FormattingTarget"
+      },
+      "minItems": 1,
+      "title": "Targets",
+      "type": "array"
+    },
+    "formatting_allowed": {
+      "const": true,
+      "default": true,
+      "title": "Formatting Allowed",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "engine_version",
+    "profile_id",
+    "input_sha256",
+    "content_fingerprint_before",
+    "approved_rule_ids",
+    "targets"
+  ],
+  "title": "FormattingPlan",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/formatting_plan.schema.json"
+}

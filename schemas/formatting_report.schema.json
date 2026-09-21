@@ -1,0 +1,245 @@
+{
+  "$defs": {
+    "FormattingOperation": {
+      "additionalProperties": false,
+      "properties": {
+        "rule_id": {
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "block_id": {
+          "title": "Block Id",
+          "type": "string"
+        },
+        "property_path": {
+          "$ref": "#/$defs/PropertyPath"
+        },
+        "locator": {
+          "$ref": "#/$defs/SourceAnchor"
+        },
+        "before": {
+          "additionalProperties": true,
+          "title": "Before",
+          "type": "object"
+        },
+        "after": {
+          "additionalProperties": true,
+          "title": "After",
+          "type": "object"
+        }
+      },
+      "required": [
+        "rule_id",
+        "block_id",
+        "property_path",
+        "locator",
+        "before",
+        "after"
+      ],
+      "title": "FormattingOperation",
+      "type": "object"
+    },
+    "PropertyPath": {
+      "enum": [
+        "page.width_mm",
+        "page.height_mm",
+        "page.margin_top_mm",
+        "page.margin_bottom_mm",
+        "page.margin_left_mm",
+        "page.margin_right_mm",
+        "page.number_format",
+        "page.number_start",
+        "page.number_visible",
+        "run.font_east_asia",
+        "run.font_latin",
+        "run.font_high_ansi",
+        "run.size_pt",
+        "run.bold",
+        "run.italic",
+        "paragraph.alignment",
+        "paragraph.line_spacing",
+        "paragraph.space_before_pt",
+        "paragraph.space_after_pt",
+        "paragraph.first_line_indent_pt",
+        "paragraph.first_line_indent_chars",
+        "paragraph.hanging_indent_chars",
+        "paragraph.left_indent_pt",
+        "paragraph.right_indent_pt",
+        "paragraph.outline_level",
+        "paragraph.keep_with_next",
+        "paragraph.page_break_before",
+        "table.top_pt",
+        "table.header_separator_pt",
+        "table.bottom_pt",
+        "table.vertical_borders_present",
+        "table.repeat_header",
+        "content.character_count",
+        "content.keyword_count",
+        "content.separator"
+      ],
+      "title": "PropertyPath",
+      "type": "string"
+    },
+    "SourceAnchor": {
+      "additionalProperties": false,
+      "properties": {
+        "part_name": {
+          "default": "word/document.xml",
+          "title": "Part Name",
+          "type": "string"
+        },
+        "paragraph_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Paragraph Index"
+        },
+        "table_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Table Index"
+        },
+        "row_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Row Index"
+        },
+        "cell_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cell Index"
+        },
+        "xml_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Xml Path"
+        }
+      },
+      "title": "SourceAnchor",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "engine_version": {
+      "title": "Engine Version",
+      "type": "string"
+    },
+    "profile_id": {
+      "title": "Profile Id",
+      "type": "string"
+    },
+    "input_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Input Sha256",
+      "type": "string"
+    },
+    "output_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Output Sha256",
+      "type": "string"
+    },
+    "content_fingerprint_before": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Fingerprint Before",
+      "type": "string"
+    },
+    "content_fingerprint_after": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Fingerprint After",
+      "type": "string"
+    },
+    "content_preserved": {
+      "title": "Content Preserved",
+      "type": "boolean"
+    },
+    "applied_rule_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Applied Rule Ids",
+      "type": "array"
+    },
+    "operations": {
+      "items": {
+        "$ref": "#/$defs/FormattingOperation"
+      },
+      "minItems": 1,
+      "title": "Operations",
+      "type": "array"
+    },
+    "requires_word_validation": {
+      "const": true,
+      "default": true,
+      "title": "Requires Word Validation",
+      "type": "boolean"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "engine_version",
+    "profile_id",
+    "input_sha256",
+    "output_sha256",
+    "content_fingerprint_before",
+    "content_fingerprint_after",
+    "content_preserved",
+    "applied_rule_ids",
+    "operations",
+    "warnings"
+  ],
+  "title": "FormattingReport",
+  "type": "object",
+  "$id": "https://paperalign.local/schemas/formatting_report.schema.json"
+}

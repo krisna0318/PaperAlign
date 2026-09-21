@@ -102,6 +102,7 @@ def create_synthetic_docx(
     font_name: str = "宋体",
     include_unsupported: bool = False,
     include_three_line_table: bool = False,
+    include_second_table_row: bool = False,
     include_style_cascade: bool = False,
 ) -> Path:
     extra_body = ""
@@ -157,6 +158,13 @@ def create_synthetic_docx(
       <w:tr>
         <w:tc><w:tcPr><w:tcBorders><w:top w:val="single" w:sz="8"/><w:bottom w:val="single" w:sz="12"/></w:tcBorders></w:tcPr><w:p><w:r><w:t>样本</w:t></w:r></w:p></w:tc>
         <w:tc><w:tcPr><w:tcBorders><w:top w:val="single" w:sz="8"/><w:bottom w:val="single" w:sz="12"/></w:tcBorders></w:tcPr><w:p><w:r><w:t>1</w:t></w:r></w:p></w:tc>
+      </w:tr>
+"""
+    elif include_second_table_row:
+        second_row = """
+      <w:tr>
+        <w:tc><w:p><w:r><w:t>样本</w:t></w:r></w:p></w:tc>
+        <w:tc><w:p><w:r><w:t>1</w:t></w:r></w:p></w:tc>
       </w:tr>
 """
 

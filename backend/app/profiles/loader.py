@@ -71,8 +71,6 @@ def load_profile(directory: Path | None = None) -> ProfileBundle:
                 raise ProfileLoadError("Rule belongs to a different Profile")
             if rule.source != index.get(rule.source.locator):
                 raise ProfileLoadError("Rule source is missing or differs from evidence index")
-            if rule.auto_fixable:
-                raise ProfileLoadError("M2 Profiles are read-only")
             key = (rule.scope, rule.target.model_dump_json(), rule.property_path, rule.comparison)
             if key in seen_definitions:
                 raise ProfileLoadError("Duplicate or conflicting atomic target definition")

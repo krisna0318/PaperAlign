@@ -1,6 +1,6 @@
 # SCAU undergraduate 2026 v1
 
-Version 1.0.0 contains 248 atomic rules mapped to the 46 P0 inventory entries.
+Version 1.1.0 contains 248 atomic rules mapped to the 46 P0 inventory entries. Four user-confirmed abbreviation-table border rules are authorized for the deterministic M6 adapter; the remaining rules are read-only.
 Only the four previously confirmed abbreviation-table border rules are confirmed;
 the other 244 rules remain provisional. All rules are read-only.
 

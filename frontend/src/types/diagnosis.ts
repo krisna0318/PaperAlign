@@ -37,6 +37,8 @@ export interface DiagnosticSummary {
   issue_count: number;
   issues_truncated: boolean;
   evidence_insufficient_count: number;
+  formatting_candidate_count: number;
+  formatting_rule_ids: string[];
   formatting_allowed: false;
   conclusion: "diagnosis_only_not_compliance_proof";
 }
@@ -45,4 +47,33 @@ export interface DiagnosticJobView {
   schema_version: "1.0";
   job: AnalysisJob;
   summary: DiagnosticSummary | null;
+}
+
+export interface FormattingOperation {
+  rule_id: string;
+  block_id: string;
+  property_path: string;
+  locator: SourceAnchor;
+  before: Record<string, unknown>;
+  after: Record<string, unknown>;
+}
+
+export interface FormattingReport {
+  schema_version: "1.0";
+  input_sha256: string;
+  output_sha256: string;
+  content_fingerprint_before: string;
+  content_fingerprint_after: string;
+  content_preserved: boolean;
+  applied_rule_ids: string[];
+  operations: FormattingOperation[];
+  requires_word_validation: true;
+  warnings: string[];
+}
+
+export interface FormatJobResult {
+  schema_version: "1.0";
+  job_id: string;
+  output_artifact: string;
+  report: FormattingReport;
 }

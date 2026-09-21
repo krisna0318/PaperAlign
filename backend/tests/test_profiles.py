@@ -40,7 +40,10 @@ def test_builtin_profile_covers_inventory_and_all_json_passes_schema() -> None:
     assert ids == {entry.inventory_id for entry in bundle.coverage}
     assert len(bundle.rules) == 248
     assert sum(rule.status == "confirmed" for rule in bundle.rules) == 4
-    assert all(not rule.auto_fixable for rule in bundle.rules)
+    auto_fixable = [rule for rule in bundle.rules if rule.auto_fixable]
+    assert len(auto_fixable) == 4
+    assert all(rule.status.value == "confirmed" for rule in auto_fixable)
+    assert {rule.scope.value for rule in auto_fixable} == {"abbreviation_table"}
 
 
 @pytest.mark.parametrize(

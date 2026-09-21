@@ -43,6 +43,8 @@ class DiagnosticSummary(ContractModel):
     issue_count: int = Field(ge=0)
     issues_truncated: bool
     evidence_insufficient_count: int = Field(ge=0)
+    formatting_candidate_count: int = Field(ge=0)
+    formatting_rule_ids: list[str]
     formatting_allowed: Literal[False] = False
     conclusion: Literal["diagnosis_only_not_compliance_proof"] = (
         "diagnosis_only_not_compliance_proof"

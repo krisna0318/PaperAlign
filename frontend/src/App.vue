@@ -2,17 +2,25 @@
 import { onMounted, ref } from "vue";
 
 import { getHealth, type HealthResponse } from "./api/health";
-import { createDiagnosticJob, DiagnosticApiError } from "./api/jobs";
+import {
+  createDiagnosticJob,
+  DiagnosticApiError,
+  formatDiagnosticJob,
+  formattedDownloadUrl,
+} from "./api/jobs";
 import DiagnosisSummary from "./components/DiagnosisSummary.vue";
 import FileUploader from "./components/FileUploader.vue";
+import FormatPanel from "./components/FormatPanel.vue";
 import ReviewPanel from "./components/ReviewPanel.vue";
-import type { DiagnosticJobView } from "./types/diagnosis";
+import type { DiagnosticJobView, FormatJobResult } from "./types/diagnosis";
 
 const health = ref<HealthResponse | null>(null);
 const healthError = ref<string | null>(null);
 const busy = ref(false);
 const error = ref<string | null>(null);
 const result = ref<DiagnosticJobView | null>(null);
+const formatting = ref(false);
+const formatted = ref<FormatJobResult | null>(null);
 
 onMounted(async () => {
   try {
@@ -26,12 +34,29 @@ async function analyze(file: File): Promise<void> {
   busy.value = true;
   error.value = null;
   result.value = null;
+  formatted.value = null;
   try {
     result.value = await createDiagnosticJob(file);
   } catch (caught) {
     error.value = caught instanceof DiagnosticApiError ? caught.message : "分析失败，请稍后重试。";
   } finally {
     busy.value = false;
+  }
+}
+
+async function formatCopy(): Promise<void> {
+  if (!result.value?.summary) return;
+  formatting.value = true;
+  error.value = null;
+  try {
+    formatted.value = await formatDiagnosticJob(
+      result.value.job.id,
+      result.value.summary.formatting_rule_ids,
+    );
+  } catch (caught) {
+    error.value = caught instanceof DiagnosticApiError ? caught.message : "排版失败，请检查任务报告。";
+  } finally {
+    formatting.value = false;
   }
 }
 </script>
@@ -64,6 +89,14 @@ async function analyze(file: File): Promise<void> {
       <div v-if="error" class="notice error" role="alert"><strong>无法完成分析</strong><span>{{ error }}</span></div>
       <DiagnosisSummary v-if="result" :result="result" />
       <ReviewPanel v-if="result?.summary" :summary="result.summary" />
+      <FormatPanel
+        v-if="result"
+        :result="result"
+        :busy="formatting"
+        :formatted="formatted"
+        :download-url="formatted ? formattedDownloadUrl(result.job.id) : null"
+        @format="formatCopy"
+      />
     </main>
 
     <footer><span>PaperAlign 本地 MVP</span><span>诊断结果用于辅助复核，不替代学校最终审核。</span></footer>

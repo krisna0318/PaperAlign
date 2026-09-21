@@ -12,6 +12,7 @@ from app.domain.analysis import (
 )
 from app.domain.blocks import DocumentBlock
 from app.domain.evaluation import EvaluationReport, GoldSet
+from app.domain.formatting import FormattingPlan, FormattingReport
 from app.domain.hybrid import HybridReview
 from app.domain.issues import DiagnosisIssue
 from app.domain.jobs import AnalysisJob
@@ -23,6 +24,8 @@ from app.domain.structure import StructureOverrides, StructureReport
 from app.domain.template_evidence import TemplateEvidenceReport
 
 SCHEMAS: dict[str, type[BaseModel]] = {
+    "formatting_plan.schema.json": FormattingPlan,
+    "formatting_report.schema.json": FormattingReport,
     "evaluation_report.schema.json": EvaluationReport,
     "gold_set.schema.json": GoldSet,
     "hybrid_review.schema.json": HybridReview,

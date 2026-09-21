@@ -2,14 +2,14 @@
 
 ## Current state
 
-- Current milestone: M5 local read-only diagnostic UI completed (application 0.12.0). Accuracy remains unassessed because the real Gold Set has zero human-confirmed labels; full M2 normative confirmation and M3/M4 human review remain acceptance work.
+- Current milestone: M6 deterministic safe formatting completed for the only four confirmed auto-fixable rules (application 0.13.0). Accuracy remains unassessed because the real Gold Set has zero human-confirmed labels; the other 244 rules remain diagnostic-only.
 - Implemented: repository scaffold, safe DOCX package inspection, OOXML document profile, protected-content fingerprint, unsupported-object report, deterministic CLI artifacts, tests, and CI.
-- Live DeepSeek proposals and conservative Hybrid adjudication are verified. The local upload/diagnostic UI is implemented; deterministic formatting and final Word validation are not. Full school compliance is not available while 244 rules remain provisional.
+- Live DeepSeek proposals, conservative Hybrid adjudication, local diagnosis and the confirmed abbreviation-table formatter are implemented. Final Word validation is not. Full school compliance is not available while 244 rules remain provisional.
 - M2.0 implemented: comment-optional template evidence extraction, paragraph style usage, direct-format clusters, and table border widths with OOXML-to-point conversion.
 - M2.1 implemented: document defaults, base/derived paragraph styles, character styles and direct formatting are merged into property-level effective values with provenance.
 - M2.1 audit: `audit-template --include-preview` writes HTML and short previews only under ignored `.paperalign`. Real Word 16.0 check: 13 paragraphs, 92 matching properties; source SHA unchanged. This is not human visual sign-off. Browser tool denied file:// page inspection; do not claim UI visual verification.
 - M2.2: FormatRule schema 2.0 (breaking from free-form 1.0); typed values/units/scopes, human confirmation record, evidence precedence, normalized observations, preflight states. Preflight None means ready for a comparator, never pass.
-- M2.3: Profile 1.0.0 has 248 atomic rules (4 confirmed, 244 provisional), 36 evidence records, 46 inventory entries (14 encoded, 23 partial, 9 deferred). Loader validates references, evidence hash, duplicate definitions and coverage. Every rule is read-only.
+- M2.3 baseline Profile 1.0.0 had 248 atomic rules (4 confirmed, 244 provisional), 36 evidence records and 46 inventory entries. Profile 1.1.0 authorizes only the four confirmed abbreviation-table rules for the M6 adapter; the other 244 remain read-only. Loader validates references, evidence hash, duplicate definitions and coverage.
 - CLI: inspect-profile exports profile.json/profile_summary.md/applicability.json. verify-template checks hash-bound sample indexes only; rejects other documents. Real sample: 3 pass, 1 fail (abbreviation table separator 0.5 pt vs 1 pt), 108 evidence_insufficient. Never label these counts whole-document compliance.
 - M3: classify produces a hash-bound StructureReport for every represented M1 block, identifies four heading levels and document regions, preserves TOC fields, detects formulas/drawings, builds parentage, allows reviewed role/scope corrections, and runs located M2 rules. Local HTML/JSON/Markdown stay under .paperalign; no-key and no-write.
 - Final-page fallback: classify also writes a customer-readable manual review guide. It states which layout results cannot be guaranteed statically and gives applicable Word steps plus acceptance checks for final layout, fields/TOC, figures, tables, sections/page numbering and unsupported objects.
@@ -22,6 +22,7 @@
 - M4.3: adjudicate-review consumes plan plus model run and writes a separate HybridReview. Policy v1 requires resolved rules/model role and scope agreement plus model confidence >= configured threshold; unique role scopes may be deterministically derived. Any conflict, missing proposal, low confidence, unknown, abstention or manual-only target routes to human review. Real threshold 0.90 run: 5 semantic auto-accept, 23 manual; policy remains provisional_not_accuracy_validated and formatting_allowed=false. Local result: .paperalign/m4-review/hybrid/2026-09-21-policy-v1.
 - M4.4: the three-system engineering path is closed out. With 0/28 human labels, all accuracy metrics correctly remain unassessed. M5/M6 engineering may continue, but Hybrid output cannot authorize formatting until independent labels calibrate the policy.
 - M5: POST /api/jobs accepts a raw DOCX body (50 MB cap), creates an isolated local task, runs Rules-only structure analysis and persists hash-bound results; GET /api/jobs/{id} reloads the task. The UI displays bounded 20-character review previews, counts, warnings and at most 100 prioritized issue summaries. It never formats, calls AI or claims full compliance.
+- M6: only four confirmed abbreviation-table border rules are auto-fixable. A deterministic adapter requires the complete approved rule group and an unambiguous abbreviation_table target, rejects blocking objects and existing outputs, writes a new DOCX, then re-parses it and requires the protected content fingerprint to remain identical. CLI, task API, download endpoint and UI confirmation are separate adapters over the same core.
 - Real runs before final full regression: thesis 785 blocks, 28 priority review roots / 179 including inherited table-cell review; template 392 blocks, 9 review roots. Thesis located checks: 2 pass, 2 fail, 4379 evidence_insufficient. These are check occurrences, not unique-rule coverage or accuracy.
 - Latest verification after M5 (2026-09-21): 139 backend tests, strict mypy (63 source files), Ruff, frontend typecheck, Vitest and production build passed. Two third-party TestClient deprecation warnings remain nonblocking.
 - M3 implementation follows pushed M2 commit 7406931; use `git log -1 --oneline` for the current delivery commit.
@@ -42,7 +43,7 @@
 
 ## Next implementation target
 
-Next module is M6 deterministic safe formatting. The real 28-target Gold Set still needs independent human review before any Hybrid threshold can be accepted. DeepSeek connectivity is already verified; do not repeat paid calls just to rediscover this. Keep M2 rule confirmation as a separate gate before consequential formatting:
+Next module is M7 Word validation and delivery. The real 28-target Gold Set still needs independent human review before any Hybrid threshold can be accepted. DeepSeek connectivity is already verified; do not repeat paid calls just to rediscover this. Keep M2 rule confirmation as a separate gate before expanding consequential formatting:
 
 ```text
 official template evidence
@@ -58,7 +59,8 @@ official template evidence
   → M4.3 Hybrid adjudication and optional third evaluation system (implemented; policy calibration pending)
   → M4.4 three-system engineering closeout (implemented; accuracy unassessed)
   → M5 read-only diagnostic UI (implemented)
-  → M6 deterministic safe formatting
+  → M6 deterministic safe formatting (implemented for 4 confirmed rules)
+  → M7 Word validation and delivery
 ```
 
 Planning references:
@@ -80,6 +82,8 @@ Planning references:
 - `docs/reports/m44-evaluation-closeout.md`
 - `docs/implementation/m5-execution-plan.md`
 - `docs/reports/m5-diagnostic-ui-report.md`
+- `docs/implementation/m6-execution-plan.md`
+- `docs/reports/m6-safe-formatting-report.md`
 - `docs/README.md`
 
 Do not re-ask the template scope or expand college-specific templates. Remaining atomic confirmation and page-layout ambiguities can be requested when needed for consequential validation or formatting, not as a blanket blocker on read-only development.

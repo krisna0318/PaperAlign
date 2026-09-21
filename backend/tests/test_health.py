@@ -10,6 +10,6 @@ def test_health_endpoint() -> None:
     assert response.json() == {
         "status": "ok",
         "service": "paperalign-api",
-        "version": "0.12.0",
-        "stage": "M5",
+        "version": "0.13.0",
+        "stage": "M6",
     }

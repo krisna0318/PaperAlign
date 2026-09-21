@@ -1,4 +1,4 @@
-import type { DiagnosticJobView } from "../types/diagnosis";
+import type { DiagnosticJobView, FormatJobResult } from "../types/diagnosis";
 
 interface ApiErrorBody {
   detail?: { code?: string; message?: string; job_id?: string | null } | string;
@@ -47,4 +47,24 @@ export async function createDiagnosticJob(file: File): Promise<DiagnosticJobView
 
 export async function getDiagnosticJob(jobId: string): Promise<DiagnosticJobView> {
   return parseResponse(await fetch(`/api/jobs/${encodeURIComponent(jobId)}`));
+}
+
+export async function formatDiagnosticJob(
+  jobId: string,
+  approvedRuleIds: string[],
+): Promise<FormatJobResult> {
+  const response = await fetch(`/api/jobs/${encodeURIComponent(jobId)}/format`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ approved_rule_ids: approvedRuleIds }),
+  });
+  if (!response.ok) {
+    await parseResponse(response);
+    throw new DiagnosticApiError("排版请求失败。");
+  }
+  return (await response.json()) as FormatJobResult;
+}
+
+export function formattedDownloadUrl(jobId: string): string {
+  return `/api/jobs/${encodeURIComponent(jobId)}/download`;
 }

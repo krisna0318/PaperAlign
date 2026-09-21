@@ -8,6 +8,7 @@ from app import __version__
 from app.ai.deepseek_responses import DeepSeekResponsesProvider
 from app.ai.openai_responses import OpenAIResponsesProvider
 from app.domain.enums import AiMode
+from app.formatting.safe_formatter import ABBREVIATION_RULE_IDS, format_docx
 from app.parsers.errors import DocxAnalysisError
 from app.profiles.loader import ProfileLoadError, check_applicability, load_profile
 from app.services.ai_review import write_ai_review_plan
@@ -18,7 +19,11 @@ from app.services.format_audit import write_format_audit
 from app.services.hybrid import write_hybrid_review
 from app.services.profile_service import export_profile, verify_template_samples
 from app.services.structure_service import write_structure_review
-from app.services.template_inspector import inspect_template, write_template_artifacts
+from app.services.template_inspector import (
+    _write_text,
+    inspect_template,
+    write_template_artifacts,
+)
 from app.settings import get_settings
 
 
@@ -122,12 +127,47 @@ def build_parser() -> argparse.ArgumentParser:
     adjudicate.add_argument("run", type=Path)
     adjudicate.add_argument("--out", type=Path, required=True, help="directory under .paperalign")
     adjudicate.add_argument("--confidence-threshold", type=float, default=0.9)
+    format_copy = subparsers.add_parser(
+        "format-copy",
+        help="create a new DOCX using confirmed deterministic formatting rules",
+    )
+    format_copy.add_argument("input", type=Path)
+    format_copy.add_argument("--out", type=Path, required=True)
+    format_copy.add_argument("--report-out", type=Path, required=True)
+    format_copy.add_argument(
+        "--approve-confirmed-abbreviation-table",
+        action="store_true",
+        help="approve the four confirmed abbreviation-table border rules",
+    )
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
+        if args.command == "format-copy":
+            if not args.approve_confirmed_abbreviation_table:
+                raise DocxAnalysisError(
+                    "format_approval_required",
+                    "Pass --approve-confirmed-abbreviation-table after reviewing the rules",
+                )
+            format_plan, format_report = format_docx(
+                args.input,
+                args.out,
+                sorted(ABBREVIATION_RULE_IDS),
+            )
+            args.report_out.mkdir(parents=True, exist_ok=True)
+            _write_text(
+                args.report_out / "formatting_plan.json",
+                format_plan.model_dump_json(indent=2) + "\n",
+            )
+            _write_text(
+                args.report_out / "formatting_report.json",
+                format_report.model_dump_json(indent=2) + "\n",
+            )
+            print(f"Formatted copy: {args.out.resolve()}")
+            print("Content fingerprint preserved; desktop Word validation is still required")
+            return 0
         if args.command == "adjudicate-review":
             review = write_hybrid_review(
                 args.plan,

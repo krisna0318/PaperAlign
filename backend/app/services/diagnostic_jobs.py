@@ -15,11 +15,12 @@ from app.domain.diagnostic_jobs import (
     DiagnosticReviewItem,
     DiagnosticSummary,
 )
-from app.domain.enums import AiMode, JobStatus
+from app.domain.enums import AiMode, BlockKind, JobStatus, RuleStatus
 from app.domain.jobs import AnalysisJob, ArtifactReference
+from app.domain.rules import RuleScope
 from app.parsers.docx_package import sha256_file
 from app.parsers.errors import DocxAnalysisError
-from app.profiles.loader import BUILTIN_PROFILE_ID
+from app.profiles.loader import BUILTIN_PROFILE_ID, load_profile
 from app.services.structure_service import inspect_structure
 
 MAX_UPLOAD_BYTES = 50 * 1024 * 1024
@@ -110,6 +111,19 @@ def create_diagnostic_job(data_dir: Path, filename: str, payload: bytes) -> Diag
         ]
         all_issue_items.sort(key=lambda item: (item.status != "fail", item.rule_id))
         issue_items = all_issue_items[:100]
+        formatting_rules = sorted(
+            rule.id
+            for rule in load_profile().rules
+            if rule.status == RuleStatus.CONFIRMED
+            and rule.auto_fixable
+            and rule.scope == RuleScope.ABBREVIATION_TABLE
+        )
+        formatting_candidates = sum(
+            item.kind == BlockKind.TABLE
+            and item.scope == RuleScope.ABBREVIATION_TABLE
+            and not item.requires_confirmation
+            for item in report.decisions
+        )
         summary = DiagnosticSummary(
             input_sha256=report.input_sha256,
             content_fingerprint=report.content_fingerprint,
@@ -127,6 +141,8 @@ def create_diagnostic_job(data_dir: Path, filename: str, payload: bytes) -> Diag
             evidence_insufficient_count=report.validation_counts.get(
                 "evidence_insufficient", 0
             ),
+            formatting_candidate_count=formatting_candidates,
+            formatting_rule_ids=formatting_rules if formatting_candidates else [],
         )
         summary_path = artifact_dir / "diagnostic_summary.json"
         _write_json(summary_path, summary)
@@ -170,6 +186,14 @@ def get_diagnostic_job(data_dir: Path, job_id: str) -> DiagnosticJobView:
         raise DiagnosticJobError("job_not_found", "未找到该分析任务。") from exc
     except (OSError, ValidationError) as exc:
         raise DiagnosticJobError("job_unreadable", "任务记录无法读取。") from exc
+
+
+def save_diagnostic_job(data_dir: Path, view: DiagnosticJobView) -> None:
+    root = data_dir.resolve()
+    path = root / "jobs" / view.job.id / "job.json"
+    if not path.resolve().is_relative_to(root):
+        raise DiagnosticJobError("invalid_job_id", "任务编号格式无效。")
+    _write_json(path, view)
 
 
 def _artifact(root: Path, kind: str, path: Path) -> ArtifactReference:

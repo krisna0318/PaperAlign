@@ -22,10 +22,10 @@
       "locator": "template_comment:18",
       "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
     },
-    "implementation": "read_only",
+    "implementation": "formatting.abbreviation_table_borders_v1",
     "validator": "numeric_compare",
     "priority": "P0",
-    "auto_fixable": false,
+    "auto_fixable": true,
     "confirmation": {
       "reviewer": "用户",
       "confirmed_at": "2026-09-20T04:57:06.790Z",
@@ -55,10 +55,10 @@
       "locator": "template_comment:18",
       "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
     },
-    "implementation": "read_only",
+    "implementation": "formatting.abbreviation_table_borders_v1",
     "validator": "numeric_compare",
     "priority": "P0",
-    "auto_fixable": false,
+    "auto_fixable": true,
     "confirmation": {
       "reviewer": "用户",
       "confirmed_at": "2026-09-20T04:57:06.792Z",
@@ -88,10 +88,10 @@
       "locator": "template_comment:18",
       "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
     },
-    "implementation": "read_only",
+    "implementation": "formatting.abbreviation_table_borders_v1",
     "validator": "numeric_compare",
     "priority": "P0",
-    "auto_fixable": false,
+    "auto_fixable": true,
     "confirmation": {
       "reviewer": "用户",
       "confirmed_at": "2026-09-20T04:57:06.792Z",
@@ -120,10 +120,10 @@
       "locator": "template_comment:18",
       "document_sha256": "bcac55ef57164ac1c18eeb7a5f563be37cf730947e9fb3c1703e660ba20b8322"
     },
-    "implementation": "read_only",
+    "implementation": "formatting.abbreviation_table_borders_v1",
     "validator": "exact_equal",
     "priority": "P0",
-    "auto_fixable": false,
+    "auto_fixable": true,
     "confirmation": {
       "reviewer": "用户",
       "confirmed_at": "2026-09-20T04:57:06.792Z",

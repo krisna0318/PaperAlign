@@ -1,15 +1,18 @@
 from typing import Annotated, NoReturn
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
+from fastapi.responses import FileResponse
 from starlette.concurrency import run_in_threadpool
 
 from app.domain.diagnostic_jobs import DiagnosticJobView
+from app.domain.formatting import FormatJobRequest, FormatJobResult
 from app.services.diagnostic_jobs import (
     MAX_UPLOAD_BYTES,
     DiagnosticJobError,
     create_diagnostic_job,
     get_diagnostic_job,
 )
+from app.services.format_jobs import format_job, resolve_formatted_output
 from app.settings import Settings, get_settings
 
 router = APIRouter(prefix="/api/jobs", tags=["diagnostic jobs"])
@@ -44,6 +47,38 @@ def read_job(
 ) -> DiagnosticJobView:
     try:
         return get_diagnostic_job(settings.data_dir, job_id)
+    except DiagnosticJobError as exc:
+        _raise_http(exc)
+
+
+@router.post("/{job_id}/format", response_model=FormatJobResult)
+async def create_formatted_copy(
+    job_id: str,
+    body: FormatJobRequest,
+    settings: Annotated[Settings, Depends(get_settings)],
+) -> FormatJobResult:
+    try:
+        return await run_in_threadpool(
+            format_job, settings.data_dir, job_id, body.approved_rule_ids
+        )
+    except DiagnosticJobError as exc:
+        _raise_http(exc)
+
+
+@router.get("/{job_id}/download")
+def download_formatted_copy(
+    job_id: str,
+    settings: Annotated[Settings, Depends(get_settings)],
+) -> FileResponse:
+    try:
+        path = resolve_formatted_output(settings.data_dir, job_id)
+        return FileResponse(
+            path,
+            media_type=(
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            ),
+            filename="PaperAlign-formatted.docx",
+        )
     except DiagnosticJobError as exc:
         _raise_http(exc)
 
